@@ -1,7 +1,7 @@
 {
-  "version": "1.0.1",
-  "versionCode": 2,
-  "updateUrl": "https://github.com/MiguelTroncoso/linkplay-updates/releases/download/v1.0.1/linkplay-v1.0.1.apk",
-  "changelog": "Mejoras en descargas privadas, rotación de pantalla, perfiles, PIN adulto, favoritos, continuar viendo, caché y compatibilidad Android TV / Firestick.",
+  "version": "1.0.4",
+  "versionCode": 3,
+  "updateUrl": "https://github.com/MiguelTroncoso/linkplay-updates/releases/download/v1.0.4/linkplay-1.0.4.apk",
+  "changelog": "v1.0.4: Soporte Android TV, búsqueda global, correcciones de rotación, descargas offline mejoradas y más.",
   "mandatory": false
 }
