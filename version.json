@@ -1,7 +1,7 @@
 {
-  "version": "1.0.18",
-  "versionCode": 18,
-  "updateUrl": "https://github.com/MiguelTroncoso/linkplay-updates/releases/download/v1.0.18/LinkPlay-v1.0.18.apk",
-  "changelog": "v1.0.18: Reparadas varias funciones de la aplicación, incluyendo la función de reproducción automática y la función de búsqueda. Además, se han corregido algunos errores menores y se ha mejorado la estabilidad general de la aplicación.",
+  "version": "1.0.22",
+  "versionCode": 22,
+  "updateUrl": "https://github.com/MiguelTroncoso/linkplay-updates/releases/download/v1.0.22/LinkPlay-v1.0.22.apk",
+  "changelog": "v1.0.22: Fix carrusel de inicio \u2014 siempre muestra 6-8 items desde el primer ingreso sin necesidad de actualizar. Usa campo added de Xtream para detectar estrenos recientes.",
   "mandatory": true
 }
