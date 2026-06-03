@@ -1,7 +1,7 @@
 {
   "version": "1.0.15",
   "versionCode": 15,
-  "updateUrl": "https://github.com/TU_USUARIO/TU_REPOSITORIO/releases/download/v1.0.15/LinkPlay-v1.0.15.apk",
+  "updateUrl": "https://github.com/MiguelTroncoso/linkplay-updates/releases/download/v1.0.15/LinkPlay-v1.0.15.apk",
   "changelog": "v1.0.15: Corrige reproducción de series, aviso de próximo capítulo, controles del reproductor, botón volver y estabilidad en Android móvil/TV.",
   "mandatory": true
 }
