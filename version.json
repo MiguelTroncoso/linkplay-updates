@@ -1,7 +1,7 @@
 {
-  "version": "1.0.24",
-  "versionCode": 24,
-  "updateUrl": "https://github.com/MiguelTroncoso/linkplay-updates/releases/download/v1.0.24/LinkPlay-v1.0.24.apk",
-  "changelog": "v1.0.24: HOTFIX login \u2014 login() ahora devuelve el formato correcto que espera AuthContext.",
+  "version": "1.0.25",
+  "versionCode": 25,
+  "updateUrl": "https://github.com/MiguelTroncoso/linkplay-updates/releases/download/v1.0.25/LinkPlay-v1.0.25.apk",
+  "changelog": "v1.0.25: Fix volver cierra app en todos los screens, fix seek adelantar/retroceder, compartir pel\u00edculas/series, m\u00faltiples cuentas, Chromecast, notificaciones, b\u00fasqueda global.",
   "mandatory": true
 }
