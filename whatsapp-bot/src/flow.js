@@ -15,6 +15,7 @@ import {
 import * as msg from './messages.js';
 import { handleOwnerCommand } from './commands.js';
 import { syncLead } from './notion.js';
+import { extractPaymentInfo } from './vision.js';
 import { logger } from './logger.js';
 
 const jidToPhone = (jid) => jid.split('@')[0];
@@ -37,7 +38,7 @@ async function alertOwner(text) {
 
 const currentDemo = () => msg.demoMessage(getSetting('demo', DEFAULT_DEMO), getSetting('apps', DEFAULT_APPS));
 
-export async function handleMessage(jid, text, pushName, hasImage = false) {
+export async function handleMessage(jid, text, pushName, hasImage = false, media = null) {
   // 0) Mensajes del dueño: comandos de administración, nunca flujo de lead.
   if (config.ownerJid && jid === config.ownerJid) {
     await handleOwnerCommand(jid, text);
@@ -136,10 +137,25 @@ export async function handleMessage(jid, text, pushName, hasImage = false) {
     return;
   }
 
-  // 5.1) Ya había hablado antes y solo saluda: saludo de regreso.
+  // 5.1) Respuesta al menú de re-enganche (1 = precios, 2 = hablar con persona).
+  if (lead.stage === 'returning_menu') {
+    const opt = detectOption(text);
+    if (opt === 1) {
+      await reply(jid, msg.pricesMessage(), { stage: 'opt2', state: 'Interesado', fallback_count: 0 });
+      return;
+    }
+    if (opt === 2) {
+      const updated = await reply(jid, msg.humanReply(), { stage: 'human', fallback_count: 0 });
+      await alertOwner(msg.ownerHumanAlert(updated, text));
+      return;
+    }
+    // Si no respondió 1/2, sigue con el resto de intenciones normales.
+  }
+
+  // 5.2) Ya había hablado antes y solo saluda: menú de re-enganche.
   if (text && isGreeting(text)) {
-    await reply(jid, msg.welcomeBack(lead), { fallback_count: 0 });
-    logger.info({ jid }, 'Lead recurrente: saludo de regreso');
+    await reply(jid, msg.welcomeBack(lead), { stage: 'returning_menu', fallback_count: 0 });
+    logger.info({ jid }, 'Lead recurrente: menú de re-enganche');
     return;
   }
 
@@ -174,8 +190,23 @@ export async function handleMessage(jid, text, pushName, hasImage = false) {
     return;
   }
 
-  // 9.5) Envió una imagen (sin intención de texto clara): posible comprobante de pago.
+  // 9.5) Envió una imagen: intenta leer el comprobante con OCR.
   if (hasImage) {
+    const info = media ? await extractPaymentInfo(media, country) : null;
+    if (info?.isReceipt && info.amountUsd != null) {
+      // Comprobante con monto legible → registra monto y pide credenciales.
+      const updated = await reply(jid, msg.paymentReceiptReply(info), {
+        stage: 'awaiting_credentials',
+        state: 'Cerrado',
+        amount_usd: info.amountUsd,
+        payment_method: info.method || (info.currency ? `Comprobante ${info.currency}` : 'Comprobante'),
+        fallback_count: 0,
+      });
+      await alertOwner(msg.ownerReceiptAlert(updated, info));
+      logger.info({ phone: updated.phone, usd: info.amountUsd }, '📸 Comprobante leído con OCR');
+      return;
+    }
+    // Sin OCR o no se pudo leer el monto → pide escribir "pago realizado".
     const updated = await reply(jid, msg.paymentProofPrompt(), { state: 'Interesado', fallback_count: 0 });
     await alertOwner(msg.ownerImageAlert(updated));
     logger.info({ phone: updated.phone }, '📸 Imagen recibida: posible comprobante');

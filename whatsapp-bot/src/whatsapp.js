@@ -3,6 +3,7 @@ import makeWASocket, {
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
+  downloadMediaMessage,
 } from '@whiskeysockets/baileys';
 import qrcode from 'qrcode-terminal';
 import { fileURLToPath } from 'url';
@@ -93,16 +94,29 @@ export async function startWhatsApp(onMessage) {
       const jid = msg.key.remoteJid;
       // Ignora mensajes propios, grupos y estados.
       if (msg.key.fromMe || !jid || jid.endsWith('@g.us') || jid === 'status@broadcast') continue;
-      const hasImage = Boolean(msg.message?.imageMessage || msg.message?.documentMessage);
+      const imageMessage = msg.message?.imageMessage;
+      const hasImage = Boolean(imageMessage || msg.message?.documentMessage);
       const text =
         msg.message?.conversation ||
         msg.message?.extendedTextMessage?.text ||
-        msg.message?.imageMessage?.caption ||
+        imageMessage?.caption ||
         msg.message?.documentMessage?.caption ||
         '';
       if (!text.trim() && !hasImage) continue; // ignora audios/stickers/etc. sin texto
+
+      // Descarga la imagen (comprobante) para el OCR; los documentos no se procesan.
+      let media = null;
+      if (imageMessage) {
+        try {
+          const buffer = await downloadMediaMessage(msg, 'buffer', {}, { logger, reuploadRequest: sock.updateMediaMessage });
+          media = { buffer, mimetype: imageMessage.mimetype || 'image/jpeg' };
+        } catch (err) {
+          logger.warn({ err: err.message }, 'No se pudo descargar la imagen');
+        }
+      }
+
       try {
-        await onMessage(jid, text.trim(), msg.pushName || null, hasImage);
+        await onMessage(jid, text.trim(), msg.pushName || null, hasImage, media);
       } catch (err) {
         logger.error({ err: err.message, jid }, 'Error procesando mensaje entrante');
       }

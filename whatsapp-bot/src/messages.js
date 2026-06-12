@@ -110,18 +110,44 @@ export function demoMessage(demoText, appsText) {
   );
 }
 
-// Saludo para un lead que ya había hablado antes.
+// Saludo + menú de re-enganche para un lead que ya había hablado antes.
 export const welcomeBack = (lead) =>
-  `👋 ¡Hola de nuevo${lead?.name ? `, ${lead.name}` : ''}! Qué gusto verte por aquí otra vez.\n` +
-  `¿Retomamos? Cuéntame en qué te ayudo:\n` +
-  `1️⃣ Quiero iniciar desde cero\n` +
-  `2️⃣ Ya vendo y quiero más clientes\n\n` +
-  `O escríbeme tu duda sobre *precios*, *demo* o *formas de pago*.`;
+  `👋 ¡Hola de nuevo${lead?.name ? `, ${lead.name}` : ''}! Qué gusto verte por aquí otra vez.\n\n` +
+  `¿Ya te decidiste y quieres empezar con nosotros?\n` +
+  `1️⃣ Sí, quiero empezar (te muestro los precios)\n` +
+  `2️⃣ Quiero hablar con una persona`;
+
+// Precios completos (para el "1" del menú de re-enganche).
+export const pricesMessage = () =>
+  `📋 *Nuestros planes:*\n\n${plansBlock()}\n\n` +
+  `¿Con cuál quieres empezar? Dime y te paso los datos de pago. 🚀`;
 
 // Respuesta cuando el lead envía una imagen (posible comprobante de pago).
 export const paymentProofPrompt = () =>
   `📸 ¡Gracias! Recibí tu imagen. Si es tu *comprobante de pago*, escríbeme las palabras ` +
   `*pago realizado* y enseguida te pido los datos para activar tu panel. 🙌`;
+
+// El OCR detectó un comprobante con monto: confirma y pide credenciales.
+export function paymentReceiptReply(info) {
+  const local = info.amount != null && info.currency ? ` por *${info.amount} ${info.currency}*` : '';
+  const usd = info.amountUsd != null ? ` (≈ $${info.amountUsd} USD)` : '';
+  return (
+    `📸 ¡Recibí tu comprobante${local}${usd}! 🙌 Gracias.\n\n` +
+    `Para activar tu panel, envíame en *un solo mensaje* el *usuario* y la *contraseña* que deseas.\n` +
+    `Ejemplo:\n_usuario: juan123_\n_clave: miClave2025_`
+  );
+}
+
+export function ownerReceiptAlert(lead, info) {
+  const local = info.amount != null && info.currency ? `${info.amount} ${info.currency}` : 'monto no detectado';
+  const usd = info.amountUsd != null ? ` ≈ $${info.amountUsd} USD` : '';
+  return (
+    `💸 *COMPROBANTE LEÍDO (OCR)*\n\n👤 ${lead.name || 'Sin nombre'}\n📞 ${lead.phone}\n` +
+    `🌎 ${lead.country || 'Desconocido'}\n💰 Monto: ${local}${usd}\n` +
+    `🏦 Método: ${info.method || 'no detectado'}\n\n` +
+    `➡️ Verifica el comprobante. El bot ya le pidió usuario y contraseña para crear el panel.`
+  );
+}
 
 export function ownerImageAlert(lead) {
   return (

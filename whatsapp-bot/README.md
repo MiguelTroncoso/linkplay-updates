@@ -42,8 +42,8 @@ Lead escribe ──▶ ¿es el dueño? ──▶ ejecuta comando (/demo, /apps, 
 | Situación del lead | Qué hace el bot |
 |---|---|
 | Primer mensaje (número nuevo) | Envía bienvenida con menú 1/2 |
-| Vuelve a saludar (ya habló antes) | Saludo de regreso ("¡Hola de nuevo!") sin repetir todo |
-| Envía una **imagen** (comprobante) | Le pide escribir *"pago realizado"* + **te alerta** del posible comprobante |
+| Vuelve a saludar (ya habló antes) | Menú de re-enganche: *"¿Ya te decidiste? 1️⃣ Sí, ver precios · 2️⃣ Hablar con una persona"* |
+| Envía una **imagen** (comprobante) | **Lee el monto con IA (OCR)**, lo guarda en Notion y pide usuario/clave. Sin OCR: pide escribir *"pago realizado"* |
 | Responde "1" | Explicación + precios + **demo del día** + apps |
 | Responde "2" | Precios + pregunta cuántos clientes maneja |
 | "quiero la demo" | Envía la demo del día + apps |
@@ -170,6 +170,7 @@ Cada mañana solo envías `/demo ...` al bot por WhatsApp. Nada más.
 | `NOTION_TOKEN` | No | Token de integración interna de Notion |
 | `NOTION_DATABASE_ID` | No | ID de la base de datos de leads |
 | `IGNORE_NUMBERS` | No | Números que el bot nunca responde (coma-separados, sin `+`) |
+| `ANTHROPIC_API_KEY` | No | Clave de Claude para leer el monto de los comprobantes con OCR |
 | `TZ` | No | Zona horaria del cron (def. `America/Santiago`) |
 | `MIN_TYPING_MS` / `MAX_TYPING_MS` | No | Rango de "escritura humana" antes de enviar |
 
@@ -243,6 +244,18 @@ Crea una base de datos con **exactamente** estas propiedades (los nombres deben 
 Tras editar `config.js`: `pm2 restart iptv-bot`.
 
 ---
+
+## 📸 OCR de comprobantes (lectura del monto con IA)
+
+Cuando un lead envía la **foto de su comprobante**, el bot la lee con **Claude Haiku 4.5**
+(visión) y extrae el **monto, la moneda y el método de pago**. Convierte el monto a USD
+con tus tasas (`src/config.js`), lo **guarda en Notion** (campo *Monto USD*) y le pide al
+cliente el usuario/clave para su panel — todo automático. Tú recibes la alerta con el monto.
+
+Para activarlo, pon tu `ANTHROPIC_API_KEY` (de <https://console.anthropic.com>) en `.env`.
+Es muy económico: Haiku cuesta ~$1 por millón de tokens, y cada comprobante usa muy pocos.
+Si dejas la clave vacía, el bot sigue funcionando: solo le pide al cliente que escriba
+*"pago realizado"* en vez de leer el monto.
 
 ## ⚠️ Nota sobre Baileys (anti-ban)
 

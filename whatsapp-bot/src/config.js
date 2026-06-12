@@ -121,6 +121,16 @@ export const DEFAULT_APPS = `📲 *Apps recomendadas*
 • iPhone / iPad: *Smarters Player Lite*
 • PC/Windows: *VLC* o *MyIPTV Player*`;
 
+// Convierte un monto en moneda local a USD usando las tasas de COUNTRIES.
+export function toUsd(amount, currency) {
+  if (!amount || !currency) return null;
+  if (currency === 'USD') return Math.round(amount * 100) / 100;
+  for (const c of Object.values(COUNTRIES)) {
+    if (c.currency === currency) return Math.round((amount / c.rate) * 100) / 100;
+  }
+  return null;
+}
+
 // Detecta el país a partir del número (JID o E.164 sin '+').
 export function detectCountry(numberOrJid) {
   const digits = String(numberOrJid).replace(/\D/g, '');
