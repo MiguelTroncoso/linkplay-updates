@@ -1,7 +1,7 @@
 // Motor de conversación: decide qué responder a cada mensaje entrante.
 import { sendText } from './whatsapp.js';
 import { getLead, upsertLead, getSetting, isIgnored } from './db.js';
-import { detectCountry, config, DEFAULT_DEMO, DEFAULT_APPS } from './config.js';
+import { detectCountry, config, DEFAULT_DEMO } from './config.js';
 import {
   detectOption,
   isCurrencyRequest,
@@ -40,7 +40,7 @@ async function alertOwner(text) {
   await sendText(config.ownerJid, text);
 }
 
-const currentDemo = () => msg.demoMessage(getSetting('demo', DEFAULT_DEMO), getSetting('apps', DEFAULT_APPS));
+const currentDemo = () => msg.demoMessage(getSetting('demo', DEFAULT_DEMO));
 
 // Registra el plan elegido (monto → Notion), entrega datos de pago y alerta al dueño.
 async function capturePlan(jid, plan, country) {

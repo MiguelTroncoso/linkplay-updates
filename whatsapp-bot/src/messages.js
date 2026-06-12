@@ -126,12 +126,9 @@ export function ownerAlert(lead, text) {
   );
 }
 
-// Demo del día + apps recomendadas
-export function demoMessage(demoText, appsText) {
-  return (
-    `🎬 *Demo de prueba (válida hoy)*\n\n${demoText}\n\n${appsText}\n\n` +
-    `Pruébalo y me cuentas qué te pareció. Cuando quieras, te activo tu panel para revender. 🚀`
-  );
+// Demo: solo el contenido que el dueño configura con /demo (sin extras).
+export function demoMessage(demoText) {
+  return demoText;
 }
 
 // Saludo + menú de re-enganche para un lead que ya había hablado antes.
