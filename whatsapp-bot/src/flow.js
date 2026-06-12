@@ -10,6 +10,7 @@ import {
   isHumanRequest,
   isDemoRequest,
   isBankRequest,
+  isGreeting,
 } from './intents.js';
 import * as msg from './messages.js';
 import { handleOwnerCommand } from './commands.js';
@@ -36,7 +37,7 @@ async function alertOwner(text) {
 
 const currentDemo = () => msg.demoMessage(getSetting('demo', DEFAULT_DEMO), getSetting('apps', DEFAULT_APPS));
 
-export async function handleMessage(jid, text, pushName) {
+export async function handleMessage(jid, text, pushName, hasImage = false) {
   // 0) Mensajes del dueño: comandos de administración, nunca flujo de lead.
   if (config.ownerJid && jid === config.ownerJid) {
     await handleOwnerCommand(jid, text);
@@ -65,7 +66,7 @@ export async function handleMessage(jid, text, pushName) {
     name: pushName || existing?.name || null,
     country: country?.name || existing?.country || null,
     last_inbound: Date.now(),
-    notes: text.slice(0, 500),
+    notes: text.slice(0, 500) || (hasImage ? '[imagen recibida]' : ''),
     fu24_sent: 0,
     fu48_sent: 0,
     fu72_done: 0,
@@ -81,6 +82,11 @@ export async function handleMessage(jid, text, pushName) {
 
   // 1) Esperando usuario/contraseña tras un pago confirmado.
   if (lead.stage === 'awaiting_credentials') {
+    if (!text) {
+      // Mandó una imagen u otro adjunto: insistimos en que envíe los datos por texto.
+      await reply(jid, msg.askCredentials());
+      return;
+    }
     const updated = await reply(jid, msg.credentialsReceived(), {
       credentials: text.slice(0, 500),
       stage: 'credentials_received',
@@ -130,6 +136,13 @@ export async function handleMessage(jid, text, pushName) {
     return;
   }
 
+  // 5.1) Ya había hablado antes y solo saluda: saludo de regreso.
+  if (text && isGreeting(text)) {
+    await reply(jid, msg.welcomeBack(lead), { fallback_count: 0 });
+    logger.info({ jid }, 'Lead recurrente: saludo de regreso');
+    return;
+  }
+
   // 6) Menú: opción 1 (desde cero) → explicación + precios + demo.
   const option = detectOption(text);
   if (option === 1) {
@@ -158,6 +171,14 @@ export async function handleMessage(jid, text, pushName) {
   // 9) Pregunta por precio en moneda local.
   if (isCurrencyRequest(text, country)) {
     await reply(jid, msg.currencyConversion(country), { fallback_count: 0 });
+    return;
+  }
+
+  // 9.5) Envió una imagen (sin intención de texto clara): posible comprobante de pago.
+  if (hasImage) {
+    const updated = await reply(jid, msg.paymentProofPrompt(), { state: 'Interesado', fallback_count: 0 });
+    await alertOwner(msg.ownerImageAlert(updated));
+    logger.info({ phone: updated.phone }, '📸 Imagen recibida: posible comprobante');
     return;
   }
 

@@ -41,7 +41,9 @@ Lead escribe ──▶ ¿es el dueño? ──▶ ejecuta comando (/demo, /apps, 
 
 | Situación del lead | Qué hace el bot |
 |---|---|
-| Primer mensaje | Envía bienvenida con menú 1/2 |
+| Primer mensaje (número nuevo) | Envía bienvenida con menú 1/2 |
+| Vuelve a saludar (ya habló antes) | Saludo de regreso ("¡Hola de nuevo!") sin repetir todo |
+| Envía una **imagen** (comprobante) | Le pide escribir *"pago realizado"* + **te alerta** del posible comprobante |
 | Responde "1" | Explicación + precios + **demo del día** + apps |
 | Responde "2" | Precios + pregunta cuántos clientes maneja |
 | "quiero la demo" | Envía la demo del día + apps |

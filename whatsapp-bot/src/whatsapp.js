@@ -93,14 +93,16 @@ export async function startWhatsApp(onMessage) {
       const jid = msg.key.remoteJid;
       // Ignora mensajes propios, grupos y estados.
       if (msg.key.fromMe || !jid || jid.endsWith('@g.us') || jid === 'status@broadcast') continue;
+      const hasImage = Boolean(msg.message?.imageMessage || msg.message?.documentMessage);
       const text =
         msg.message?.conversation ||
         msg.message?.extendedTextMessage?.text ||
         msg.message?.imageMessage?.caption ||
+        msg.message?.documentMessage?.caption ||
         '';
-      if (!text.trim()) continue;
+      if (!text.trim() && !hasImage) continue; // ignora audios/stickers/etc. sin texto
       try {
-        await onMessage(jid, text.trim(), msg.pushName || null);
+        await onMessage(jid, text.trim(), msg.pushName || null, hasImage);
       } catch (err) {
         logger.error({ err: err.message, jid }, 'Error procesando mensaje entrante');
       }

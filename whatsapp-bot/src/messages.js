@@ -110,6 +110,26 @@ export function demoMessage(demoText, appsText) {
   );
 }
 
+// Saludo para un lead que ya había hablado antes.
+export const welcomeBack = (lead) =>
+  `👋 ¡Hola de nuevo${lead?.name ? `, ${lead.name}` : ''}! Qué gusto verte por aquí otra vez.\n` +
+  `¿Retomamos? Cuéntame en qué te ayudo:\n` +
+  `1️⃣ Quiero iniciar desde cero\n` +
+  `2️⃣ Ya vendo y quiero más clientes\n\n` +
+  `O escríbeme tu duda sobre *precios*, *demo* o *formas de pago*.`;
+
+// Respuesta cuando el lead envía una imagen (posible comprobante de pago).
+export const paymentProofPrompt = () =>
+  `📸 ¡Gracias! Recibí tu imagen. Si es tu *comprobante de pago*, escríbeme las palabras ` +
+  `*pago realizado* y enseguida te pido los datos para activar tu panel. 🙌`;
+
+export function ownerImageAlert(lead) {
+  return (
+    `📸 *POSIBLE COMPROBANTE DE PAGO*\n\n👤 ${lead.name || 'Sin nombre'}\n📞 ${lead.phone}\n` +
+    `🌎 ${lead.country || 'Desconocido'}\n\n➡️ Revisa la imagen en el chat de WhatsApp.`
+  );
+}
+
 // Datos bancarios según país (+ pagos internacionales).
 export function bankMessage(country) {
   const local = country && BANK_DETAILS[country.code];

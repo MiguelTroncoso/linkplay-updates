@@ -73,6 +73,14 @@ export function isDemoRequest(text) {
   return DEMO_PATTERNS.some((re) => re.test(t));
 }
 
+// El mensaje es solo un saludo (para reconocer a quien vuelve a escribir).
+// Admite combinaciones como "hola buenas", "hola buenos dias", etc.
+const GREET_WORD = '(hola+|ola|buenas|buenos dias|buen dia|buenas tardes|buenas noches|hey|holi|que tal|saludos|alo)';
+const GREETING = new RegExp(`^(${GREET_WORD}[\\s!.,¿?]*)+$`);
+export function isGreeting(text) {
+  return GREETING.test(normalize(text));
+}
+
 // El lead pide datos bancarios / a dónde transferir.
 const BANK_PATTERNS = [
   /datos bancarios/, /datos de pago/, /numero de cuenta/, /\bcuenta bancaria\b/,
