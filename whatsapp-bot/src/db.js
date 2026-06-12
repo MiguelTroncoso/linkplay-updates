@@ -33,6 +33,10 @@ db.exec(`
 // Tabla clave/valor para ajustes editables en caliente (demo del día, apps...).
 db.exec(`CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);`);
 
+// Contactos a ignorar: números ya guardados en tu agenda + ignorados manualmente.
+// Si ignored = 1, el bot NO responde a ese número (no es un lead de la campaña).
+db.exec(`CREATE TABLE IF NOT EXISTS contacts (jid TEXT PRIMARY KEY, name TEXT, ignored INTEGER DEFAULT 1);`);
+
 // Migración suave: agrega columnas nuevas si la tabla ya existía.
 for (const col of ['fallback_count INTEGER DEFAULT 0', 'credentials TEXT']) {
   try {
@@ -51,6 +55,31 @@ export function setSetting(key, value) {
   db.prepare(
     'INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value'
   ).run(key, value);
+}
+
+// Marca un contacto guardado de la agenda (no flipea un ajuste manual previo).
+export function rememberSavedContact(jid, name = null) {
+  db.prepare(
+    `INSERT INTO contacts (jid, name, ignored) VALUES (?, ?, 1)
+     ON CONFLICT(jid) DO UPDATE SET name = COALESCE(excluded.name, contacts.name)`
+  ).run(jid, name);
+}
+
+// Ignora/activa manualmente un número (comandos /ignore y /unignore).
+export function setIgnored(jid, ignored, name = null) {
+  db.prepare(
+    `INSERT INTO contacts (jid, name, ignored) VALUES (?, ?, ?)
+     ON CONFLICT(jid) DO UPDATE SET ignored = excluded.ignored`
+  ).run(jid, name, ignored ? 1 : 0);
+}
+
+export function isIgnored(jid) {
+  const row = db.prepare('SELECT ignored FROM contacts WHERE jid = ?').get(jid);
+  return row ? row.ignored === 1 : false;
+}
+
+export function countIgnored() {
+  return db.prepare('SELECT COUNT(*) AS n FROM contacts WHERE ignored = 1').get().n;
 }
 
 export function getLead(jid) {

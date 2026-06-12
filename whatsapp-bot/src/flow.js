@@ -1,6 +1,6 @@
 // Motor de conversación: decide qué responder a cada mensaje entrante.
 import { sendText } from './whatsapp.js';
-import { getLead, upsertLead, getSetting } from './db.js';
+import { getLead, upsertLead, getSetting, isIgnored } from './db.js';
 import { detectCountry, config, DEFAULT_DEMO, DEFAULT_APPS } from './config.js';
 import {
   detectOption,
@@ -40,6 +40,12 @@ export async function handleMessage(jid, text, pushName) {
   // 0) Mensajes del dueño: comandos de administración, nunca flujo de lead.
   if (config.ownerJid && jid === config.ownerJid) {
     await handleOwnerCommand(jid, text);
+    return;
+  }
+
+  // 0.1) Contacto ya guardado en tu agenda (no es un lead): el bot NO responde.
+  if (isIgnored(jid)) {
+    logger.debug({ jid }, 'Contacto guardado/ignorado: el bot no responde');
     return;
   }
 

@@ -66,8 +66,19 @@ Lead escribe ──▶ ¿es el dueño? ──▶ ejecuta comando (/demo, /apps, 
 | `/apps <texto>` | Actualiza las apps recomendadas |
 | `/pause <número>` | Pausa el bot para ese lead (lo atiendes tú) |
 | `/resume <número>` | Reactiva el bot para ese lead |
-| `/stats` | Resumen de leads por estado |
+| `/ignore <número>` | El bot **nunca** responde a ese número |
+| `/unignore <número>` | Permite que el bot vuelva a responder a ese número |
+| `/stats` | Resumen de leads e ignorados |
 | `/help` | Lista de comandos |
+
+### 🚫 El bot NO responde a tus contactos guardados
+
+Para que el bot atienda **solo a leads nuevos** de la campaña (y no a tus conocidos),
+ignora automáticamente a cualquier número que ya tengas **guardado en la agenda** del
+WhatsApp donde corre el bot. Tu lista de contactos se sincroniza sola al conectar.
+
+Para los que te escribieron **antes** de activar el bot (y aún no tienes guardados),
+agrégalos a `IGNORE_NUMBERS` en `.env` o usa `/ignore <número>` sobre la marcha.
 
 **Ejemplo de tu rutina de la mañana** (un solo mensaje, admite varias líneas):
 
@@ -156,6 +167,7 @@ Cada mañana solo envías `/demo ...` al bot por WhatsApp. Nada más.
 | `OWNER_JID` | Sí (para alertas/comandos) | Tu número: `569XXXXXXXX@s.whatsapp.net` |
 | `NOTION_TOKEN` | No | Token de integración interna de Notion |
 | `NOTION_DATABASE_ID` | No | ID de la base de datos de leads |
+| `IGNORE_NUMBERS` | No | Números que el bot nunca responde (coma-separados, sin `+`) |
 | `TZ` | No | Zona horaria del cron (def. `America/Santiago`) |
 | `MIN_TYPING_MS` / `MAX_TYPING_MS` | No | Rango de "escritura humana" antes de enviar |
 

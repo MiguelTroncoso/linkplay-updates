@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { config } from './config.js';
 import { logger, waLogger } from './logger.js';
+import { rememberSavedContact } from './db.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const AUTH_DIR = join(__dirname, '..', 'auth_info');
@@ -69,6 +70,22 @@ export async function startWhatsApp(onMessage) {
       if (!loggedOut) startWhatsApp(onMessage);
     }
   });
+
+  // Sincroniza tu agenda: los contactos con nombre guardado se marcan para ignorar.
+  const remember = (list = []) => {
+    let n = 0;
+    for (const c of list) {
+      if (c?.id?.endsWith('@s.whatsapp.net') && c.name) {
+        rememberSavedContact(c.id, c.name);
+        n++;
+      }
+    }
+    if (n) logger.info({ n }, 'Contactos guardados sincronizados (el bot no les responderá)');
+  };
+  sock.ev.on('contacts.set', ({ contacts }) => remember(contacts));
+  sock.ev.on('contacts.upsert', (contacts) => remember(contacts));
+  sock.ev.on('contacts.update', (contacts) => remember(contacts));
+  sock.ev.on('messaging-history.set', ({ contacts }) => remember(contacts));
 
   sock.ev.on('messages.upsert', async ({ messages, type }) => {
     if (type !== 'notify') return;

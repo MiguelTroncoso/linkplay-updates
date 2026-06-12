@@ -1,6 +1,6 @@
 // Comandos que SOLO el dueño (OWNER_JID) puede enviar al bot por WhatsApp.
 import { sendText } from './whatsapp.js';
-import { getSetting, setSetting, getLead, upsertLead, allLeads } from './db.js';
+import { getSetting, setSetting, getLead, upsertLead, allLeads, setIgnored, countIgnored } from './db.js';
 import { DEFAULT_DEMO, DEFAULT_APPS } from './config.js';
 import { logger } from './logger.js';
 
@@ -14,8 +14,12 @@ const HELP = `🛠️ *Comandos del dueño*
 /apps <texto>    → actualiza las apps recomendadas
 /pause <número>  → pausa el bot para ese lead (lo atiendes tú)
 /resume <número> → reactiva el bot para ese lead
-/stats           → resumen de leads por estado
-/help            → muestra esta ayuda`;
+/ignore <número> → el bot NUNCA responde a ese número
+/unignore <núm.> → permite que el bot responda a ese número
+/stats           → resumen de leads e ignorados
+/help            → muestra esta ayuda
+
+ℹ️ Tus contactos ya guardados en WhatsApp se ignoran automáticamente.`;
 
 // Devuelve true si el mensaje era un comando del dueño (y ya fue atendido).
 export async function handleOwnerCommand(jid, text) {
@@ -66,11 +70,25 @@ export async function handleOwnerCommand(jid, text) {
       break;
     }
 
+    case '/ignore': {
+      if (!rest[0]) return await sendText(jid, 'Uso: /ignore <número con código de país>'), true;
+      setIgnored(phoneToJid(rest[0]), true);
+      await sendText(jid, `🚫 El bot ya no responderá a ${rest[0]}.`);
+      break;
+    }
+
+    case '/unignore': {
+      if (!rest[0]) return await sendText(jid, 'Uso: /unignore <número con código de país>'), true;
+      setIgnored(phoneToJid(rest[0]), false);
+      await sendText(jid, `✅ El bot volverá a responder a ${rest[0]}.`);
+      break;
+    }
+
     case '/stats': {
       const leads = allLeads();
       const by = leads.reduce((acc, l) => ((acc[l.state] = (acc[l.state] || 0) + 1), acc), {});
       const lines = Object.entries(by).map(([s, n]) => `• ${s}: ${n}`).join('\n') || 'Sin leads aún.';
-      await sendText(jid, `📊 *Leads (${leads.length} total)*\n${lines}`);
+      await sendText(jid, `📊 *Leads (${leads.length} total)*\n${lines}\n🚫 Ignorados: ${countIgnored()}`);
       break;
     }
 

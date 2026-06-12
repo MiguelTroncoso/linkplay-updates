@@ -9,6 +9,14 @@ export const config = {
   maxTypingMs: Number(process.env.MAX_TYPING_MS || 3000),
 };
 
+// Números a ignorar manualmente desde el arranque (además de tus contactos guardados).
+// Útil para los que ya te escribieron antes de activar el bot. Coma-separados, sin '+'.
+export const IGNORE_NUMBERS = (process.env.IGNORE_NUMBERS || '')
+  .split(',')
+  .map((s) => s.replace(/\D/g, ''))
+  .filter(Boolean)
+  .map((n) => `${n}@s.whatsapp.net`);
+
 // --- Planes y precios en USD ---
 export const PLANS = {
   resellers: [
