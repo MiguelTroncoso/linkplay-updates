@@ -1,0 +1,11 @@
+node_modules/
+auth_info/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.env
+bank-details.local.json
+knowledge.local.md
+logs/
+*.log
