@@ -1,0 +1,11 @@
+{
+  "_comentario": "Copia este archivo a bank-details.local.json (en el VPS) y reemplaza con tus datos REALES. bank-details.local.json NO se sube a GitHub. Usa \\n para saltos de línea. Borra los países donde no cobres.",
+  "CL": "🏦 *Chile (CLP)*\nBanco: TuBanco\nTipo de cuenta: Cuenta Corriente\nN° de cuenta: 1234567890\nRUT: 12.345.678-9\nNombre: Miguel Troncoso\nCorreo: tucorreo@mail.com",
+  "MX": "🏦 *México (MXN — SPEI)*\nBanco: TuBanco\nCLABE: 012345678901234567\nTitular: Miguel Troncoso",
+  "CO": "🏦 *Colombia (COP)*\nNequi: 3001234567\nBancolombia Ahorros: 12345678901\nTitular: Miguel Troncoso\nCédula: 1234567890",
+  "PE": "🏦 *Perú (PEN)*\nYape / Plin: 987654321\nBCP cuenta: 123-45678901-0-12\nCCI: 00212312345678901234\nTitular: Miguel Troncoso",
+  "BO": "🏦 *Bolivia (BS)*\nBanco: TuBanco\nN° de cuenta: 1234567890\nTitular: Miguel Troncoso\nCI: 1234567",
+  "EC": "🏦 *Ecuador (USD)*\nBanco: TuBanco\nTipo de cuenta: Ahorros\nN° de cuenta: 1234567890\nTitular: Miguel Troncoso\nCédula: 1234567890",
+  "SV": "🏦 *El Salvador (USD)*\nBanco: TuBanco\nN° de cuenta: 1234567890\nTitular: Miguel Troncoso\nDUI: 12345678-9",
+  "CRYPTO": "🌎 *Pagos internacionales*\n💰 USDT (TRC20/Binance): TU_WALLET\n💳 PayPal: tucorreo@mail.com\n🏧 Western Union: a nombre de Miguel Troncoso — Ciudad, País"
+}

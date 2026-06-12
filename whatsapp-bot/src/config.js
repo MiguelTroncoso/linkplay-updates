@@ -1,5 +1,10 @@
 // Configuración central del negocio: planes, precios, monedas y métodos de pago.
 // Edita este archivo para actualizar precios o tasas de cambio sin tocar la lógica.
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const config = {
   ownerJid: process.env.OWNER_JID || '',
@@ -105,11 +110,25 @@ Titular: [NOMBRE]
 DUI: [NÚMERO]`,
 };
 
-// Pagos globales (USDT/PayPal/WU). ✏️ Completa con tus datos reales.
-export const CRYPTO_PAYMENTS = `🌎 *Pagos internacionales*
+// Pagos globales (USDT/PayPal/WU).
+let cryptoText = `🌎 *Pagos internacionales*
 💰 USDT (red TRC20/Binance): [TU WALLET o BinancePay ID]
 💳 PayPal: [TU CORREO PAYPAL]
 🏧 Western Union: a nombre de [NOMBRE] — [CIUDAD, PAÍS]`;
+export const getCrypto = () => cryptoText;
+
+// 🔒 Carga tus datos bancarios REALES desde un archivo privado que NO se sube a
+// GitHub (bank-details.local.json). Si no existe, se usan los textos de ejemplo
+// de arriba. Crea el archivo en el VPS con la forma de bank-details.example.json.
+try {
+  const local = JSON.parse(readFileSync(join(__dirname, '..', 'bank-details.local.json'), 'utf8'));
+  for (const code of Object.keys(BANK_DETAILS)) {
+    if (local[code]) BANK_DETAILS[code] = local[code];
+  }
+  if (local.CRYPTO) cryptoText = local.CRYPTO;
+} catch {
+  /* sin archivo local: se usan los textos de ejemplo */
+}
 
 // --- Demo y apps por defecto (se sobreescriben con /demo y /apps) ---
 // El dueño cambia la demo cada mañana enviando "/demo ..." al bot.

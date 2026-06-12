@@ -1,5 +1,5 @@
 // Plantillas de mensajes y formateo de precios/monedas.
-import { PLANS, GLOBAL_PAYMENTS, LOCAL_PAYMENTS, BANK_DETAILS, CRYPTO_PAYMENTS } from './config.js';
+import { PLANS, GLOBAL_PAYMENTS, LOCAL_PAYMENTS, BANK_DETAILS, getCrypto } from './config.js';
 
 const fmtUsd = (n) => `$${Number.isInteger(n) ? n : n.toFixed(2)} USD`;
 
@@ -188,9 +188,9 @@ export function bankMessage(country) {
   const local = country && BANK_DETAILS[country.code];
   const header = `💳 *Datos para tu pago*\n`;
   if (local) {
-    return `${header}\n${local}\n\n${CRYPTO_PAYMENTS}\n\n📸 Cuando transfieras, envíame el comprobante por aquí.`;
+    return `${header}\n${local}\n\n${getCrypto()}\n\n📸 Cuando transfieras, envíame el comprobante por aquí.`;
   }
-  return `${header}\n${CRYPTO_PAYMENTS}\n\n📸 Cuando pagues, envíame el comprobante por aquí.`;
+  return `${header}\n${getCrypto()}\n\n📸 Cuando pagues, envíame el comprobante por aquí.`;
 }
 
 // Conexión con un asesor humano.

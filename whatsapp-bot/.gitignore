@@ -5,5 +5,6 @@ auth_info/
 *.db-wal
 *.db-shm
 .env
+bank-details.local.json
 logs/
 *.log
