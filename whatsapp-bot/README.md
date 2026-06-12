@@ -1,116 +1,238 @@
 # 🤖 Bot WhatsApp B2B — IPTV LATAM (Resellers)
 
-Bot de WhatsApp para captar y dar seguimiento a revendedores de la plataforma de
-Televisión Digital. Construido con **Baileys** (WhatsApp Web, gratis) + **SQLite**
-+ **Notion**, pensado para correr en un VPS de 4GB con **PM2**.
+Bot de WhatsApp para captar, atender y dar seguimiento a revendedores de la
+plataforma de Televisión Digital. Construido con **Baileys** (WhatsApp Web, gratis)
++ **SQLite** + **Notion**, pensado para correr en un VPS de 4GB con **PM2**.
+
+---
 
 ## ✨ Funciones
 
 1. **Respuesta automática** con menú de bienvenida (opción 1: desde cero / opción 2: ya vende).
-2. **Seguimiento automático**: 24h (suave), 48h (urgencia/promo), 72h (marca lead frío).
-3. **Conversión de moneda** cuando el lead pregunta el precio en su moneda local
-   (CLP, MXN, COP, PEN, BS; Ecuador y El Salvador en USD).
-4. **Registro automático en Notion** (nombre, país, fecha, estado, plan, monto, pago, notas).
-5. **Alerta al dueño** por WhatsApp cuando un lead da señales de cierre
-   ("sí quiero", "cuándo empezamos", "cómo pago", etc.).
+2. **Demo del día**: el dueño la cambia cada mañana con un comando y el bot la reenvía
+   igual todo el día, junto con las **apps recomendadas**.
+3. **Seguimiento automático**: 24h (suave), 48h (urgencia/promo), 72h (marca lead frío).
+4. **Conversión de moneda** local cuando el lead la pide (CLP, MXN, COP, PEN, BS; EC y SV en USD).
+5. **Datos bancarios por país**: el bot los envía automáticamente cuando el lead va a pagar.
+6. **Flujo de pago → entrega**: cuando el lead dice "ya pagué", el bot le pide el
+   *usuario y contraseña* que desea y **te alerta** para que crees el panel manualmente.
+7. **Hablar con una persona**: si el lead lo pide (o el bot no entiende tras varios intentos),
+   se hace **handoff humano**: te avisa y **pausa el bot** para ese lead para no interferir.
+8. **Registro automático en Notion** (nombre, país, fecha, estado, plan, monto, pago, notas).
+9. **Alertas al dueño** por WhatsApp ante cierres, pagos, credenciales y solicitudes de asesor.
 
-El país se detecta por el código telefónico del número: 🇲🇽 52 · 🇨🇱 56 · 🇪🇨 593 ·
-🇸🇻 503 · 🇧🇴 591 · 🇵🇪 51 · 🇨🇴 57.
+El país se detecta por el código telefónico: 🇲🇽 52 · 🇨🇱 56 · 🇪🇨 593 · 🇸🇻 503 · 🇧🇴 591 · 🇵🇪 51 · 🇨🇴 57.
+
+---
+
+## 🧭 Cómo conversa el bot (flujo)
+
+```
+Lead escribe ──▶ ¿es el dueño? ──▶ ejecuta comando (/demo, /apps, /pause, ...)
+                       │ no
+                       ▼
+        ¿bot en pausa (handoff)? ──▶ solo registra, no responde
+                       │ no
+                       ▼
+  Prioridad: credenciales > "hablar con persona" > "ya pagué" > cierre >
+             primer contacto (bienvenida) > opción 1/2 > demo > bancos >
+             moneda local > fallback (2 intentos → ofrece asesor)
+```
+
+| Situación del lead | Qué hace el bot |
+|---|---|
+| Primer mensaje | Envía bienvenida con menú 1/2 |
+| Responde "1" | Explicación + precios + **demo del día** + apps |
+| Responde "2" | Precios + pregunta cuántos clientes maneja |
+| "quiero la demo" | Envía la demo del día + apps |
+| "¿cuánto en pesos?" | Convierte precios a su moneda local |
+| "a dónde transfiero" | Envía datos bancarios de su país + USDT/PayPal/WU |
+| "sí quiero / cómo pago" | Datos de pago + **alerta al dueño** |
+| "ya pagué" | Pide usuario/clave deseados + **alerta al dueño** |
+| Envía usuario/clave | Confirma + **alerta al dueño con las credenciales** para crear el panel |
+| "hablar con una persona" | Avisa que un asesor sigue + **pausa el bot** + te alerta |
+
+---
+
+## 🛠️ Comandos del dueño (envíalos por WhatsApp al número del bot)
+
+> Solo funcionan desde el número configurado en `OWNER_JID`.
+
+| Comando | Acción |
+|---|---|
+| `/demo` | Muestra la demo actual |
+| `/demo <texto>` | **Actualiza la demo del día** (links, credenciales de prueba…) |
+| `/apps` | Muestra las apps recomendadas |
+| `/apps <texto>` | Actualiza las apps recomendadas |
+| `/pause <número>` | Pausa el bot para ese lead (lo atiendes tú) |
+| `/resume <número>` | Reactiva el bot para ese lead |
+| `/stats` | Resumen de leads por estado |
+| `/help` | Lista de comandos |
+
+**Ejemplo de tu rutina de la mañana** (un solo mensaje, admite varias líneas):
+
+```
+/demo Usuario de prueba del día:
+🔗 http://tu-servidor.com:8080
+👤 usuario: demo1206
+🔑 clave: prueba2026
+⏳ Válido solo por hoy
+```
+
+---
 
 ## 🏗️ Arquitectura
-
-```
-WhatsApp ──Baileys──▶ flow.js (motor) ──▶ SQLite (estado/seguimientos)
-                          │                    │
-                          ├──▶ intents.js (moneda/opciones/cierre)
-                          ├──▶ messages.js (plantillas + conversión)
-                          ├──▶ notion.js  (CRM)
-                          └──▶ alerta al dueño
-node-cron (cada hora) ──▶ followup.js ──▶ seguimientos 24/48/72h
-```
 
 | Archivo | Rol |
 |---|---|
 | `src/index.js` | Arranque: conecta WhatsApp + programa seguimientos |
-| `src/whatsapp.js` | Transporte Baileys (QR, reconexión, envío con escritura simulada) |
+| `src/whatsapp.js` | Transporte Baileys (QR, reconexión, escritura simulada anti-ban) |
 | `src/flow.js` | Motor de conversación |
-| `src/intents.js` | Detección de opción / moneda / cierre |
+| `src/commands.js` | Comandos del dueño (`/demo`, `/apps`, `/pause`…) |
+| `src/intents.js` | Detección de opción / moneda / cierre / pago / humano / demo / banco |
 | `src/messages.js` | Plantillas y conversión de moneda |
-| `src/config.js` | Planes, precios, tasas de cambio, países, pagos |
-| `src/db.js` | SQLite |
+| `src/config.js` | **Planes, precios, tasas, países, bancos, demo y apps por defecto** |
+| `src/db.js` | SQLite (leads + ajustes) |
 | `src/notion.js` | Sincronización con Notion (opcional) |
-| `src/followup.js` | Cron de seguimiento |
+| `src/followup.js` | Cron de seguimiento (cada hora) |
 
-## 🚀 Instalación en el VPS (Ubuntu/Debian)
+---
+
+## 🚀 Paso a paso: instalación en el VPS (Ubuntu/Debian, 4GB RAM)
 
 ```bash
-# 1. Node.js 20 LTS
+# 1. Node.js 20 LTS + herramientas de compilación (better-sqlite3 las necesita)
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install -y nodejs build-essential   # build-essential para better-sqlite3
+sudo apt-get install -y nodejs build-essential
 
-# 2. Dependencias del bot
-cd whatsapp-bot
+# 2. Clonar el repo y entrar a la carpeta del bot
+git clone https://github.com/MiguelTroncoso/linkplay-updates.git
+cd linkplay-updates/whatsapp-bot
+
+# 3. Instalar dependencias
 npm install
 
-# 3. Configuración
+# 4. Configurar variables de entorno
 cp .env.example .env
-nano .env        # pon tu OWNER_JID y, opcional, las claves de Notion
+nano .env
+#    OWNER_JID = tu número en formato 569XXXXXXXX@s.whatsapp.net (obligatorio para alertas)
+#    NOTION_TOKEN y NOTION_DATABASE_ID (opcionales)
 
-# 4. Primer arranque (escanea el QR con WhatsApp Business)
+# 5. Completar tus datos reales en src/config.js
+nano src/config.js
+#    → BANK_DETAILS  (cuentas bancarias por país)
+#    → CRYPTO_PAYMENTS (USDT/PayPal/Western Union)
+#    → PLANS y COUNTRIES (precios y tasas, si cambian)
+
+# 6. Primer arranque: vincular WhatsApp escaneando el QR
 npm start
-#   WhatsApp Business → Dispositivos vinculados → Vincular dispositivo → escanea el QR
-#   La sesión queda guardada en auth_info/ (no se vuelve a pedir QR)
+#    En WhatsApp Business: Ajustes → Dispositivos vinculados → Vincular dispositivo
+#    Escanea el QR que aparece en la terminal.
+#    La sesión queda guardada en auth_info/ (no se vuelve a pedir QR).
 
-# 5. Producción con PM2 (auto-reinicio y arranque con el sistema)
+# 7. Producción con PM2 (auto-reinicio + arranque con el sistema)
 sudo npm install -g pm2
 pm2 start ecosystem.config.cjs
 pm2 save
-pm2 startup        # ejecuta el comando que imprime
+pm2 startup        # ejecuta el comando que imprime para que arranque al reiniciar el VPS
 ```
 
-Ver logs: `pm2 logs iptv-bot` · Reiniciar: `pm2 restart iptv-bot`
+**Operación diaria:**
+
+```bash
+pm2 logs iptv-bot       # ver actividad en vivo
+pm2 restart iptv-bot    # reiniciar
+pm2 stop iptv-bot       # detener
+```
+
+Cada mañana solo envías `/demo ...` al bot por WhatsApp. Nada más.
+
+---
 
 ## ⚙️ Variables de entorno (`.env`)
 
 | Variable | Obligatoria | Descripción |
 |---|---|---|
-| `OWNER_JID` | Sí (para alertas) | Tu número en formato `569XXXXXXXX@s.whatsapp.net` |
+| `OWNER_JID` | Sí (para alertas/comandos) | Tu número: `569XXXXXXXX@s.whatsapp.net` |
 | `NOTION_TOKEN` | No | Token de integración interna de Notion |
 | `NOTION_DATABASE_ID` | No | ID de la base de datos de leads |
 | `TZ` | No | Zona horaria del cron (def. `America/Santiago`) |
 | `MIN_TYPING_MS` / `MAX_TYPING_MS` | No | Rango de "escritura humana" antes de enviar |
 
-## 🗂️ Base de datos de Notion
+> 💡 Para obtener tu `OWNER_JID`: es tu número completo con código de país, sin `+`,
+> seguido de `@s.whatsapp.net`. Ej. Chile `+56 9 1234 5678` → `56912345678@s.whatsapp.net`.
 
-Crea una base de datos con **exactamente** estas propiedades (nombre y tipo):
+---
 
-| Propiedad | Tipo |
+## 🗂️ Notion: crear la base de datos (BD)
+
+### Opción A — Prompt listo para pegar en Notion AI
+
+> En una página de Notion, escribe `/AI` (o usa Notion AI) y pega esto:
+
+```
+Crea una base de datos (database) tipo tabla llamada "Leads IPTV LATAM" con estas
+propiedades exactas, respetando nombres y tipos:
+
+1. "Nombre"           → Title
+2. "Número"           → Text
+3. "País"             → Select con opciones: México, Chile, Ecuador, El Salvador, Bolivia, Perú, Colombia
+4. "Primer contacto"  → Date
+5. "Estado"           → Select con opciones: Nuevo, Demo, Interesado, Cerrado, Frío
+6. "Plan"             → Text
+7. "Monto USD"        → Number (formato dólar)
+8. "Método de pago"   → Text
+9. "Notas"            → Text
+
+Crea también 3 vistas: una tabla "Todos", un tablero (Board) agrupado por "Estado",
+y una vista de calendario por "Primer contacto".
+```
+
+### Opción B — Manual
+
+Crea una base de datos con **exactamente** estas propiedades (los nombres deben coincidir):
+
+| Propiedad | Tipo | Notas |
+|---|---|---|
+| `Nombre` | Title | |
+| `Número` | Text | |
+| `País` | Select | México, Chile, Ecuador, El Salvador, Bolivia, Perú, Colombia |
+| `Primer contacto` | Date | |
+| `Estado` | Select | `Nuevo`, `Demo`, `Interesado`, `Cerrado`, `Frío` |
+| `Plan` | Text | |
+| `Monto USD` | Number | |
+| `Método de pago` | Text | |
+| `Notas` | Text | |
+
+### Conectar la integración
+
+1. Ve a <https://www.notion.so/my-integrations> → **New integration** → copia el *Internal Integration Secret* → pégalo en `NOTION_TOKEN`.
+2. Abre tu base de datos → botón **···** (arriba a la derecha) → **Connections** → añade tu integración.
+3. Copia el **ID de la base** desde la URL y pégalo en `NOTION_DATABASE_ID`:
+   `https://notion.so/tuworkspace/`**`ESTE_ES_EL_ID`**`?v=...` (los 32 caracteres antes de `?v=`).
+
+> Si dejas `NOTION_TOKEN`/`NOTION_DATABASE_ID` vacíos, el bot funciona igual, solo no registra en Notion.
+
+---
+
+## 💰 Actualizar precios, tasas, bancos, demo
+
+| Qué | Dónde |
 |---|---|
-| `Nombre` | Title |
-| `Número` | Text |
-| `País` | Select |
-| `Primer contacto` | Date |
-| `Estado` | Select (opciones: `Nuevo`, `Demo`, `Interesado`, `Cerrado`, `Frío`) |
-| `Plan` | Text |
-| `Monto USD` | Number |
-| `Método de pago` | Text |
-| `Notas` | Text |
+| Precios de planes | `src/config.js` → `PLANS` |
+| Tasas de cambio | `src/config.js` → `COUNTRIES` (campo `rate`) |
+| Datos bancarios por país | `src/config.js` → `BANK_DETAILS` |
+| USDT / PayPal / Western Union | `src/config.js` → `CRYPTO_PAYMENTS` |
+| Demo del día | comando `/demo` por WhatsApp (no requiere reiniciar) |
+| Apps recomendadas | comando `/apps` por WhatsApp |
 
-Luego comparte la base con tu integración (botón **···** → *Connections*) y copia el
-ID de la base (parte de la URL) en `NOTION_DATABASE_ID`. Si dejas las claves de Notion
-vacías, el bot funciona igual pero sin registrar en Notion.
+Tras editar `config.js`: `pm2 restart iptv-bot`.
 
-## 💰 Actualizar precios o tasas de cambio
-
-Todo está en `src/config.js` (`PLANS` y `COUNTRIES`). Las tasas son de referencia
-y se editan a mano; si más adelante quieres tasas en vivo, se puede conectar una API
-de tipo de cambio.
+---
 
 ## ⚠️ Nota sobre Baileys (anti-ban)
 
-Baileys usa WhatsApp Web de forma no oficial. Para reducir el riesgo de bloqueo:
-- El bot simula escritura antes de responder y no hace spam.
-- Respeta el corte a 72h (no insiste con leads fríos).
-- Usa un número de WhatsApp Business dedicado y mantenlo "calentado".
-
-Si el volumen crece, considera migrar a la **WhatsApp Cloud API oficial** de Meta.
+Baileys usa WhatsApp Web de forma no oficial. Para reducir el riesgo de bloqueo el bot
+simula escritura antes de responder, no hace spam y respeta el corte a 72h. Recomendado:
+usa un número de WhatsApp Business **dedicado** y "calentado". Si el volumen crece mucho,
+considera migrar a la **WhatsApp Cloud API oficial** de Meta.

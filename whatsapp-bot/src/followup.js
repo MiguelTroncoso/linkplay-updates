@@ -15,6 +15,7 @@ export async function runFollowups() {
 
   for (const lead of leadsForFollowup()) {
     if (lead.jid === config.ownerJid) continue;
+    if (lead.stage === 'human') continue; // lo atiende una persona, no interferir
     const hours = (now - lead.last_inbound) / HOUR;
 
     if (hours >= 72 && !lead.fu72_done) {

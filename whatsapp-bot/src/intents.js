@@ -40,3 +40,47 @@ export function isClosing(text) {
   const t = normalize(text);
   return CLOSING_PATTERNS.some((re) => re.test(t));
 }
+
+// El lead avisa que ya realizó el pago.
+const PAYMENT_DONE = [
+  /\bya pague\b/, /\bya pague\b/, /ya hice el pago/, /ya realice el pago/, /ya transfer/,
+  /\btransferi\b/, /hice la transferencia/, /pago realizado/, /pago hecho/, /\blisto pague\b/,
+  /envie el comprobante/, /aqui el comprobante/, /adjunto comprobante/, /ya deposite/, /\bya envie el pago\b/,
+];
+export function isPaymentDone(text) {
+  const t = normalize(text);
+  return PAYMENT_DONE.some((re) => re.test(t));
+}
+
+// El lead quiere hablar con una persona real.
+const HUMAN_PATTERNS = [
+  /hablar con (una |alguien|un )?(persona|humano|asesor|agente|alguien|vendedor|ejecutivo)/,
+  /atencion (humana|personal|de una persona)/, /\bun asesor\b/, /\bpersona real\b/,
+  /me pueden? llamar/, /quiero hablar con/, /\bagente\b/, /\bsoporte\b/, /\bayuda humana\b/,
+];
+export function isHumanRequest(text) {
+  const t = normalize(text);
+  return HUMAN_PATTERNS.some((re) => re.test(t));
+}
+
+// El lead pide la demo / quiere probar.
+const DEMO_PATTERNS = [
+  /\bdemo\b/, /quiero probar/, /puedo probar/, /una prueba/, /probar el servicio/,
+  /probarlo/, /pruebame/, /quiero ver/, /me lo muestras/, /tienen prueba/,
+];
+export function isDemoRequest(text) {
+  const t = normalize(text);
+  return DEMO_PATTERNS.some((re) => re.test(t));
+}
+
+// El lead pide datos bancarios / a dónde transferir.
+const BANK_PATTERNS = [
+  /datos bancarios/, /datos de pago/, /numero de cuenta/, /\bcuenta bancaria\b/,
+  /a donde (transfiero|pago|deposito|envio)/, /donde (transfiero|deposito|consigno)/,
+  /\bnequi\b/, /\byape\b/, /\bplin\b/, /\bclabe\b/, /\bspei\b/, /\bcci\b/,
+  /a que cuenta/, /pasame (la cuenta|los datos)/, /tus datos para pagar/,
+];
+export function isBankRequest(text) {
+  const t = normalize(text);
+  return BANK_PATTERNS.some((re) => re.test(t));
+}

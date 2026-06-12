@@ -15,6 +15,11 @@ const AUTH_DIR = join(__dirname, '..', 'auth_info');
 
 let sock = null;
 
+// Inyección de un socket falso para pruebas automatizadas.
+export function _setSockForTest(fake) {
+  sock = fake;
+}
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 

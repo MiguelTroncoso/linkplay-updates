@@ -53,6 +53,66 @@ export const LOCAL_PAYMENTS = {
   SV: 'Transferencia en USD',
 };
 
+// --- Datos bancarios / de pago por país ---
+// ✏️ EDITA estos textos con tus datos reales. Soporta varias líneas.
+// El bot los envía cuando el lead va a pagar (según su país).
+export const BANK_DETAILS = {
+  CL: `🏦 *Chile (CLP)*
+Banco: [TU BANCO]
+Tipo de cuenta: [Cuenta Corriente/Vista]
+N° de cuenta: [NÚMERO]
+RUT: [TU RUT]
+Nombre: [TITULAR]
+Correo: [CORREO]`,
+  MX: `🏦 *México (MXN — SPEI)*
+Banco: [TU BANCO]
+CLABE: [18 DÍGITOS]
+N° de tarjeta: [OPCIONAL]
+Titular: [NOMBRE]`,
+  CO: `🏦 *Colombia (COP)*
+Nequi: [NÚMERO]
+Bancolombia — Ahorros N°: [NÚMERO]
+Titular: [NOMBRE]
+Cédula: [NÚMERO]`,
+  PE: `🏦 *Perú (PEN)*
+Yape / Plin: [NÚMERO]
+Banco (BCP/Interbank): [CUENTA]
+CCI: [NÚMERO]
+Titular: [NOMBRE]`,
+  BO: `🏦 *Bolivia (BS)*
+Banco: [TU BANCO]
+N° de cuenta: [NÚMERO]
+Titular: [NOMBRE]
+CI: [NÚMERO]`,
+  EC: `🏦 *Ecuador (USD)*
+Banco: [TU BANCO]
+Tipo de cuenta: [Ahorros/Corriente]
+N° de cuenta: [NÚMERO]
+Titular: [NOMBRE]
+Cédula: [NÚMERO]`,
+  SV: `🏦 *El Salvador (USD)*
+Banco: [TU BANCO]
+N° de cuenta: [NÚMERO]
+Titular: [NOMBRE]
+DUI: [NÚMERO]`,
+};
+
+// Pagos globales (USDT/PayPal/WU). ✏️ Completa con tus datos reales.
+export const CRYPTO_PAYMENTS = `🌎 *Pagos internacionales*
+💰 USDT (red TRC20/Binance): [TU WALLET o BinancePay ID]
+💳 PayPal: [TU CORREO PAYPAL]
+🏧 Western Union: a nombre de [NOMBRE] — [CIUDAD, PAÍS]`;
+
+// --- Demo y apps por defecto (se sobreescriben con /demo y /apps) ---
+// El dueño cambia la demo cada mañana enviando "/demo ..." al bot.
+export const DEFAULT_DEMO =
+  '⚠️ La demo del día aún no está configurada. Escríbeme y te la activo en minutos.';
+export const DEFAULT_APPS = `📲 *Apps recomendadas*
+• Android / TV Box / Fire Stick: *IPTV Smarters Pro* o *XCIPTV*
+• Smart TV Samsung/LG: *Smart STB* o *SS IPTV*
+• iPhone / iPad: *Smarters Player Lite*
+• PC/Windows: *VLC* o *MyIPTV Player*`;
+
 // Detecta el país a partir del número (JID o E.164 sin '+').
 export function detectCountry(numberOrJid) {
   const digits = String(numberOrJid).replace(/\D/g, '');

@@ -30,6 +30,29 @@ db.exec(`
   );
 `);
 
+// Tabla clave/valor para ajustes editables en caliente (demo del día, apps...).
+db.exec(`CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);`);
+
+// Migración suave: agrega columnas nuevas si la tabla ya existía.
+for (const col of ['fallback_count INTEGER DEFAULT 0', 'credentials TEXT']) {
+  try {
+    db.exec(`ALTER TABLE leads ADD COLUMN ${col};`);
+  } catch {
+    /* la columna ya existe */
+  }
+}
+
+export function getSetting(key, fallback = null) {
+  const row = db.prepare('SELECT value FROM settings WHERE key = ?').get(key);
+  return row ? row.value : fallback;
+}
+
+export function setSetting(key, value) {
+  db.prepare(
+    'INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value'
+  ).run(key, value);
+}
+
 export function getLead(jid) {
   return db.prepare('SELECT * FROM leads WHERE jid = ?').get(jid);
 }

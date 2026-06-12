@@ -1,5 +1,5 @@
 // Plantillas de mensajes y formateo de precios/monedas.
-import { PLANS, GLOBAL_PAYMENTS, LOCAL_PAYMENTS } from './config.js';
+import { PLANS, GLOBAL_PAYMENTS, LOCAL_PAYMENTS, BANK_DETAILS, CRYPTO_PAYMENTS } from './config.js';
 
 const fmtUsd = (n) => `$${Number.isInteger(n) ? n : n.toFixed(2)} USD`;
 
@@ -99,6 +99,66 @@ export function ownerAlert(lead, text) {
     `📌 Estado: ${lead.state}\n` +
     `💬 Dijo: "${text}"\n\n` +
     `➡️ Contáctalo para cerrar la venta.`
+  );
+}
+
+// Demo del día + apps recomendadas
+export function demoMessage(demoText, appsText) {
+  return (
+    `🎬 *Demo de prueba (válida hoy)*\n\n${demoText}\n\n${appsText}\n\n` +
+    `Pruébalo y me cuentas qué te pareció. Cuando quieras, te activo tu panel para revender. 🚀`
+  );
+}
+
+// Datos bancarios según país (+ pagos internacionales).
+export function bankMessage(country) {
+  const local = country && BANK_DETAILS[country.code];
+  const header = `💳 *Datos para tu pago*\n`;
+  if (local) {
+    return `${header}\n${local}\n\n${CRYPTO_PAYMENTS}\n\n📸 Cuando transfieras, envíame el comprobante por aquí.`;
+  }
+  return `${header}\n${CRYPTO_PAYMENTS}\n\n📸 Cuando pagues, envíame el comprobante por aquí.`;
+}
+
+// Conexión con un asesor humano.
+export const humanReply = () =>
+  `👨‍💼 ¡Claro que sí! Te conecto con uno de nuestros asesores.\n` +
+  `En unos minutos una persona del equipo continúa contigo por aquí. 🙌\n` +
+  `Mientras tanto, puedes dejarme tu consulta y la verá el asesor.`;
+
+// Tras confirmar pago: pedir usuario/contraseña deseados.
+export const askCredentials = () =>
+  `🙌 *¡Pago recibido, gracias!* Ya casi tienes tu panel.\n\n` +
+  `Para crearlo, envíame en *un solo mensaje* el *usuario* y la *contraseña* que deseas.\n` +
+  `Ejemplo:\n_usuario: juan123_\n_clave: miClave2025_`;
+
+// Confirmación tras recibir las credenciales.
+export const credentialsReceived = () =>
+  `✅ ¡Listo! Recibí tus datos. Estoy creando tu panel y en unos minutos te entrego el acceso. 🚀`;
+
+// --- Alertas internas al dueño ---
+export function ownerPaymentAlert(lead, text) {
+  return (
+    `💸 *PAGO REPORTADO*\n\n👤 ${lead.name || 'Sin nombre'}\n📞 ${lead.phone}\n` +
+    `🌎 ${lead.country || 'Desconocido'}\n💬 "${text}"\n\n` +
+    `➡️ Verifica el comprobante. El bot ya le pidió usuario y contraseña.`
+  );
+}
+
+export function ownerCredentialsAlert(lead, creds) {
+  return (
+    `🔐 *CREAR PANEL — credenciales recibidas*\n\n👤 ${lead.name || 'Sin nombre'}\n📞 ${lead.phone}\n` +
+    `🌎 ${lead.country || 'Desconocido'}\n\n📝 Datos que pidió el cliente:\n${creds}\n\n` +
+    `➡️ Crea el panel manualmente y entrégale el acceso.`
+  );
+}
+
+export function ownerHumanAlert(lead, text) {
+  return (
+    `🙋 *LEAD PIDE HABLAR CON UNA PERSONA*\n\n👤 ${lead.name || 'Sin nombre'}\n📞 ${lead.phone}\n` +
+    `🌎 ${lead.country || 'Desconocido'}\n💬 "${text}"\n\n` +
+    `➡️ El bot quedó *en pausa* para este lead. Responde tú directamente.\n` +
+    `Para reactivar el bot con él: \`/resume ${lead.phone}\``
   );
 }
 
