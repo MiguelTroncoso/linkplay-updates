@@ -79,6 +79,33 @@ export function currencyConversion(country) {
   );
 }
 
+// Pregunta qué plan/monto va a comprar.
+export const askPlan = () =>
+  `🎉 ¡Genial! Vamos a activarte.\n\n` +
+  `¿Qué plan vas a tomar? Escríbeme el *monto en USD* (ej: $20, $35.20) ` +
+  `o el plan (ej: *45+5 créditos*, *Panel Ilimitado*).`;
+
+export const askPlanAgain = () =>
+  `🤔 No capté el plan. Escríbeme el *monto en USD* (ej: $20) ` +
+  `o el plan exacto (ej: *100+10 créditos*).`;
+
+// Confirma el plan elegido y entrega los datos de pago.
+export function planSelected(plan, country) {
+  return (
+    `✅ ¡Perfecto! Tomaste *${plan.name}* ($${plan.usd} USD).\n\n` +
+    `${bankMessage(country)}\n\n` +
+    `📸 Cuando hagas el pago, escríbeme *pago realizado* y te activo tu panel. 🚀`
+  );
+}
+
+export function ownerPlanAlert(lead, plan) {
+  return (
+    `🛒 *LEAD ELIGIÓ PLAN*\n\n👤 ${lead.name || 'Sin nombre'}\n📞 ${lead.phone}\n` +
+    `🌎 ${lead.country || 'Desconocido'}\n📦 Plan: ${plan.name}\n💰 Monto: $${plan.usd} USD\n\n` +
+    `➡️ Está por pagar. Te avisaré cuando confirme el pago.`
+  );
+}
+
 // Respuesta cuando el lead da señales de cierre
 export function closingReply(country) {
   const pay = country ? LOCAL_PAYMENTS[country.code] || GLOBAL_PAYMENTS : GLOBAL_PAYMENTS;

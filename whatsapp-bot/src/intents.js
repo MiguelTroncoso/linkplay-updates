@@ -1,4 +1,8 @@
 // Detección de intenciones a partir del texto del lead.
+import { PLANS } from './config.js';
+
+const ALL_PLANS = [...PLANS.resellers, ...PLANS.superResellers, ...PLANS.ilimitados];
+
 const normalize = (t) =>
   t
     .toLowerCase()
@@ -91,4 +95,44 @@ const BANK_PATTERNS = [
 export function isBankRequest(text) {
   const t = normalize(text);
   return BANK_PATTERNS.some((re) => re.test(t));
+}
+
+// Extrae un monto numérico ("$35.20", "20 usd", "35,20") del texto.
+function parseMoney(t) {
+  const m = t.match(/(\d+(?:[.,]\d{1,2})?)/);
+  return m ? parseFloat(m[1].replace(',', '.')) : null;
+}
+
+// Detecta el plan/monto que el lead quiere comprar. Devuelve { usd, name } o null.
+// loose=true (cuando le preguntamos directamente) acepta un número suelto como monto.
+export function detectPlan(text, { loose = false } = {}) {
+  const t = normalize(text);
+
+  // Combo de créditos: "10+2", "45 + 5", etc.
+  const combo = t.match(/(\d+)\s*\+\s*(\d+)/);
+  if (combo) {
+    const key = `${combo[1]}+${combo[2]}`;
+    const p = PLANS.resellers.find((pl) => pl.name.replace(/\s/g, '').startsWith(key));
+    if (p) return { usd: p.usd, name: p.name };
+  }
+  // Paneles ilimitados por nombre.
+  if (/ilimitado\s+admin/.test(t)) return { usd: 400, name: 'Panel Ilimitado Admin (mensual)' };
+  if (/ilimitado/.test(t)) return { usd: 200, name: 'Panel Ilimitado (mensual)' };
+
+  const num = parseMoney(t);
+  if (num == null) return null;
+
+  // Para montos sueltos exigimos contexto, salvo que se lo hayamos preguntado (loose).
+  const signal = /\$|usd|d[oó]lar|cr[eé]dito|plan|paquete/.test(t);
+  if (!loose && !signal) return null;
+
+  // Por cantidad de créditos del panel Super Reseller (1500, 2000, ...).
+  const sr = PLANS.superResellers.find((p) => parseInt(p.name, 10) === num);
+  if (sr) return { usd: sr.usd, name: sr.name };
+  // Por precio exacto de algún plan.
+  const byPrice = ALL_PLANS.find((p) => Math.abs(p.usd - num) < 0.5);
+  if (byPrice) return { usd: byPrice.usd, name: byPrice.name };
+  // Monto personalizado.
+  if (num >= 1 && num <= 100000) return { usd: num, name: `$${num} USD` };
+  return null;
 }

@@ -11,6 +11,7 @@ import {
   isDemoRequest,
   isBankRequest,
   isGreeting,
+  detectPlan,
 } from './intents.js';
 import * as msg from './messages.js';
 import { handleOwnerCommand } from './commands.js';
@@ -37,6 +38,19 @@ async function alertOwner(text) {
 }
 
 const currentDemo = () => msg.demoMessage(getSetting('demo', DEFAULT_DEMO), getSetting('apps', DEFAULT_APPS));
+
+// Registra el plan elegido (monto → Notion), entrega datos de pago y alerta al dueño.
+async function capturePlan(jid, plan, country) {
+  const updated = await reply(jid, msg.planSelected(plan, country), {
+    plan: plan.name,
+    amount_usd: plan.usd,
+    stage: 'awaiting_payment',
+    state: 'Interesado',
+    fallback_count: 0,
+  });
+  await alertOwner(msg.ownerPlanAlert(updated, plan));
+  logger.info({ phone: updated.phone, usd: plan.usd }, '🛒 Plan elegido');
+}
 
 export async function handleMessage(jid, text, pushName, hasImage = false, media = null) {
   // 0) Mensajes del dueño: comandos de administración, nunca flujo de lead.
@@ -118,15 +132,26 @@ export async function handleMessage(jid, text, pushName, hasImage = false, media
     return;
   }
 
-  // 4) Señal de cierre: respuesta + datos bancarios + alerta al dueño.
+  // 3.5) Le preguntamos qué plan quiere: capturamos el monto (→ Notion).
+  if (lead.stage === 'awaiting_plan') {
+    const plan = detectPlan(text, { loose: true });
+    if (plan) {
+      await capturePlan(jid, plan, country);
+      return;
+    }
+    await reply(jid, msg.askPlanAgain());
+    return;
+  }
+
+  // 4) Señal de cierre: preguntamos qué plan/monto va a comprar + alerta al dueño.
   if (isClosing(text)) {
-    const updated = await reply(jid, `${msg.closingReply(country)}\n\n${msg.bankMessage(country)}`, {
+    const updated = await reply(jid, msg.askPlan(), {
       state: 'Interesado',
-      stage: 'closing',
+      stage: 'awaiting_plan',
       fallback_count: 0,
     });
     await alertOwner(msg.ownerAlert(updated, text));
-    logger.info({ phone: updated.phone }, '🔔 Lead caliente: alerta enviada');
+    logger.info({ phone: updated.phone }, '🔔 Lead caliente: pregunté el plan');
     return;
   }
 
@@ -168,6 +193,13 @@ export async function handleMessage(jid, text, pushName, hasImage = false, media
   }
   if (option === 2) {
     await reply(jid, msg.option2(), { stage: 'opt2', state: 'Interesado', fallback_count: 0 });
+    return;
+  }
+
+  // 6.5) Mencionó un plan/monto directamente ("quiero el de $20", "el 45+5").
+  const plan = detectPlan(text);
+  if (plan) {
+    await capturePlan(jid, plan, country);
     return;
   }
 

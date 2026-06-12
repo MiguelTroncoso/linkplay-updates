@@ -49,7 +49,8 @@ Lead escribe ──▶ ¿es el dueño? ──▶ ejecuta comando (/demo, /apps, 
 | "quiero la demo" | Envía la demo del día + apps |
 | "¿cuánto en pesos?" | Convierte precios a su moneda local |
 | "a dónde transfiero" | Envía datos bancarios de su país + USDT/PayPal/WU |
-| "sí quiero / cómo pago" | Datos de pago + **alerta al dueño** |
+| "sí quiero / cómo pago" | Pregunta *¿qué plan vas a tomar?* + **alerta al dueño** |
+| Responde el monto ("$20", "45+5", "ilimitado") | Registra el **monto en USD y el plan en Notion** + envía datos de pago |
 | "ya pagué" | Pide usuario/clave deseados + **alerta al dueño** |
 | Envía usuario/clave | Confirma + **alerta al dueño con las credenciales** para crear el panel |
 | "hablar con una persona" | Avisa que un asesor sigue + **pausa el bot** + te alerta |
@@ -245,17 +246,19 @@ Tras editar `config.js`: `pm2 restart iptv-bot`.
 
 ---
 
-## 📸 OCR de comprobantes (lectura del monto con IA)
+## 💰 Cómo se registra el monto en Notion
 
-Cuando un lead envía la **foto de su comprobante**, el bot la lee con **Claude Haiku 4.5**
-(visión) y extrae el **monto, la moneda y el método de pago**. Convierte el monto a USD
-con tus tasas (`src/config.js`), lo **guarda en Notion** (campo *Monto USD*) y le pide al
-cliente el usuario/clave para su panel — todo automático. Tú recibes la alerta con el monto.
+Cuando el lead quiere comprar, el bot le pregunta **"¿qué plan vas a tomar?"**. El lead
+responde con el monto (*"$20"*, *"$35.20"*) o el plan (*"45+5 créditos"*, *"Panel Ilimitado"*),
+y el bot **guarda automáticamente el monto en USD y el plan en Notion** (campos *Monto USD* y
+*Plan*), te alerta, y le entrega los datos de pago. Tú confirmas el pago como siempre. No
+requiere ninguna configuración extra.
 
-Para activarlo, pon tu `ANTHROPIC_API_KEY` (de <https://console.anthropic.com>) en `.env`.
-Es muy económico: Haiku cuesta ~$1 por millón de tokens, y cada comprobante usa muy pocos.
-Si dejas la clave vacía, el bot sigue funcionando: solo le pide al cliente que escriba
-*"pago realizado"* en vez de leer el monto.
+### OCR de comprobantes (opcional)
+
+Como extra, si pones tu `ANTHROPIC_API_KEY` (de <https://console.anthropic.com>) en `.env`,
+el bot también puede **leer la foto del comprobante** con Claude Haiku 4.5 y extraer el monto.
+Es opcional — el bot funciona perfecto sin esto, porque ya captura el monto preguntándolo.
 
 ## ⚠️ Nota sobre Baileys (anti-ban)
 
