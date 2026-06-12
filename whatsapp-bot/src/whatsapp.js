@@ -10,12 +10,21 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { config } from './config.js';
 import { logger, waLogger } from './logger.js';
-import { rememberSavedContact } from './db.js';
+import { rememberSavedContact, setIgnored } from './db.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const AUTH_DIR = join(__dirname, '..', 'auth_info');
 
 let sock = null;
+
+// IDs de mensajes que envió el propio bot (para distinguirlos de los que el
+// dueño escribe a mano desde su teléfono).
+const botSentIds = new Set();
+const rememberBotSent = (id) => {
+  if (!id) return;
+  botSentIds.add(id);
+  if (botSentIds.size > 3000) botSentIds.clear();
+};
 
 // Inyección de un socket falso para pruebas automatizadas.
 export function _setSockForTest(fake) {
@@ -33,7 +42,8 @@ export async function sendText(jid, text) {
     await sock.sendPresenceUpdate('composing', jid);
     await sleep(rand(config.minTypingMs, config.maxTypingMs));
     await sock.sendPresenceUpdate('paused', jid);
-    await sock.sendMessage(jid, { text });
+    const sent = await sock.sendMessage(jid, { text });
+    rememberBotSent(sent?.key?.id);
   } catch (err) {
     logger.error({ err: err.message, jid }, 'Error enviando mensaje');
   }
@@ -89,11 +99,26 @@ export async function startWhatsApp(onMessage) {
   sock.ev.on('messaging-history.set', ({ contacts }) => remember(contacts));
 
   sock.ev.on('messages.upsert', async ({ messages, type }) => {
-    if (type !== 'notify') return;
     for (const msg of messages) {
       const jid = msg.key.remoteJid;
-      // Ignora mensajes propios, grupos y estados.
-      if (msg.key.fromMe || !jid || jid.endsWith('@g.us') || jid === 'status@broadcast') continue;
+      if (!jid || jid.endsWith('@g.us') || jid === 'status@broadcast') continue;
+
+      // Mensajes salientes de la cuenta del bot.
+      if (msg.key.fromMe) {
+        // ¿lo envió el propio bot? -> es solo el eco, ignorar.
+        if (botSentIds.has(msg.key.id)) {
+          botSentIds.delete(msg.key.id);
+          continue;
+        }
+        // Lo escribió el DUEÑO a mano desde su teléfono -> el humano atiende ese
+        // chat: el bot deja de responderle a ese contacto (socios, amigos, etc.).
+        if (config.ownerJid && jid === config.ownerJid) continue; // chat consigo mismo, no marcar
+        setIgnored(jid, true);
+        logger.info({ jid }, '✍️ Respondiste a mano: el bot ya no intervendrá en ese chat');
+        continue;
+      }
+
+      if (type !== 'notify') continue; // solo procesamos mensajes entrantes nuevos
       const imageMessage = msg.message?.imageMessage;
       const hasImage = Boolean(imageMessage || msg.message?.documentMessage);
       const text =
