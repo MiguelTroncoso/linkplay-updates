@@ -1,0 +1,9 @@
+node_modules/
+auth_info/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.env
+logs/
+*.log
