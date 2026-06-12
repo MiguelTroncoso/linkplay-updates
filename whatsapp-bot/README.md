@@ -260,6 +260,23 @@ Como extra, si pones tu `ANTHROPIC_API_KEY` (de <https://console.anthropic.com>)
 el bot también puede **leer la foto del comprobante** con Claude Haiku 4.5 y extraer el monto.
 Es opcional — el bot funciona perfecto sin esto, porque ya captura el monto preguntándolo.
 
+## 🧠 Cerebro de IA — "entrenar" al bot
+
+Para preguntas que no encajan en ninguna regla (las raras o muy variadas), el bot puede
+responder con **Claude Haiku** usando tu base de conocimiento. Así lo "entrenas":
+
+1. Pon tu `ANTHROPIC_API_KEY` (de <https://console.anthropic.com>) en `.env`.
+2. Edita **`knowledge.local.md`** (en el VPS, no se sube a GitHub) agregando preguntas/
+   respuestas, canales, políticas, etc. Lo que escribas ahí se suma a `knowledge.md`.
+3. `pm2 restart iptv-bot`.
+
+El modelo es configurable con `AI_MODEL` (por defecto `claude-haiku-4-5`). Es muy barato:
+unos centavos al día con tu volumen. Sin la clave, el bot usa su menú/fallback de siempre.
+
+> El bot ya no captura un monto como "plan elegido" salvo que haya intención clara de
+> compra (ej: *"quiero el de $20"*). Una pregunta como *"¿un crédito vale 40 pesos?"* se
+> responde con los precios reales, no se toma como una compra.
+
 ## ⚠️ Nota sobre Baileys (anti-ban)
 
 Baileys usa WhatsApp Web de forma no oficial. Para reducir el riesgo de bloqueo el bot

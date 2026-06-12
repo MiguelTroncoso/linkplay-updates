@@ -26,22 +26,19 @@ export const welcome = () =>
   `1️⃣ Quiero iniciar desde cero\n` +
   `2️⃣ Ya vendo y quiero más clientes`;
 
-// Opción 1 — explicación + precios + demo
+// Opción 1 — explicación breve + ofrece precios o demo (sin saturar)
 export const option1 = () =>
-  `🙌 ¡Excelente! Empezar es muy fácil, no necesitas experiencia previa.\n\n` +
-  `Funciona así:\n` +
-  `1. Compras un panel de créditos mayoristas.\n` +
-  `2. Cada crédito = 1 cuenta de 1 mes para un cliente.\n` +
-  `3. Tú revendes cada cuenta a $4-8 USD/mes y te quedas la diferencia.\n\n` +
-  `Estos son nuestros planes:\n\n${plansBlock()}\n\n` +
-  `🎁 Te puedo activar una *demo gratis* para que pruebes el servicio en tu pantalla. ` +
-  `¿Te la genero? Dime en qué dispositivo la verías (TV, celular, TV Box).`;
+  `🙌 ¡Perfecto! Empezar es fácil y no necesitas experiencia.\n` +
+  `Compras créditos mayoristas y revendes cada cuenta a $4-8 USD/mes; la diferencia es tu ganancia. 💼\n\n` +
+  `¿Qué te gustaría ver primero?\n` +
+  `💰 Escribe *precios* para ver los planes\n` +
+  `🎁 Escribe *demo* para una prueba gratis`;
 
-// Opción 2 — precios directos + pregunta de volumen
+// Opción 2 — pregunta de volumen (sin soltar precios de golpe)
 export const option2 = () =>
-  `💪 ¡Perfecto! Si ya vendes, lo que te conviene es escalar con más créditos a mejor costo.\n\n` +
-  `Estos son nuestros planes mayoristas:\n\n${plansBlock()}\n\n` +
-  `Para recomendarte el panel ideal: *¿cuántos clientes manejas actualmente?* 👇`;
+  `💪 ¡Genial! Si ya vendes, lo ideal es escalar con más créditos a mejor costo.\n\n` +
+  `Para recomendarte el panel perfecto: *¿cuántos clientes manejas actualmente?* 👇\n` +
+  `(O escribe *precios* para verlos.)`;
 
 // Seguimiento 24h — suave
 export const followup24 = () =>

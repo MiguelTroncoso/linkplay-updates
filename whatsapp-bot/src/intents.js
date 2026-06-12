@@ -97,6 +97,18 @@ export function isBankRequest(text) {
   return BANK_PATTERNS.some((re) => re.test(t));
 }
 
+// Intención clara de COMPRAR (para no confundir preguntas con elección de plan).
+const BUY_INTENT = /\b(quiero comprar|lo compro|me lo llevo|me quedo con|dame el|quiero el|voy a comprar|comprar el|tomar el|llevar el|adquirir|lo quiero|quiero ese)\b/;
+export function isBuyIntent(text) {
+  return BUY_INTENT.test(normalize(text));
+}
+
+// Pregunta por precios / planes (en cualquier país).
+const PRICE_REQUEST = /(precio|precios|cuanto cuesta|cuanto vale|cuanto sale|cuanto es|cuanto cobran|valor|costo|tarifa|planes|lista de precios)/;
+export function isPriceRequest(text) {
+  return PRICE_REQUEST.test(normalize(text));
+}
+
 // Extrae un monto numérico ("$35.20", "20 usd", "35,20") del texto.
 function parseMoney(t) {
   const m = t.match(/(\d+(?:[.,]\d{1,2})?)/);

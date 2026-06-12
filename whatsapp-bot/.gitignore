@@ -6,5 +6,6 @@ auth_info/
 *.db-shm
 .env
 bank-details.local.json
+knowledge.local.md
 logs/
 *.log

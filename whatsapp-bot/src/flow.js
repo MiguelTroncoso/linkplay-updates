@@ -12,11 +12,14 @@ import {
   isBankRequest,
   isGreeting,
   detectPlan,
+  isBuyIntent,
+  isPriceRequest,
 } from './intents.js';
 import * as msg from './messages.js';
 import { handleOwnerCommand } from './commands.js';
 import { syncLead } from './notion.js';
 import { extractPaymentInfo } from './vision.js';
+import { aiReply, aiEnabled } from './ai.js';
 import { logger } from './logger.js';
 
 const jidToPhone = (jid) => jid.split('@')[0];
@@ -184,11 +187,10 @@ export async function handleMessage(jid, text, pushName, hasImage = false, media
     return;
   }
 
-  // 6) Menú: opción 1 (desde cero) → explicación + precios + demo.
+  // 6) Menú: opción 1 (desde cero) → explicación breve (sin saturar con precios/demo).
   const option = detectOption(text);
   if (option === 1) {
     await reply(jid, msg.option1(), { stage: 'opt1', state: 'Demo', fallback_count: 0 });
-    if (getSetting('demo')) await sendText(jid, currentDemo());
     return;
   }
   if (option === 2) {
@@ -196,11 +198,14 @@ export async function handleMessage(jid, text, pushName, hasImage = false, media
     return;
   }
 
-  // 6.5) Mencionó un plan/monto directamente ("quiero el de $20", "el 45+5").
-  const plan = detectPlan(text);
-  if (plan) {
-    await capturePlan(jid, plan, country);
-    return;
+  // 6.5) Eligió un plan CON intención de comprar ("quiero el de $20", "me quedo con 45+5").
+  // Ojo: solo con intención clara; "¿un crédito vale 40 pesos?" es pregunta, no compra.
+  if (isBuyIntent(text)) {
+    const plan = detectPlan(text);
+    if (plan) {
+      await capturePlan(jid, plan, country);
+      return;
+    }
   }
 
   // 7) Pide la demo.
@@ -216,8 +221,8 @@ export async function handleMessage(jid, text, pushName, hasImage = false, media
     return;
   }
 
-  // 9) Pregunta por precio en moneda local.
-  if (isCurrencyRequest(text, country)) {
+  // 9) Pregunta por precios (en USD o en su moneda local).
+  if (isPriceRequest(text) || isCurrencyRequest(text, country)) {
     await reply(jid, msg.currencyConversion(country), { fallback_count: 0 });
     return;
   }
@@ -245,7 +250,17 @@ export async function handleMessage(jid, text, pushName, hasImage = false, media
     return;
   }
 
-  // 10) No entendido: reofrece el menú; tras varios intentos, ofrece un asesor.
+  // 10) Pregunta libre: responde el cerebro de IA usando la base de conocimiento.
+  if (aiEnabled && text) {
+    const ans = await aiReply(text, country?.name);
+    if (ans) {
+      await reply(jid, ans, { fallback_count: 0 });
+      logger.info({ jid }, '🧠 Respuesta de IA');
+      return;
+    }
+  }
+
+  // 11) Sin IA o sin respuesta: reofrece el menú; tras varios intentos, ofrece un asesor.
   const count = (lead.fallback_count || 0) + 1;
   if (count >= 2) {
     const updated = await reply(jid, msg.humanReply(), { stage: 'human', fallback_count: 0 });
