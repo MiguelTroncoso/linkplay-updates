@@ -4,25 +4,25 @@ Producto digital completo: ebook + kit de materiales de venta para Hotmart.
 
 **Subtítulo:** Sistema simple para ordenar clientes, responder mejor y vender más usando WhatsApp + IA.
 
-## 📦 Entregables (listos en PDF)
+## 📦 Entregables
+
+### 🛒 Para el comprador (subir a Hotmart)
 
 | Archivo | Descripción | Páginas |
 |---|---|---|
 | `ebook-WhatsApp-Ventas-Pro.pdf` | Ebook completo (15 secciones + bonus + recursos + aviso legal) | 45 |
-| `materiales-de-venta.pdf` | Contraportada, descripciones Hotmart, beneficios, bullets, portadas, paleta, guía de estilo y títulos A/B | 14 |
+| `recursos/plantilla-CRM-WhatsApp-Ventas-Pro.csv` | Plantilla CRM editable para Google Sheets / Excel | — |
+| `recursos/checklist-imprimible.md` | Checklist diario y rutina de 20 min para imprimir | — |
+| `recursos/frases-copiables.txt` | Muestra inicial de frases listas para copiar | — |
+| `recursos/prompts-IA.txt` | Prompts de IA para mejorar y adaptar mensajes | — |
 
-Archivos fuente editables (HTML con estilos embebidos): `ebook.html` y `materiales-de-venta.html`.
-
-### Recursos descargables (`recursos/`)
-
-Archivos reales para entregar al comprador (referenciados en la página "Recursos descargables" del ebook):
+### 🔒 Uso interno (NO entregar al comprador)
 
 | Archivo | Descripción |
 |---|---|
-| `plantilla-CRM-WhatsApp-Ventas-Pro.csv` | Plantilla CRM editable para Google Sheets / Excel |
-| `checklist-imprimible.md` | Checklist diario y rutina de 20 min para imprimir |
-| `frases-copiables.txt` | Muestra inicial de frases listas para copiar |
-| `prompts-IA.txt` | Prompts de IA para mejorar y adaptar mensajes |
+| `materiales-de-venta.pdf` | Material interno para configurar Hotmart, anuncios y página de venta (descripciones, beneficios, bullets, portadas, paleta, guía de estilo, títulos A/B) |
+
+Archivos fuente editables (HTML con estilos embebidos): `ebook.html` y `materiales-de-venta.html`.
 
 ## 📘 Estructura del ebook
 
