@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp Ventas Pro — Academia Venta Digital</title>
+<style>
+  :root{
+    --azul:#0B3D6B;        /* azul profundo - confianza */
+    --azul2:#1573C6;       /* azul vivo - digital */
+    --verde:#25D366;       /* verde WhatsApp - acción */
+    --verde-osc:#0E7A4A;
+    --grafito:#26303B;     /* texto principal */
+    --gris:#5C6B7A;        /* texto secundario */
+    --gris-claro:#EAF0F5;  /* fondos suaves */
+    --gris-borde:#D7E0E8;
+    --blanco:#FFFFFF;
+    --amarillo:#FFC53D;    /* acentos / destacados */
+  }
+
+  *{ box-sizing:border-box; }
+  html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body{
+    font-family:"Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color:var(--grafito);
+    margin:0;
+    font-size:11.5pt;
+    line-height:1.62;
+  }
+
+  /* ---------- Estructura de páginas ---------- */
+  .page{
+    page-break-after:always;
+    padding:26mm 22mm 24mm 22mm;
+    position:relative;
+    min-height:100vh;
+  }
+  .page:last-child{ page-break-after:auto; }
+
+  /* ---------- Tipografía ---------- */
+  h1,h2,h3,h4{ color:var(--azul); line-height:1.2; margin:0 0 .5em; }
+  h1{ font-size:26pt; }
+  h2{ font-size:19pt; border-bottom:3px solid var(--verde); padding-bottom:.25em; margin-top:0; }
+  h3{ font-size:14pt; color:var(--azul2); margin-top:1.3em; }
+  h4{ font-size:12pt; color:var(--grafito); margin-top:1.1em; }
+  p{ margin:.55em 0; }
+  ul,ol{ margin:.5em 0 .9em; padding-left:1.25em; }
+  li{ margin:.3em 0; }
+  strong{ color:var(--azul); }
+  a{ color:var(--azul2); text-decoration:none; }
+
+  .kicker{
+    text-transform:uppercase; letter-spacing:.18em; font-size:9pt;
+    color:var(--verde-osc); font-weight:700; margin-bottom:.4em;
+  }
+
+  /* ---------- Portada ---------- */
+  .cover{
+    background:linear-gradient(150deg,var(--azul) 0%, var(--azul2) 55%, var(--verde-osc) 130%);
+    color:#fff; display:flex; flex-direction:column; justify-content:space-between;
+    padding:30mm 22mm; min-height:100vh; page-break-after:always;
+  }
+  .cover .brand{ font-size:12pt; letter-spacing:.22em; text-transform:uppercase; font-weight:700; opacity:.92; }
+  .cover .brand span{ color:var(--amarillo); }
+  .cover h1{ color:#fff; font-size:46pt; line-height:1.04; margin:.2em 0 0; }
+  .cover .wa{ display:inline-block; background:var(--verde); color:#04331f; font-weight:800;
+    padding:6px 16px; border-radius:30px; font-size:12pt; letter-spacing:.04em; }
+  .cover .sub{ font-size:15pt; line-height:1.45; max-width:80%; opacity:.96; font-weight:300; }
+  .cover .pill{ display:inline-flex; gap:8px; flex-wrap:wrap; }
+  .cover .pill span{ background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35);
+    padding:5px 13px; border-radius:20px; font-size:9.5pt; }
+  .cover .foot{ font-size:10pt; opacity:.85; border-top:1px solid rgba(255,255,255,.3); padding-top:14px; }
+  .cover .badge{ font-size:9pt; background:var(--amarillo); color:#3a2a00; font-weight:800;
+    padding:4px 12px; border-radius:6px; display:inline-block; }
+
+  /* ---------- Cajas / componentes ---------- */
+  .box{ background:var(--gris-claro); border-radius:12px; padding:16px 20px; margin:14px 0; }
+  .box-bordered{ border:1px solid var(--gris-borde); }
+  .tip{ border-left:5px solid var(--verde); background:#EAFBF1; border-radius:0 10px 10px 0; padding:12px 18px; margin:14px 0; }
+  .tip .t{ font-weight:800; color:var(--verde-osc); text-transform:uppercase; font-size:8.5pt; letter-spacing:.1em; display:block; margin-bottom:3px;}
+  .warn{ border-left:5px solid var(--amarillo); background:#FFF7E2; border-radius:0 10px 10px 0; padding:12px 18px; margin:14px 0; }
+  .warn .t{ font-weight:800; color:#9a6b00; text-transform:uppercase; font-size:8.5pt; letter-spacing:.1em; display:block; margin-bottom:3px;}
+  .ia{ border-left:5px solid var(--azul2); background:#EAF3FC; border-radius:0 10px 10px 0; padding:12px 18px; margin:14px 0; }
+  .ia .t{ font-weight:800; color:var(--azul2); text-transform:uppercase; font-size:8.5pt; letter-spacing:.1em; display:block; margin-bottom:3px;}
+
+  .copy{ background:#fff; border:1.5px dashed var(--verde); border-radius:10px; padding:12px 16px; margin:10px 0;
+    font-family:"Consolas","Courier New",monospace; font-size:10pt; color:var(--grafito); line-height:1.5; }
+  .copy .lbl{ font-family:"Segoe UI",sans-serif; display:block; font-size:8pt; font-weight:800; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--verde-osc); margin-bottom:6px; }
+
+  .ej{ margin:14px 0; }
+  .chat{ background:#E6DDD3; border-radius:14px; padding:14px 14px 18px; }
+  .chat .head{ font-size:8.5pt; color:#5b5247; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; text-align:center; }
+  .msg{ max-width:78%; padding:8px 12px; border-radius:12px; margin:6px 0; font-size:10pt; line-height:1.4; box-shadow:0 1px 1px rgba(0,0,0,.08); }
+  .in{ background:#fff; border-top-left-radius:3px; }
+  .out{ background:#D9FDD3; margin-left:auto; border-top-right-radius:3px; }
+  .who{ display:block; font-size:7.5pt; font-weight:800; opacity:.6; margin-bottom:2px; }
+
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:10pt; }
+  th{ background:var(--azul); color:#fff; text-align:left; padding:9px 11px; font-size:9.5pt; }
+  td{ border:1px solid var(--gris-borde); padding:8px 11px; vertical-align:top; }
+  tr:nth-child(even) td{ background:var(--gris-claro); }
+  .tag{ display:inline-block; padding:2px 9px; border-radius:20px; font-size:8.5pt; font-weight:700; color:#fff; }
+  .t-frio{ background:#8AA0B4; } .t-tibio{ background:var(--amarillo); color:#5a3d00; }
+  .t-caliente{ background:#E8643B; } .t-cliente{ background:var(--verde-osc); } .t-perdido{ background:#9AA7B2; }
+
+  .check{ list-style:none; padding-left:0; }
+  .check li{ padding-left:30px; position:relative; margin:.5em 0; }
+  .check li:before{ content:"\2713"; position:absolute; left:0; top:-1px; width:20px; height:20px; background:var(--verde);
+    color:#fff; border-radius:5px; text-align:center; font-weight:800; font-size:11pt; line-height:20px; }
+
+  .ex{ background:#fff; border:1px solid var(--gris-borde); border-top:4px solid var(--azul2); border-radius:10px; padding:14px 18px; margin:14px 0; }
+  .ex .t{ color:var(--azul2); font-weight:800; text-transform:uppercase; font-size:9pt; letter-spacing:.08em; }
+
+  .num{ display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; background:var(--verde);
+    color:#fff; border-radius:50%; font-weight:800; font-size:13pt; margin-right:10px; }
+
+  .toc-item{ display:flex; justify-content:space-between; border-bottom:1px dotted var(--gris-borde); padding:7px 0; font-size:11pt; }
+  .toc-item span:first-child{ color:var(--grafito); }
+  .toc-item .n{ color:var(--gris); font-weight:700; }
+  .toc-cap{ color:var(--azul2); font-weight:700; }
+
+  /* Encabezado/pie corrido */
+  .runhead{ position:absolute; top:12mm; left:22mm; right:22mm; display:flex; justify-content:space-between;
+    font-size:8pt; color:var(--gris); text-transform:uppercase; letter-spacing:.12em; border-bottom:1px solid var(--gris-borde); padding-bottom:5px; }
+  .runhead b{ color:var(--verde-osc); }
+
+  .day{ background:var(--gris-claro); border-radius:12px; padding:14px 18px; margin:12px 0; border-left:5px solid var(--azul2); }
+  .day h4{ margin-top:0; color:var(--azul); }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .center{ text-align:center; }
+  .mt0{ margin-top:0; }
+  .lead{ font-size:13pt; color:var(--gris); line-height:1.55; }
+  .divider{ height:3px; width:60px; background:var(--verde); border-radius:3px; margin:10px 0 16px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PORTADA ============ -->
+<section class="cover">
+  <div>
+    <div class="brand">Academia <span>Venta Digital</span></div>
+  </div>
+  <div>
+    <span class="wa">WhatsApp + IA</span>
+    <h1>WhatsApp<br>Ventas Pro</h1>
+    <p class="sub">Sistema simple para ordenar clientes, responder mejor y vender más usando WhatsApp + IA.</p>
+  </div>
+  <div>
+    <div class="pill">
+      <span>Plantilla CRM lista</span>
+      <span>Frases para copiar y pegar</span>
+      <span>Rutina de 20 minutos</span>
+      <span>Plan de 7 días</span>
+    </div>
+    <br>
+    <span class="badge">EBOOK PRÁCTICO · GUÍA PASO A PASO</span>
+  </div>
+  <div class="foot">
+    Academia Venta Digital · Aprende a vender con orden, no con suerte.
+  </div>
+</section>
+
+<!-- ============ PRESENTACIÓN MARCA ============ -->
+<section class="page">
+  <div class="kicker">Quiénes somos</div>
+  <h2>Academia Venta Digital</h2>
+  <div class="divider"></div>
+  <p class="lead">Ayudamos a personas comunes a vender mejor con herramientas simples: sin palabras raras, sin sistemas caros y sin depender de la suerte.</p>
+
+  <p>En <strong>Academia Venta Digital</strong> creemos en algo muy sencillo: la mayoría de los emprendedores no necesita “saber más de marketing”. Necesita <strong>orden</strong>. Necesita un sistema que cualquiera pueda seguir, aunque venda desde su celular, atienda solo o esté empezando de cero.</p>
+
+  <p>Cada día, miles de negocios reciben mensajes por WhatsApp y dejan ventas sobre la mesa. No por falta de clientes, sino por falta de método: mensajes que se pierden, consultas sin responder, clientes que “después te aviso” y nunca vuelven.</p>
+
+  <h3>Lo que hacemos</h3>
+  <p>Convertimos lo complicado en pasos claros. Tomamos lo mejor de las ventas, el orden tipo CRM y la inteligencia artificial, y lo transformamos en rutinas que puedes aplicar hoy mismo.</p>
+
+  <div class="box box-bordered">
+    <p class="mt0"><strong>Nuestra forma de enseñar se basa en 3 ideas:</strong></p>
+    <ul>
+      <li><strong>Simple antes que perfecto.</strong> Un sistema que usas vale más que uno “ideal” que abandonas.</li>
+      <li><strong>Orden antes que esfuerzo.</strong> No se trata de mandar más mensajes, sino de mandar los correctos.</li>
+      <li><strong>Herramientas a tu favor.</strong> La IA no te reemplaza: te ayuda a responder mejor y más rápido.</li>
+    </ul>
+  </div>
+
+  <div class="warn">
+    <span class="t">Importante y honesto</span>
+    Este material no promete que te hagas rico ni garantiza resultados. Te entrega un método ordenado y probado en la práctica. Los resultados dependen de tu producto, tu mercado y tu constancia.
+  </div>
+
+  <p>Si estás listo para dejar de improvisar y empezar a vender con un sistema, este ebook es tu punto de partida. Vamos paso a paso.</p>
+</section>
+
+<!-- ============ ÍNDICE ============ -->
+<section class="page">
+  <div class="runhead"><span>WhatsApp Ventas Pro</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Lo que vas a aprender</div>
+  <h2>Índice</h2>
+  <div class="divider"></div>
+
+  <div class="toc-item"><span>Presentación de Academia Venta Digital</span><span class="n">02</span></div>
+  <div class="toc-item"><span>Introducción: por qué se pierden ventas en WhatsApp</span><span class="n">04</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 1 · El error de vender solo respondiendo mensajes</span><span class="n">06</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 2 · Cómo ordenar tus clientes por etapas</span><span class="n">09</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 3 · Cómo usar una plantilla CRM simple</span><span class="n">13</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 4 · Cómo responder rápido sin sonar robótico</span><span class="n">17</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 5 · Cómo usar IA para crear mejores respuestas</span><span class="n">21</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 6 · Cómo hacer seguimiento sin parecer insistente</span><span class="n">25</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 7 · Cómo responder objeciones comunes</span><span class="n">29</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 8 · Cómo cerrar ventas con mensajes claros</span><span class="n">33</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 9 · Rutina diaria de 20 minutos</span><span class="n">37</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 10 · Plan de acción de 7 días</span><span class="n">40</span></div>
+  <div class="toc-item"><span>Checklist final</span><span class="n">44</span></div>
+  <div class="toc-item"><span>Siguiente paso: Meta Ads Express para WhatsApp</span><span class="n">46</span></div>
+</section>
+
+<!-- ============ INTRODUCCIÓN ============ -->
+<section class="page">
+  <div class="runhead"><span>Introducción</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Introducción</div>
+  <h2>Por qué muchos emprendedores pierden ventas en WhatsApp</h2>
+  <div class="divider"></div>
+
+  <p class="lead">No pierdes ventas porque tu producto sea malo. Las pierdes porque el cliente se enfría mientras tú estás ocupado, distraído o sin un sistema que te recuerde quién es quién.</p>
+
+  <p>WhatsApp es, probablemente, tu herramienta de ventas más poderosa. Es donde el cliente ya está, donde te escribe con confianza y donde puede decidir en minutos. Pero tiene una trampa: <strong>fue hecho para conversar, no para vender de forma ordenada.</strong></p>
+
+  <p>Por eso pasa lo de siempre. Te escriben cinco personas el mismo día. Respondes a tres, una te deja en visto, otra te dice “lo pienso y te aviso”. Al día siguiente llegan mensajes nuevos, y los de ayer bajan en la lista. Una semana después no recuerdas con quién quedaste en enviar el precio. Y esa venta… simplemente se evaporó.</p>
+
+  <h3>Las 5 fugas de ventas más comunes</h3>
+  <table>
+    <tr><th>La fuga</th><th>Cómo se ve en tu día a día</th></tr>
+    <tr><td><strong>1. Falta de orden</strong></td><td>No sabes quién te escribió, qué quería ni en qué quedaste.</td></tr>
+    <tr><td><strong>2. Respuesta lenta</strong></td><td>Contestas horas después; el cliente ya compró en otro lado.</td></tr>
+    <tr><td><strong>3. Sin seguimiento</strong></td><td>El “después te aviso” queda en el olvido. Nadie vuelve a escribir.</td></tr>
+    <tr><td><strong>4. Mensajes confusos</strong></td><td>Respuestas largas, sin precio claro ni un paso siguiente.</td></tr>
+    <tr><td><strong>5. Cierre débil</strong></td><td>Resuelves la duda pero nunca pides la venta. La conversación muere.</td></tr>
+  </table>
+
+  <div class="tip">
+    <span class="t">La buena noticia</span>
+    Ninguna de estas fugas requiere talento especial ni un sistema caro. Se arreglan con <strong>orden + plantillas + 20 minutos al día</strong>. Eso es exactamente lo que vas a construir en este ebook.
+  </div>
+
+  <h3>Lo que vas a lograr al terminar</h3>
+  <ul class="check">
+    <li>Saber en segundos quién es cada cliente y en qué etapa está.</li>
+    <li>Responder rápido y claro, sin sonar como un robot.</li>
+    <li>Hacer seguimiento sin sentir que estás molestando.</li>
+    <li>Responder objeciones (“está caro”, “lo pienso”) con calma.</li>
+    <li>Cerrar más ventas con mensajes simples y directos.</li>
+    <li>Usar la IA como tu asistente, sin depender 100% de ella.</li>
+  </ul>
+
+  <p><strong>Cómo leer este ebook:</strong> no necesitas leerlo todo de una vez. Avanza un capítulo, aplica el ejercicio, y sigue. Al final tienes un <strong>plan de 7 días</strong> que junta todo. Empecemos por el error que comete casi todo el mundo.</p>
+</section>
+
+<!-- ============ CAPÍTULO 1 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 1</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 1</div>
+  <h2>El error de vender solo respondiendo mensajes</h2>
+  <div class="divider"></div>
+
+  <p class="lead">Responder no es vender. Responder es reaccionar. Vender es guiar. La diferencia entre los dos es un sistema.</p>
+
+  <p>La mayoría de los emprendedores trabaja en “modo bombero”: apaga incendios. Llega un mensaje, lo responde. Llega otro, lo responde. Vive a la espera de que la gente escriba, y cuando nadie escribe, las ventas se detienen. Esto se siente productivo —estás ocupado todo el día— pero es una trampa.</p>
+
+  <h3>Por qué “solo responder” te limita</h3>
+  <ul>
+    <li><strong>Dependes del azar.</strong> Si hoy nadie escribe, hoy no vendes. No tienes control.</li>
+    <li><strong>Tratas a todos igual.</strong> El que quiere comprar ya y el que “solo mira” reciben la misma atención.</li>
+    <li><strong>Olvidas conversaciones.</strong> Sin registro, los clientes tibios desaparecen de tu memoria.</li>
+    <li><strong>No tienes un paso siguiente.</strong> Respondes la duda y… ahí queda. El cliente decide solo (y casi siempre decide “después”).</li>
+  </ul>
+
+  <h3>El cambio de mentalidad</h3>
+  <p>Un vendedor con sistema no espera: <strong>conduce</strong>. Cada conversación tiene un objetivo y un próximo paso. No deja que el cliente se enfríe, porque sabe exactamente quién está esperando qué.</p>
+
+  <table>
+    <tr><th>Vender solo respondiendo</th><th>Vender con sistema</th></tr>
+    <tr><td>Reacciono cuando me escriben</td><td>Tengo una rutina diaria de revisión</td></tr>
+    <tr><td>Trato a todos igual</td><td>Clasifico por etapa (frío, tibio, caliente)</td></tr>
+    <tr><td>Confío en mi memoria</td><td>Anoto en una plantilla simple</td></tr>
+    <tr><td>Respondo y espero</td><td>Respondo y propongo el siguiente paso</td></tr>
+    <tr><td>“A ver si vuelve”</td><td>Hago seguimiento programado</td></tr>
+  </table>
+
+  <div class="ej">
+    <p><strong>Ejemplo real — La misma consulta, dos finales distintos</strong></p>
+    <div class="grid2">
+      <div class="chat">
+        <div class="head">❌ Solo respondiendo</div>
+        <div class="msg in"><span class="who">Cliente</span>Hola, ¿tienes el modelo en negro?</div>
+        <div class="msg out"><span class="who">Tú</span>Sí, tenemos 👍</div>
+        <div class="msg in"><span class="who">Cliente</span>Ah ok, gracias</div>
+        <div class="msg in" style="opacity:.5"><span class="who">Cliente</span><i>(nunca más escribe)</i></div>
+      </div>
+      <div class="chat">
+        <div class="head">✅ Con sistema</div>
+        <div class="msg in"><span class="who">Cliente</span>Hola, ¿tienes el modelo en negro?</div>
+        <div class="msg out"><span class="who">Tú</span>¡Hola! Sí, lo tengo disponible 🙌 Te queda en $19.990 con envío incluido. ¿Lo quieres para esta semana?</div>
+        <div class="msg in"><span class="who">Cliente</span>Sí, me interesa</div>
+        <div class="msg out"><span class="who">Tú</span>Perfecto 🙌 Te aparto uno. ¿Te paso los datos para coordinar?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="t">La clave del capítulo</span>
+    Cada respuesta debe terminar con un <strong>paso siguiente</strong>: una pregunta, una propuesta o una acción. Nunca dejes la conversación “en el aire”.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Abre tu WhatsApp y revisa tus últimas 10 conversaciones de venta. Anota: ¿cuántas terminaron con un <strong>paso siguiente claro</strong> y cuántas quedaron “en el aire”? Ese número es tu punto de partida. Lo vas a mejorar con este sistema.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 2 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 2</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 2</div>
+  <h2>Cómo ordenar tus clientes por etapas</h2>
+  <div class="divider"></div>
+
+  <p class="lead">No todos los clientes están listos para comprar hoy. Tratarlos a todos igual es el error que más ventas cuesta. La solución: clasificarlos por “temperatura”.</p>
+
+  <p>Imagina que tus clientes son una fila. Algunos están a punto de pagar, otros tienen dudas y otros apenas miran. Si los mezclas, pierdes tiempo con quien no va a comprar y descuidas a quien sí. <strong>Ordenarlos por etapas es como ponerle semáforo a tus ventas.</strong></p>
+
+  <h3>Las 5 etapas del cliente</h3>
+  <table>
+    <tr><th>Etapa</th><th>¿Quién es?</th><th>Qué hacer</th></tr>
+    <tr><td><span class="tag t-frio">FRÍO</span></td><td>Te escribió por primera vez, pregunta general.</td><td>Responder rápido y dar valor. Despertar interés.</td></tr>
+    <tr><td><span class="tag t-tibio">TIBIO</span></td><td>Mostró interés real, pidió precio o detalles.</td><td>Resolver dudas y proponer el paso siguiente.</td></tr>
+    <tr><td><span class="tag t-caliente">CALIENTE</span></td><td>Quiere comprar, solo falta cerrar.</td><td>Facilitar el cierre. Quitar fricción.</td></tr>
+    <tr><td><span class="tag t-cliente">CLIENTE</span></td><td>Ya te compró.</td><td>Cuidar, pedir reseña, ofrecer recompra.</td></tr>
+    <tr><td><span class="tag t-perdido">EN PAUSA</span></td><td>Se enfrió o dijo “después”.</td><td>Seguimiento espaciado. No descartar.</td></tr>
+  </table>
+
+  <div class="ia">
+    <span class="t">Por qué funciona</span>
+    Cuando sabes la etapa de cada persona, sabes <strong>qué decir</strong> sin pensarlo dos veces. A un frío no le pides los datos de pago; a un caliente no le repites el catálogo completo. El mensaje correcto, en el momento correcto.
+  </div>
+
+  <h3>Cómo saber en qué etapa está cada uno</h3>
+  <p>No necesitas adivinar. Escucha las señales:</p>
+  <ul>
+    <li><strong>Frío:</strong> “¿Qué venden?”, “¿A qué hora abren?”, “Solo estoy viendo”.</li>
+    <li><strong>Tibio:</strong> “¿Cuánto cuesta?”, “¿Tienen el color X?”, “¿Hacen envíos?”.</li>
+    <li><strong>Caliente:</strong> “¿Cómo pago?”, “¿Para cuándo lo tengo?”, “Lo quiero”.</li>
+    <li><strong>En pausa:</strong> “Lo pienso”, “Después te aviso”, o simplemente deja de responder.</li>
+  </ul>
+
+  <div class="ej">
+    <p><strong>Ejemplo — Detectando la etapa en segundos</strong></p>
+    <div class="chat">
+      <div class="head">Conversación entrante</div>
+      <div class="msg in"><span class="who">Cliente</span>Hola! Vi tu publicación. ¿Cuánto sale el pack de 3 y hacen envío a mi ciudad?</div>
+    </div>
+    <p style="margin-top:8px"><strong>Lectura:</strong> pregunta precio + envío = <span class="tag t-tibio">TIBIO</span> con interés real. No es un curioso. Merece respuesta completa y una propuesta de cierre.</p>
+  </div>
+
+  <div class="warn">
+    <span class="t">Cuidado</span>
+    No marques a todos como “calientes” por optimismo. Clasificar con honestidad es lo que te permite dedicar tu energía a quien de verdad va a comprar.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Toma tus 10 conversaciones activas y asígnale a cada una una etiqueta: FRÍO, TIBIO, CALIENTE, CLIENTE o EN PAUSA. ¿Notas el patrón? Probablemente tienes clientes CALIENTES esperando que no habías visto. En el próximo capítulo los vas a registrar en tu plantilla.</p>
+  </div>
+</section>
+<!-- ============ CAPÍTULO 3 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 3</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 3</div>
+  <h2>Cómo usar una plantilla CRM simple</h2>
+  <div class="divider"></div>
+
+  <p class="lead">CRM suena a software caro y complicado. En realidad, un CRM es solo un lugar donde anotas quién es tu cliente y en qué quedaste. Puede vivir en una hoja de cálculo gratis.</p>
+
+  <p>Tu memoria es buena, pero no fue hecha para recordar 30 conversaciones a la vez. Un CRM simple hace ese trabajo por ti. La idea es tener <strong>una sola tabla</strong> donde, de un vistazo, sepas a quién escribirle hoy.</p>
+
+  <h3>La plantilla CRM mínima (6 columnas)</h3>
+  <p>No necesitas más que esto. Lo puedes armar en Google Sheets, Excel o incluso en una libreta:</p>
+  <table>
+    <tr><th>Columna</th><th>Para qué sirve</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Nombre</strong></td><td>Identificar al cliente</td><td>María (vecina)</td></tr>
+    <tr><td><strong>Qué quiere</strong></td><td>Producto o interés</td><td>Pack de 3 cremas</td></tr>
+    <tr><td><strong>Etapa</strong></td><td>Frío / Tibio / Caliente / Cliente / Pausa</td><td>Caliente</td></tr>
+    <tr><td><strong>Último contacto</strong></td><td>Cuándo hablaron</td><td>26-jun</td></tr>
+    <tr><td><strong>Siguiente paso</strong></td><td>Qué tienes que hacer</td><td>Enviar datos de pago</td></tr>
+    <tr><td><strong>Recordar el</strong></td><td>Cuándo hacer seguimiento</td><td>28-jun</td></tr>
+  </table>
+
+  <div class="tip">
+    <span class="t">La columna mágica</span>
+    La columna <strong>“Siguiente paso”</strong> es el corazón de todo. Si cada cliente tiene un siguiente paso anotado, nunca más vas a perder una venta por olvido.
+  </div>
+
+  <h3>Ejemplo de plantilla llena</h3>
+  <table>
+    <tr><th>Nombre</th><th>Qué quiere</th><th>Etapa</th><th>Sig. paso</th><th>Recordar</th></tr>
+    <tr><td>María</td><td>Pack 3 cremas</td><td><span class="tag t-caliente">Caliente</span></td><td>Enviar datos pago</td><td>Hoy</td></tr>
+    <tr><td>José</td><td>Asesoría web</td><td><span class="tag t-tibio">Tibio</span></td><td>Mandar ejemplos</td><td>Mañana</td></tr>
+    <tr><td>Carla</td><td>Solo preguntó precio</td><td><span class="tag t-frio">Frío</span></td><td>Enviar oferta</td><td>30-jun</td></tr>
+    <tr><td>Luis</td><td>Compró zapatillas</td><td><span class="tag t-cliente">Cliente</span></td><td>Pedir reseña</td><td>02-jul</td></tr>
+    <tr><td>Ana</td><td>Dijo "lo pienso"</td><td><span class="tag t-perdido">Pausa</span></td><td>Seguimiento suave</td><td>03-jul</td></tr>
+  </table>
+
+  <div class="ia">
+    <span class="t">Versión aún más simple (sin planilla)</span>
+    Si te abruma una hoja de cálculo, usa las <strong>etiquetas de WhatsApp Business</strong>: crea etiquetas “Tibio”, “Caliente”, “Por cobrar”, “Seguimiento”. Le asignas una a cada chat y listo: tu CRM vive dentro de WhatsApp.
+  </div>
+
+  <h3>Cómo mantenerla viva (sin que sea una carga)</h3>
+  <ul>
+    <li><strong>Anota al momento.</strong> Cuando termines un chat importante, actualiza la fila. Toma 15 segundos.</li>
+    <li><strong>Revisa una vez al día.</strong> En tu rutina de 20 minutos (Capítulo 9) miras quién toca hoy.</li>
+    <li><strong>Borra lo muerto cada semana.</strong> Si alguien lleva 30 días sin responder tras varios intentos, archívalo.</li>
+  </ul>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Crea hoy tu plantilla con esas 6 columnas (Google Sheets es gratis) o activa 4 etiquetas en WhatsApp Business. Luego vuelca tus 10 clientes del ejercicio anterior. Felicidades: ya tienes un CRM funcionando. No tiene que ser perfecto, tiene que existir.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 4 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 4</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 4</div>
+  <h2>Cómo responder rápido sin sonar robótico</h2>
+  <div class="divider"></div>
+
+  <p class="lead">La velocidad vende. Pero la velocidad sin calidez espanta. El secreto es tener respuestas listas que suenen humanas: plantillas con alma.</p>
+
+  <p>Estudios de ventas coinciden en algo simple: <strong>el que responde primero, suele ganar.</strong> Cuando el cliente está “caliente”, cada minuto cuenta. Pero si para ir rápido copias y pegas mensajes fríos tipo “Estimado cliente, su consulta será procesada”, matas la conversación.</p>
+
+  <h3>La fórmula de una respuesta que vende</h3>
+  <div class="box">
+    <p class="mt0"><strong>SALUDO + RESPUESTA CLARA + PASO SIGUIENTE</strong></p>
+    <p>Tres partes, una frase cada una. Rápida de escribir, agradable de leer, y siempre deja la puerta abierta a avanzar.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="copy"><span class="lbl">❌ Robótico</span>Buenas. Sí hay stock. Valor 19990. Saludos.</div>
+    <div class="copy"><span class="lbl">✅ Humano y rápido</span>¡Hola, qué bueno que escribes! 🙌 Sí, lo tengo disponible. Te queda en $19.990 con envío. ¿Lo quieres para esta semana?</div>
+  </div>
+
+  <h3>Plantillas listas para copiar y pegar</h3>
+  <p>Adapta el nombre del producto y el tono a tu negocio. Guárdalas como “respuestas rápidas” en WhatsApp Business.</p>
+
+  <div class="copy"><span class="lbl">Saludo inicial</span>¡Hola! 👋 Gracias por escribir a [Tu Negocio]. Cuéntame, ¿qué estás buscando y te ayudo al toque?</div>
+  <div class="copy"><span class="lbl">Responder precio</span>¡Buena elección! 🙌 El [producto] te queda en $[precio]. Incluye [beneficio]. ¿Te lo aparto?</div>
+  <div class="copy"><span class="lbl">Cuando piden info general</span>¡Claro que sí! Te cuento rápido: [1 línea de beneficio]. ¿Quieres que te pase las opciones y precios?</div>
+  <div class="copy"><span class="lbl">Cuando estás ocupado</span>¡Hola! Vi tu mensaje 🙌 Estoy con un cliente y te respondo bien en un rato (antes de las [hora]). ¿Me cuentas qué necesitas y lo dejo listo?</div>
+
+  <div class="tip">
+    <span class="t">Tres trucos para sonar humano</span>
+    <ul style="margin:6px 0 0">
+      <li>Usa el <strong>nombre</strong> de la persona cuando lo sepas.</li>
+      <li>Un emoji bien puesto (🙌😊✅) calienta el mensaje. Sin abusar.</li>
+      <li>Escribe como hablarías en persona. Si no lo dirías en voz alta, no lo escribas.</li>
+    </ul>
+  </div>
+
+  <div class="warn">
+    <span class="t">El equilibrio</span>
+    Las plantillas son tu base, no tu jaula. Empieza con la plantilla y <strong>personaliza una línea</strong> según lo que dijo el cliente. Así tienes velocidad de robot con calidez de persona.
+  </div>
+
+  <div class="ej">
+    <p><strong>Ejemplo — Rápido y cálido a la vez</strong></p>
+    <div class="chat">
+      <div class="head">Respuesta en menos de 5 minutos</div>
+      <div class="msg in"><span class="who">Cliente</span>Hola, ¿hacen tortas personalizadas para cumpleaños?</div>
+      <div class="msg out"><span class="who">Tú</span>¡Holaa! 😍 Sí, esa es justo nuestra especialidad. ¿Para qué fecha sería y cuántas personas? Así te paso opciones y precio enseguida 🎂</div>
+      <div class="msg in"><span class="who">Cliente</span>Para el sábado, unas 20 personas</div>
+      <div class="msg out"><span class="who">Tú</span>¡Perfecto! Para 20 personas te recomiendo la de 25 porciones ($28.000). ¿Tienes un sabor o diseño en mente?</div>
+    </div>
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Escribe TUS 5 respuestas rápidas más usadas con la fórmula Saludo + Respuesta + Paso siguiente. Guárdalas en las respuestas rápidas de WhatsApp Business (escribiendo “/”). A partir de hoy respondes en segundos, sin perder el toque humano.</p>
+  </div>
+</section>
+<!-- ============ CAPÍTULO 5 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 5</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 5</div>
+  <h2>Cómo usar IA para crear mejores respuestas</h2>
+  <div class="divider"></div>
+
+  <p class="lead">La inteligencia artificial (como ChatGPT) es tu asistente de ventas que trabaja gratis las 24 horas. No la uses para reemplazarte: úsala para escribir mejor, más rápido y con más calma.</p>
+
+  <p>Mucha gente le tiene miedo o no sabe por dónde empezar. La verdad es simple: la IA es como un compañero que sabe redactar muy bien, pero que <strong>no conoce tu negocio</strong>. Tú pones el contexto y la inteligencia humana; ella pone la redacción rápida.</p>
+
+  <h3>4 formas concretas de usar la IA en tus ventas</h3>
+  <table>
+    <tr><th>Tarea</th><th>Cómo te ayuda la IA</th></tr>
+    <tr><td><strong>Mejorar un mensaje</strong></td><td>Le das tu borrador y te lo deja más claro y amable.</td></tr>
+    <tr><td><strong>Responder objeciones</strong></td><td>Le cuentas qué dijo el cliente y te propone 2-3 respuestas.</td></tr>
+    <tr><td><strong>Crear plantillas</strong></td><td>Genera saludos, seguimientos y cierres en minutos.</td></tr>
+    <tr><td><strong>Adaptar el tono</strong></td><td>Hace el mensaje más formal, más cercano o más corto.</td></tr>
+  </table>
+
+  <h3>Cómo pedirle bien (el secreto del buen "prompt")</h3>
+  <p>Un buen pedido tiene 3 ingredientes: <strong>quién eres</strong>, <strong>qué pasó</strong> y <strong>qué necesitas</strong>. Mira la diferencia:</p>
+
+  <div class="copy"><span class="lbl">❌ Pedido pobre</span>Escribe un mensaje de ventas.</div>
+  <div class="copy"><span class="lbl">✅ Pedido completo (copia y adapta)</span>Actúa como vendedor cercano y profesional. Vendo [productos] por WhatsApp. Un cliente me dijo: "está un poco caro". Escríbeme 3 respuestas cortas, amables y sin sonar desesperado, que resalten el valor y propongan un siguiente paso. Tono cercano, en español, con máximo 1 emoji.</div>
+
+  <div class="ia">
+    <span class="t">Prompts listos para guardar</span>
+    <ul style="margin:6px 0 0">
+      <li>“Mejora este mensaje para que suene más cálido y claro, sin perder mi estilo: [pego mi mensaje]”.</li>
+      <li>“Dame 3 formas de hacer seguimiento a un cliente que dijo ‘lo pienso’ hace 3 días, sin sonar insistente”.</li>
+      <li>“Resume este producto en 1 frase de venta que destaque el beneficio principal: [descripción]”.</li>
+      <li>“Escribe un saludo de bienvenida para clientes nuevos de mi negocio de [rubro], tono cercano”.</li>
+    </ul>
+  </div>
+
+  <h3>La regla de oro: IA sí, dependencia no</h3>
+  <p>La IA es un borrador, no la última palabra. <strong>Siempre revisa y ajusta antes de enviar.</strong> Tú conoces a tu cliente, sus precios, su forma de hablar. Si copias y pegas sin leer, vas a sonar genérico (y se nota).</p>
+
+  <div class="warn">
+    <span class="t">Lo que la IA NO debe hacer por ti</span>
+    <ul style="margin:6px 0 0">
+      <li><strong>Inventar datos:</strong> precios, stock o plazos los pones tú. La IA puede equivocarse.</li>
+      <li><strong>Hacer promesas:</strong> nunca dejes que prometa cosas que no puedes cumplir.</li>
+      <li><strong>Perder tu voz:</strong> si el mensaje no suena a ti, ajústalo hasta que lo sea.</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    <span class="t">Flujo recomendado</span>
+    1) Escribe tu idea en bruto. 2) Pídele a la IA que la mejore. 3) Léela y corrige el precio/nombre/tono. 4) Envía. Con práctica, este ciclo te toma menos de un minuto.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Toma una conversación real donde no supiste qué responder. Cópiala en ChatGPT (o la IA que uses) con el prompt completo de arriba. Compara las 3 opciones que te dé, elige la que más suene a ti, ajusta una línea y guárdala como nueva plantilla. Acabas de crear un activo reutilizable.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 6 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 6</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 6</div>
+  <h2>Cómo hacer seguimiento sin parecer insistente</h2>
+  <div class="divider"></div>
+
+  <p class="lead">El 80% de las ventas se pierden por falta de seguimiento, no por falta de interés. La diferencia entre “insistente” y “profesional” es simple: aportar valor en cada mensaje.</p>
+
+  <p>“No quiero molestar” es la frase que más dinero le cuesta a los emprendedores. La verdad es que el cliente está ocupado y se olvidó, no te está rechazando. Un buen seguimiento le hace un favor: le recuerda algo que quería resolver.</p>
+
+  <h3>La regla del seguimiento con valor</h3>
+  <p>Nunca escribas solo “¿Sigues interesado?” o “¿Qué decidiste?”. Eso presiona y suena a cobranza. En su lugar, <strong>cada seguimiento debe traer algo nuevo</strong>: una oferta, un dato, una facilidad, una novedad.</p>
+
+  <table>
+    <tr><th>❌ Insistente (presiona)</th><th>✅ Profesional (aporta)</th></tr>
+    <tr><td>“¿Vas a comprar o no?”</td><td>“Te aparté una unidad por si la querías 🙌”</td></tr>
+    <tr><td>“Hola, ¿sigues ahí?”</td><td>“Llegó el color que buscabas, ¿te muestro?”</td></tr>
+    <tr><td>“¿Ya lo pensaste?”</td><td>“Esta semana tengo envío gratis, te avisaba 😊”</td></tr>
+  </table>
+
+  <h3>El calendario de seguimiento (cuándo escribir)</h3>
+  <p>No persigas, acompaña. Espacia los mensajes para no agobiar:</p>
+  <table>
+    <tr><th>Momento</th><th>Qué enviar</th></tr>
+    <tr><td><strong>Día 1 (mismo día)</strong></td><td>Resumen de lo conversado + paso siguiente claro.</td></tr>
+    <tr><td><strong>Día 2-3</strong></td><td>Recordatorio con valor: “te aparté”, “sigue disponible”.</td></tr>
+    <tr><td><strong>Día 5-7</strong></td><td>Oferta o novedad: descuento, envío gratis, nuevo stock.</td></tr>
+    <tr><td><strong>Día 14</strong></td><td>Último mensaje suave: cierra el ciclo sin presión.</td></tr>
+  </table>
+
+  <h3>Frases de seguimiento listas para copiar</h3>
+  <div class="copy"><span class="lbl">Seguimiento día 2-3</span>¡Hola [nombre]! 😊 Te quería contar que aún tengo disponible el [producto] que viste. ¿Te lo dejo apartado?</div>
+  <div class="copy"><span class="lbl">Con valor / oferta</span>¡Hola! Justo esta semana tengo [envío gratis / 10% off] en [producto]. Me acordé de ti 🙌 ¿Lo aprovechamos?</div>
+  <div class="copy"><span class="lbl">Último mensaje (cierre del ciclo)</span>¡Hola [nombre]! No quiero llenarte de mensajes 😊 Si más adelante lo necesitas, aquí estoy. ¡Que tengas linda semana!</div>
+
+  <div class="ej">
+    <p><strong>Ejemplo — Rescatando un cliente "perdido"</strong></p>
+    <div class="chat">
+      <div class="head">3 días después del "lo pienso"</div>
+      <div class="msg out"><span class="who">Tú</span>¡Hola Ana! 😊 Te acuerdas del bolso que viste? Me llegó justo en el color café que te gustaba. Te dejo foto por si todavía lo quieres 👜</div>
+      <div class="msg in"><span class="who">Cliente</span>Ay sí! Ese me encantaba. ¿Sigue al mismo precio?</div>
+      <div class="msg out"><span class="who">Tú</span>¡El mismo! Y si lo tomas hoy te incluyo el envío. ¿Te lo aparto? 🙌</div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="t">La clave del capítulo</span>
+    Seguimiento no es “perseguir hasta que compre”. Es <strong>recordar con cariño y aportar valor</strong>, hasta 3-4 veces. Si tras eso no responde, lo pasas a “En pausa” y sigues con otros.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Revisa tu CRM y busca 3 clientes en etapa “Tibio” o “En pausa”. Escríbeles HOY un seguimiento con valor (no un “¿sigues interesado?”). Anota en tu planilla qué les ofreciste y cuándo volver a contactar.</p>
+  </div>
+</section>
+<!-- ============ CAPÍTULO 7 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 7</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 7</div>
+  <h2>Cómo responder objeciones comunes</h2>
+  <div class="divider"></div>
+
+  <p class="lead">Una objeción no es un “no”. Es un “todavía no me convences” o “tengo una duda”. Cuando aprendes a responderlas con calma, muchas se convierten en ventas.</p>
+
+  <p>El error típico es ponerse nervioso o a la defensiva cuando el cliente duda. La verdad es que las objeciones son <strong>buena señal</strong>: significan que la persona sigue interesada, solo necesita un empujón de confianza. La fórmula es siempre la misma:</p>
+
+  <div class="box">
+    <p class="mt0"><strong>VALIDA + RESPONDE + REDIRIGE</strong></p>
+    <p>1) Reconoce lo que siente (“te entiendo”). 2) Da una razón o solución. 3) Vuelve a proponer el paso siguiente.</p>
+  </div>
+
+  <h3>Las 5 objeciones más comunes y cómo responderlas</h3>
+
+  <h4>1. “Está muy caro”</h4>
+  <div class="copy"><span class="lbl">Respuesta lista</span>Te entiendo 🙌 Lo bueno es que [producto] te dura [tiempo/beneficio], así que sale más conveniente de lo que parece. Y si quieres, puedo dividir el pago en 2. ¿Te sirve así?</div>
+
+  <h4>2. “Lo tengo que pensar”</h4>
+  <div class="copy"><span class="lbl">Respuesta lista</span>¡Claro, tómate tu tiempo! 😊 Solo para ayudarte a decidir: ¿hay algo puntual que te genere duda? Así te lo aclaro y decides tranquilo/a.</div>
+
+  <h4>3. “Lo vi más barato en otro lado”</h4>
+  <div class="copy"><span class="lbl">Respuesta lista</span>Puede ser 🙌 Lo que incluyo yo es [garantía / atención directa / envío seguro], y respondo siempre que me necesites. ¿Lo prefieres con ese respaldo?</div>
+
+  <h4>4. “Ahora no tengo plata / no es buen momento”</h4>
+  <div class="copy"><span class="lbl">Respuesta lista</span>¡Sin problema, te entiendo! 😊 ¿Quieres que te lo aparte para [fecha] o te aviso cuando tenga una promo? Así no lo pierdes.</div>
+
+  <h4>5. “No estoy seguro de si me servirá”</h4>
+  <div class="copy"><span class="lbl">Respuesta lista</span>Buena pregunta 🙌 Cuéntame para qué lo necesitas y te digo con honestidad si es lo ideal para ti. Prefiero que quedes contento/a.</div>
+
+  <table>
+    <tr><th>Objeción</th><th>Lo que el cliente realmente dice</th><th>Tu objetivo</th></tr>
+    <tr><td>“Está caro”</td><td>“No veo el valor todavía”</td><td>Mostrar beneficio, dar facilidad de pago</td></tr>
+    <tr><td>“Lo pienso”</td><td>“Tengo una duda sin resolver”</td><td>Descubrir la duda real</td></tr>
+    <tr><td>“Más barato en otro lado”</td><td>“Justifícame elegirte a ti”</td><td>Resaltar tu valor agregado</td></tr>
+    <tr><td>“No es buen momento”</td><td>“No es prioridad ahora”</td><td>Mantener la puerta abierta</td></tr>
+  </table>
+
+  <div class="ia">
+    <span class="t">Usa la IA aquí</span>
+    Cuando te llegue una objeción nueva que no sepas manejar, pídele a la IA: <em>“Un cliente me dijo [objeción]. Dame 3 respuestas amables que validen, respondan y propongan seguir”.</em> Guarda la mejor en tu lista.
+  </div>
+
+  <div class="warn">
+    <span class="t">Nunca hagas esto</span>
+    No discutas, no presiones ni hagas sentir mal al cliente (“¿entonces no lo vas a llevar?”). La venta se gana con calma y confianza, no con presión.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Escribe las 3 objeciones que MÁS te dicen en tu rubro. Prepara una respuesta para cada una con la fórmula Valida + Responde + Redirige. Guárdalas como respuestas rápidas. La próxima vez no te va a tomar por sorpresa.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 8 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 8</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 8</div>
+  <h2>Cómo cerrar ventas con mensajes claros</h2>
+  <div class="divider"></div>
+
+  <p class="lead">Muchas ventas se caen al final, no por el precio, sino porque nadie pidió el cierre. El cliente queda esperando una señal… y tú esperando que él decida solo. Alguien tiene que dar el paso: ese eres tú.</p>
+
+  <p>Cerrar no es presionar. Cerrar es <strong>facilitar la decisión</strong> y hacer fácil el “sí”. Un buen cierre es claro, da un paso concreto y elimina la fricción.</p>
+
+  <h3>Las 3 reglas de un cierre que funciona</h3>
+  <ul>
+    <li><strong>Sé directo.</strong> Pide la venta sin rodeos: “¿Lo confirmamos?”.</li>
+    <li><strong>Da el siguiente paso exacto.</strong> Di qué tiene que hacer: “Te paso los datos y me envías el comprobante”.</li>
+    <li><strong>Quita fricción.</strong> Ofrece opciones de pago, apartado, envío. Mientras más fácil, más cierres.</li>
+  </ul>
+
+  <h3>Tipos de cierre (con frases listas)</h3>
+
+  <h4>Cierre directo</h4>
+  <div class="copy"><span class="lbl">Cuando el cliente ya está caliente</span>¡Perfecto! Entonces te confirmo el [producto] en $[precio] 🙌 Te paso los datos para coordinar el pago, ¿te parece?</div>
+
+  <h4>Cierre con opciones (elige entre A o B, no entre sí o no)</h4>
+  <div class="copy"><span class="lbl">Facilita la decisión</span>¿Lo prefieres con envío a domicilio o pasas a retirarlo? Así te lo voy dejando listo 😊</div>
+
+  <h4>Cierre con beneficio / urgencia honesta</h4>
+  <div class="copy"><span class="lbl">Sin mentir ni presionar</span>Me queda la última unidad de ese modelo. Si quieres te la aparto hoy para que no la pierdas 🙌</div>
+
+  <h4>Cierre tras resolver una duda</h4>
+  <div class="copy"><span class="lbl">Encadena la respuesta con el cierre</span>¡Listo, espero haber aclarado tu duda! Si te parece bien, lo dejamos confirmado y coordinamos el pago 😊</div>
+
+  <div class="ej">
+    <p><strong>Ejemplo — Un cierre limpio de principio a fin</strong></p>
+    <div class="chat">
+      <div class="head">Del interés al "sí"</div>
+      <div class="msg in"><span class="who">Cliente</span>Me gustó el plan de asesoría. ¿Cómo sería?</div>
+      <div class="msg out"><span class="who">Tú</span>¡Genial! 🙌 Son 4 sesiones por $40.000, una por semana. Empezamos cuando quieras. ¿Te acomoda partir este jueves?</div>
+      <div class="msg in"><span class="who">Cliente</span>Sí, el jueves me viene bien</div>
+      <div class="msg out"><span class="who">Tú</span>¡Perfecto! Te lo dejo agendado para el jueves 📅 Para confirmar tu cupo te paso los datos de pago. ¿Transferencia o link?</div>
+      <div class="msg in"><span class="who">Cliente</span>Transferencia</div>
+      <div class="msg out"><span class="who">Tú</span>¡Listo! Aquí van 👇 [datos]. Apenas me llegue el comprobante te envío el material de bienvenida 🙌</div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="t">La frase que cierra más ventas</span>
+    “¿Lo confirmamos?” o “¿Te lo dejo apartado?”. Simples, claras y sin presión. Pruébalas: pedir el cierre, amablemente, multiplica tus resultados.
+  </div>
+
+  <div class="warn">
+    <span class="t">Después del cierre, cuida</span>
+    Cuando te paguen, no desaparezcas. Confirma, agradece y di qué sigue (“te llega en X días”). Un buen cierre crea un cliente que vuelve y te recomienda.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Identifica en tu CRM a tus clientes en etapa “Caliente”. Escríbeles hoy un mensaje de cierre directo usando una de las frases de arriba. No esperes a que decidan solos: invítalos a confirmar. Anota cuántos respondieron.</p>
+  </div>
+</section>
+<!-- ============ CAPÍTULO 9 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 9</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 9</div>
+  <h2>Rutina diaria de 20 minutos para revisar clientes</h2>
+  <div class="divider"></div>
+
+  <p class="lead">Un sistema solo funciona si lo usas todos los días. La buena noticia: ordenar tus ventas no requiere horas. Con 20 minutos diarios y bien usados, no se te escapa ningún cliente.</p>
+
+  <p>Esta es la rutina que une todo lo aprendido. Hazla a la misma hora cada día (por ejemplo, al abrir tu negocio o antes de cerrar). Se vuelve un hábito tan natural como revisar el correo.</p>
+
+  <h3>La rutina de 20 minutos, paso a paso</h3>
+
+  <div class="day">
+    <h4>⏱️ Minutos 1–5 · Responde lo urgente</h4>
+    <p>Contesta a los clientes <strong>calientes</strong> y a los mensajes nuevos sin responder. Usa tus plantillas para ir rápido. Prioridad: quien quiere comprar ya.</p>
+  </div>
+
+  <div class="day">
+    <h4>⏱️ Minutos 6–10 · Actualiza tu CRM</h4>
+    <p>Revisa los chats del día y actualiza la etapa de cada cliente. Anota el <strong>siguiente paso</strong> y la fecha para recordar. 15 segundos por cliente.</p>
+  </div>
+
+  <div class="day">
+    <h4>⏱️ Minutos 11–16 · Haz seguimiento</h4>
+    <p>Mira en tu planilla quién toca hoy (columna “Recordar el”). Envía 3–5 seguimientos <strong>con valor</strong>. Aquí se rescatan las ventas dormidas.</p>
+  </div>
+
+  <div class="day">
+    <h4>⏱️ Minutos 17–20 · Cierra y planifica</h4>
+    <p>Empuja a los clientes calientes con un mensaje de cierre. Anota qué dejaste pendiente para mañana. Cierras el día con todo bajo control.</p>
+  </div>
+
+  <h3>Tu checklist diario (para imprimir)</h3>
+  <ul class="check">
+    <li>Respondí todos los mensajes nuevos del día.</li>
+    <li>Atendí primero a los clientes calientes.</li>
+    <li>Actualicé la etapa y el “siguiente paso” en mi CRM.</li>
+    <li>Envié al menos 3 seguimientos con valor.</li>
+    <li>Hice al menos 1 intento de cierre a un cliente caliente.</li>
+    <li>Dejé anotado lo pendiente para mañana.</li>
+  </ul>
+
+  <div class="tip">
+    <span class="t">El poder del hábito</span>
+    20 minutos al día son unas 2 horas a la semana. Esa pequeña inversión es la diferencia entre “se me olvidó responder” y “tengo mis ventas ordenadas”. La constancia gana, no la intensidad.
+  </div>
+
+  <div class="ia">
+    <span class="t">Acelera con IA</span>
+    Si en tu revisión encuentras un mensaje difícil, pásalo por la IA mientras avanzas con otros. Vuelves, ajustas y envías. Así ni los casos complicados te frenan la rutina.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Elige TU horario fijo para los 20 minutos (mañana o tarde) y ponlo como alarma en tu celular para los próximos 7 días. La alarma es tu disparador. Cumple la rutina aunque sea corta: lo importante es no romper la cadena.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 10 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 10</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 10</div>
+  <h2>Plan de acción de 7 días</h2>
+  <div class="divider"></div>
+
+  <p class="lead">Todo lo que aprendiste, convertido en pasos diarios. Una tarea por día. Al terminar la semana, tendrás tu sistema de ventas por WhatsApp funcionando completo.</p>
+
+  <div class="day">
+    <h4><span class="num">1</span>Día 1 · Ordena tu base</h4>
+    <p>Crea tu plantilla CRM (6 columnas) o activa las etiquetas en WhatsApp Business. Vuelca a todos tus clientes actuales y asígnales una etapa.</p>
+    <p><strong>Meta del día:</strong> tener visibilidad total de quién es quién.</p>
+  </div>
+
+  <div class="day">
+    <h4><span class="num">2</span>Día 2 · Arma tus plantillas</h4>
+    <p>Escribe tus 5 respuestas rápidas (saludo, precio, info, ocupado, cierre) con la fórmula Saludo + Respuesta + Paso siguiente. Guárdalas en WhatsApp.</p>
+    <p><strong>Meta del día:</strong> responder en segundos sin sonar robótico.</p>
+  </div>
+
+  <div class="day">
+    <h4><span class="num">3</span>Día 3 · Prepara tus objeciones</h4>
+    <p>Escribe respuestas para tus 3 objeciones más comunes con la fórmula Valida + Responde + Redirige. Apóyate en la IA para pulirlas.</p>
+    <p><strong>Meta del día:</strong> que ninguna objeción te tome por sorpresa.</p>
+  </div>
+
+  <div class="day">
+    <h4><span class="num">4</span>Día 4 · Activa el seguimiento</h4>
+    <p>Identifica clientes “Tibios” y “En pausa”. Escribe a 5 de ellos un seguimiento con valor (no un “¿sigues interesado?”). Anota a quién y cuándo volver.</p>
+    <p><strong>Meta del día:</strong> rescatar ventas dormidas.</p>
+  </div>
+
+  <div class="day">
+    <h4><span class="num">5</span>Día 5 · Practica tus cierres</h4>
+    <p>Busca a tus clientes “Calientes” y envíales un mensaje de cierre directo. Pide la venta amablemente: “¿Lo confirmamos?”.</p>
+    <p><strong>Meta del día:</strong> dejar de esperar y empezar a cerrar.</p>
+  </div>
+
+  <div class="day">
+    <h4><span class="num">6</span>Día 6 · Suma la IA a tu día</h4>
+    <p>Guarda 3 prompts útiles. Usa la IA para mejorar 2 mensajes reales y crear 1 plantilla nueva. Revisa y ajusta todo a tu voz antes de enviar.</p>
+    <p><strong>Meta del día:</strong> tener un asistente que te ahorra tiempo.</p>
+  </div>
+
+  <div class="day">
+    <h4><span class="num">7</span>Día 7 · Instala la rutina</h4>
+    <p>Haz por primera vez completa tu rutina de 20 minutos. Pon la alarma diaria. Revisa tu semana: ¿cuántas ventas avanzaron o cerraste?</p>
+    <p><strong>Meta del día:</strong> dejar el sistema andando solo.</p>
+  </div>
+
+  <div class="tip">
+    <span class="t">Al terminar los 7 días</span>
+    Ya no vendes “a ver si suena el WhatsApp”. Tienes un sistema: clientes ordenados, respuestas listas, seguimiento activo y una rutina diaria. Ahora solo queda repetir y mejorar.
+  </div>
+</section>
+
+<!-- ============ BONUS: ERRORES FRECUENTES ============ -->
+<section class="page">
+  <div class="runhead"><span>Bonus · Errores</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Bonus</div>
+  <h2>10 errores que matan tus ventas (y cómo evitarlos)</h2>
+  <div class="divider"></div>
+  <p class="lead">Antes de cerrar, una lista rápida para repasar. Estos son los tropiezos más comunes. Evítalos y ya estarás por delante de la mayoría.</p>
+
+  <table>
+    <tr><th>#</th><th>El error</th><th>La solución</th></tr>
+    <tr><td>1</td><td>Responder horas después</td><td>Plantillas listas + revisar a horas fijas.</td></tr>
+    <tr><td>2</td><td>Mensajes largos y confusos</td><td>Saludo + respuesta clara + paso siguiente.</td></tr>
+    <tr><td>3</td><td>No anotar nada (confiar en la memoria)</td><td>Tu CRM simple con el “siguiente paso”.</td></tr>
+    <tr><td>4</td><td>Tratar a todos igual</td><td>Clasificar por etapa (frío, tibio, caliente).</td></tr>
+    <tr><td>5</td><td>No hacer seguimiento por “no molestar”</td><td>Seguimiento con valor, no con presión.</td></tr>
+    <tr><td>6</td><td>Mandar el precio y desaparecer</td><td>Siempre proponer un paso siguiente.</td></tr>
+    <tr><td>7</td><td>Ponerse a la defensiva con las objeciones</td><td>Validar + responder + redirigir.</td></tr>
+    <tr><td>8</td><td>Nunca pedir el cierre</td><td>“¿Lo confirmamos?”, “¿Te lo aparto?”.</td></tr>
+    <tr><td>9</td><td>Copiar y pegar de la IA sin revisar</td><td>La IA es borrador; tú das la última palabra.</td></tr>
+    <tr><td>10</td><td>Desaparecer después de la venta</td><td>Confirmar, agradecer y cuidar al cliente.</td></tr>
+  </table>
+
+  <div class="tip">
+    <span class="t">Mira el lado positivo</span>
+    Cada error de esta lista es una venta que puedes recuperar a partir de hoy. No se trata de hacerlo todo perfecto, sino de corregir uno a la vez.
+  </div>
+
+  <div class="warn">
+    <span class="t">El error mental más caro</span>
+    Pensar “esto no es para mí” o “yo no sé vender”. Vender por WhatsApp no es talento, es <strong>método</strong>. Y el método ya lo tienes en tus manos.
+  </div>
+</section>
+
+<!-- ============ BONUS: BANCO DE 30 FRASES ============ -->
+<section class="page">
+  <div class="runhead"><span>Bonus · Frases</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Bonus · Copia y pega</div>
+  <h2>Banco de frases listas para vender</h2>
+  <div class="divider"></div>
+  <p class="lead">Guarda estas frases como respuestas rápidas en WhatsApp Business. Adáptalas a tu producto y a tu forma de hablar.</p>
+
+  <h3>Para abrir la conversación</h3>
+  <div class="copy">¡Hola! 👋 Gracias por escribir. Cuéntame qué buscas y te ayudo enseguida.</div>
+  <div class="copy">¡Qué bueno que escribes! 🙌 ¿Es para ti o para regalo? Así te recomiendo mejor.</div>
+  <div class="copy">¡Hola! Bienvenido/a a [Tu Negocio] 😊 ¿En qué te puedo ayudar hoy?</div>
+
+  <h3>Para responder precio</h3>
+  <div class="copy">¡Buena elección! El [producto] te queda en $[precio], incluye [beneficio]. ¿Te lo aparto?</div>
+  <div class="copy">Te queda en $[precio] 🙌 Y si tomas [oferta], te incluyo [extra]. ¿Lo vemos?</div>
+
+  <h3>Para hacer seguimiento</h3>
+  <div class="copy">¡Hola [nombre]! 😊 Aún tengo disponible el [producto] que viste. ¿Te lo dejo apartado?</div>
+  <div class="copy">Me acordé de ti 🙌 Esta semana tengo [oferta]. ¿La aprovechamos?</div>
+  <div class="copy">¡Hola! No quiero llenarte de mensajes 😊 Si lo necesitas más adelante, aquí estoy.</div>
+
+  <h3>Para responder objeciones</h3>
+  <div class="copy">Te entiendo 🙌 Lo bueno es que [beneficio], y puedo dividir el pago en 2. ¿Te sirve?</div>
+  <div class="copy">¡Claro, tómate tu tiempo! ¿Hay alguna duda puntual que te aclare para decidir tranquilo/a?</div>
+
+  <h3>Para cerrar la venta</h3>
+  <div class="copy">¡Perfecto! Entonces te confirmo el [producto]. Te paso los datos para coordinar, ¿te parece?</div>
+  <div class="copy">¿Lo prefieres con envío o pasas a retirarlo? Así te lo dejo listo 😊</div>
+  <div class="copy">Me queda la última unidad. Si quieres, te la aparto hoy para que no la pierdas 🙌</div>
+
+  <h3>Para después de la venta</h3>
+  <div class="copy">¡Gracias por tu compra! 🙌 Te llega en [tiempo]. Cualquier cosa, aquí estoy.</div>
+  <div class="copy">¡Espero que lo disfrutes! 😊 Si te gustó, ¿me ayudas con una reseña? Significa mucho 🙏</div>
+</section>
+
+<!-- ============ BONUS: PLANTILLA CRM IMPRIMIBLE ============ -->
+<section class="page">
+  <div class="runhead"><span>Bonus · Plantilla</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Bonus · Para imprimir</div>
+  <h2>Tu plantilla CRM para imprimir</h2>
+  <div class="divider"></div>
+  <p class="lead">Imprime esta página y úsala mientras montas tu CRM digital. Llénala a mano hoy mismo con tus clientes activos.</p>
+
+  <table>
+    <tr><th>Nombre</th><th>Qué quiere</th><th>Etapa</th><th>Siguiente paso</th><th>Recordar</th></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  </table>
+
+  <div class="box box-bordered">
+    <p class="mt0"><strong>Recordatorio de etapas:</strong></p>
+    <p class="mt0">
+      <span class="tag t-frio">FRÍO</span> preguntó general ·
+      <span class="tag t-tibio">TIBIO</span> pidió precio/detalle ·
+      <span class="tag t-caliente">CALIENTE</span> quiere comprar ·
+      <span class="tag t-cliente">CLIENTE</span> ya compró ·
+      <span class="tag t-perdido">EN PAUSA</span> dijo “después”
+    </p>
+  </div>
+
+  <div class="ia">
+    <span class="t">Pásalo a digital</span>
+    Cuando tengas la versión en papel funcionando, replícala en Google Sheets (gratis) para tenerla siempre en tu celular y editarla en segundos.
+  </div>
+</section>
+
+<!-- ============ CHECKLIST FINAL ============ -->
+<section class="page">
+  <div class="runhead"><span>Checklist final</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Tu sistema en una página</div>
+  <h2>Checklist final</h2>
+  <div class="divider"></div>
+  <p class="lead">Guarda esta página. Es el resumen de todo tu sistema WhatsApp Ventas Pro. Si cumples esto, estás vendiendo con orden.</p>
+
+  <h3>✅ Mi sistema está montado</h3>
+  <ul class="check">
+    <li>Tengo una plantilla CRM (o etiquetas) con todos mis clientes.</li>
+    <li>Cada cliente tiene una etapa: Frío, Tibio, Caliente, Cliente o En pausa.</li>
+    <li>Cada cliente tiene un “siguiente paso” anotado.</li>
+    <li>Tengo mis 5 respuestas rápidas guardadas en WhatsApp.</li>
+    <li>Tengo respuestas listas para mis 3 objeciones más comunes.</li>
+    <li>Guardé al menos 3 prompts de IA que me sirven.</li>
+  </ul>
+
+  <h3>✅ Mi rutina diaria</h3>
+  <ul class="check">
+    <li>Respondo rápido y con calidez (saludo + respuesta + paso siguiente).</li>
+    <li>Atiendo primero a los clientes calientes.</li>
+    <li>Actualizo mi CRM todos los días.</li>
+    <li>Hago seguimiento con valor, sin presionar.</li>
+    <li>Pido el cierre amablemente a quien está listo.</li>
+    <li>Dedico mis 20 minutos diarios sin falta.</li>
+  </ul>
+
+  <h3>✅ Mi forma de vender</h3>
+  <ul class="check">
+    <li>Guío la conversación, no solo respondo.</li>
+    <li>Cada chat termina con un paso siguiente.</li>
+    <li>Trato cada objeción con calma y confianza.</li>
+    <li>Uso la IA como apoyo, reviso antes de enviar.</li>
+    <li>Cuido a mis clientes después de la venta.</li>
+  </ul>
+
+  <div class="tip">
+    <span class="t">Recuerda</span>
+    No necesitas hacerlo perfecto. Necesitas hacerlo <strong>constante</strong>. Un sistema simple que usas todos los días vale más que uno perfecto que abandonas. ¡Tú puedes!
+  </div>
+</section>
+
+<!-- ============ INVITACIÓN SIGUIENTE PASO ============ -->
+<section class="page" style="background:linear-gradient(160deg,#0B3D6B 0%, #1573C6 90%); color:#fff;">
+  <div class="kicker" style="color:#FFC53D;">El siguiente paso</div>
+  <h2 style="color:#fff; border-color:#25D366;">Meta Ads Express para WhatsApp</h2>
+  <div class="divider"></div>
+
+  <p class="lead" style="color:#dbe8f5;">Ya sabes ordenar, responder y cerrar a los clientes que te escriben. Ahora… <strong style="color:#fff;">¿qué pasaría si llegaran muchos más?</strong></p>
+
+  <p>Con <strong style="color:#fff;">WhatsApp Ventas Pro</strong> aprendiste a no perder ninguna venta de los clientes que ya tienes. El siguiente paso natural es <strong style="color:#fff;">multiplicar cuántos te escriben</strong>. Ahí entra la publicidad: anuncios en Facebook e Instagram que envían personas interesadas directo a tu WhatsApp.</p>
+
+  <div class="box" style="background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.25);">
+    <h3 style="color:#FFC53D; margin-top:0;">📢 Meta Ads Express para WhatsApp</h3>
+    <p class="mt0">Un sistema simple, sin lenguaje técnico, para crear anuncios que llenan tu WhatsApp de clientes interesados, aunque nunca hayas hecho publicidad.</p>
+    <ul style="margin:6px 0 0;">
+      <li>Cómo crear tu primer anuncio paso a paso (sin perderte).</li>
+      <li>Cómo enviar a la gente directo a tu WhatsApp.</li>
+      <li>Cuánto invertir para empezar (sin gastar de más).</li>
+      <li>Qué escribir en el anuncio para que te escriban de verdad.</li>
+    </ul>
+  </div>
+
+  <p style="color:#dbe8f5;">Imagina tu sistema de WhatsApp Ventas Pro funcionando… pero con el doble o el triple de personas escribiéndote cada día. Eso es lo que construye <strong style="color:#fff;">Meta Ads Express</strong>: el motor que alimenta tu máquina de ventas.</p>
+
+  <div class="tip" style="background:rgba(37,211,102,.18); border-color:#25D366;">
+    <span class="t" style="color:#7CF0A8;">Tu próximo movimiento</span>
+    <span style="color:#fff;">Ordena primero (ya lo hiciste con este ebook). Luego, atrae más. Cuando estés listo para escalar, <strong>Meta Ads Express para WhatsApp</strong> es tu siguiente paso en Academia Venta Digital.</span>
+  </div>
+
+  <p class="center" style="margin-top:30px; color:#9fc4e8; font-size:10pt;">Academia Venta Digital · Aprende a vender con orden, no con suerte.</p>
+</section>
+
+</body>
+</html>
