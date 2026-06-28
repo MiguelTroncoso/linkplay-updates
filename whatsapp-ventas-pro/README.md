@@ -10,9 +10,11 @@ Producto digital completo: ebook + kit de materiales de venta para Hotmart.
 
 | Archivo | Descripción | Páginas |
 |---|---|---|
+| `LEEME-PRIMERO.txt` | Guía de bienvenida: qué incluye y orden sugerido de uso | — |
 | `ebook-WhatsApp-Ventas-Pro.pdf` | Ebook completo (15 secciones + bonus + recursos + aviso legal) | 45 |
 | `recursos/plantilla-CRM-WhatsApp-Ventas-Pro.csv` | Plantilla CRM editable para Google Sheets / Excel | — |
-| `recursos/checklist-imprimible.md` | Checklist diario y rutina de 20 min para imprimir | — |
+| `recursos/checklist-imprimible.pdf` | Checklist diario imprimible (1 página, con diseño de marca) | 1 |
+| `recursos/checklist-imprimible.md` | Checklist en texto (fuente editable del PDF) | — |
 | `recursos/frases-copiables.txt` | Muestra inicial de frases listas para copiar | — |
 | `recursos/prompts-IA.txt` | Prompts de IA para mejorar y adaptar mensajes | — |
 
