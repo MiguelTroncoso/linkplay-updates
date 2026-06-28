@@ -542,7 +542,7 @@ PORTADA = """<b>Concepto:</b> burbuja de chat verde estilo WhatsApp como protago
 <b>Composición sugerida:</b>
 • Arriba: \"ACADEMIA VENTA DIGITAL\" en mayúsculas espaciadas.
 • Centro: título grande <b>\"Pack 100 Respuestas para WhatsApp\"</b> en blanco, dentro o junto a una burbuja de chat verde.
-• Debajo: subtítulo \"Mensajes listos para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco\".
+• Debajo: subtítulo \"Mensajes listos y editables para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco\".
 • Detalle: un número \"100\" grande y destacado, y 3 píldoras con categorías (Bienvenida · Precios · Cierre).
 • Pie: etiqueta \"Complemento de WhatsApp Ventas Pro\"."""
 
@@ -665,7 +665,7 @@ def gen_html():
         <span class="wa">WhatsApp Business</span>
         <div class="big100">100</div>
         <h1>Respuestas para<br>WhatsApp</h1>
-        <p class="sub">Mensajes listos para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco.</p>
+        <p class="sub">Mensajes listos y editables para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco.</p>
       </div>
       <div>
         <div class="pill"><span>Copiar y pegar</span><span>Editables</span><span>Variante corta</span><span>Cuándo enviarlo</span></div>
@@ -779,7 +779,7 @@ def gen_html():
 def gen_md():
     L = ["# Pack 100 Respuestas para WhatsApp",
          "### Academia Venta Digital",
-         "_Mensajes listos para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco._",
+         "_Mensajes listos y editables para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco._",
          "",
          "> **Plantilla editable.** Reemplaza el texto entre [corchetes] con los datos de tu negocio. "
          "Copia cada mensaje y guárdalo como respuesta rápida en WhatsApp Business.",

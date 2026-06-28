@@ -1,6 +1,6 @@
 # Pack 100 Respuestas para WhatsApp
 ### Academia Venta Digital
-_Mensajes listos para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco._
+_Mensajes listos y editables para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco._
 
 > **Plantilla editable.** Reemplaza el texto entre [corchetes] con los datos de tu negocio. Copia cada mensaje y guárdalo como respuesta rápida en WhatsApp Business.
 
@@ -1067,7 +1067,7 @@ Ya tienes el sistema con _WhatsApp Ventas Pro_. Ahora llévate las palabras exac
 **Composición sugerida:**
 - Arriba: "ACADEMIA VENTA DIGITAL" en mayúsculas espaciadas.
 - Centro: título grande **"Pack 100 Respuestas para WhatsApp"** en blanco, dentro o junto a una burbuja de chat verde.
-- Debajo: subtítulo "Mensajes listos para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco".
+- Debajo: subtítulo "Mensajes listos y editables para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco".
 - Detalle: un número "100" grande y destacado, y 3 píldoras con categorías (Bienvenida · Precios · Cierre).
 - Pie: etiqueta "Complemento de WhatsApp Ventas Pro".
 
