@@ -1,0 +1,896 @@
+<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'><title>Pack 100 Respuestas para WhatsApp</title><style>
+:root{--azul:#0B3D6B;--azul2:#1573C6;--verde:#25D366;--verde-osc:#0E7A4A;
+--grafito:#26303B;--gris:#5C6B7A;--gris-claro:#EAF0F5;--gris-borde:#D7E0E8;--amarillo:#FFC53D;}
+*{box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;color:var(--grafito);margin:0;font-size:10.5pt;line-height:1.55;}
+.page{page-break-after:always;padding:22mm 20mm;position:relative;min-height:100vh;}
+.page:last-child{page-break-after:auto;}
+h1{color:#fff;margin:0;}
+h2{color:var(--azul);font-size:17pt;border-bottom:3px solid var(--verde);padding-bottom:.2em;margin:0 0 .5em;}
+h3{color:var(--azul2);font-size:12.5pt;margin:1.1em 0 .3em;}
+p{margin:.45em 0;}ul,ol{margin:.4em 0 .8em;padding-left:1.2em;}li{margin:.28em 0;}
+strong,b{color:var(--azul);}
+.kicker{text-transform:uppercase;letter-spacing:.16em;font-size:8.5pt;color:var(--verde-osc);font-weight:700;margin-bottom:.3em;}
+.divider{height:3px;width:54px;background:var(--verde);border-radius:3px;margin:7px 0 14px;}
+.cover{background:linear-gradient(150deg,var(--azul),var(--azul2) 58%,var(--verde-osc) 130%);color:#fff;
+display:flex;flex-direction:column;justify-content:space-between;padding:28mm 22mm;min-height:100vh;page-break-after:always;}
+.cover .brand{letter-spacing:.22em;text-transform:uppercase;font-weight:700;font-size:11pt;}
+.cover .brand span{color:var(--amarillo);}
+.cover .wa{display:inline-block;background:var(--verde);color:#04331f;font-weight:800;padding:5px 15px;border-radius:30px;font-size:11pt;}
+.cover h1{font-size:38pt;line-height:1.05;margin:.15em 0;}
+.cover .big100{font-size:90pt;font-weight:800;line-height:.9;color:var(--amarillo);margin:0;}
+.cover .sub{font-size:13.5pt;font-weight:300;opacity:.96;max-width:88%;}
+.cover .pill{display:inline-flex;gap:7px;flex-wrap:wrap;margin-top:6px;}
+.cover .pill span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);padding:4px 12px;border-radius:20px;font-size:9pt;}
+.cover .tagc{font-size:9pt;background:var(--amarillo);color:#3a2a00;font-weight:800;padding:4px 11px;border-radius:6px;display:inline-block;}
+.cover .foot{font-size:9.5pt;opacity:.85;border-top:1px solid rgba(255,255,255,.3);padding-top:12px;}
+.runhead{position:absolute;top:10mm;left:20mm;right:20mm;display:flex;justify-content:space-between;
+font-size:7.5pt;color:var(--gris);text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid var(--gris-borde);padding-bottom:4px;}
+.runhead b{color:var(--verde-osc);}
+.cathead{background:linear-gradient(120deg,var(--azul),var(--azul2));color:#fff;border-radius:14px;padding:18px 22px;margin:0 0 16px;}
+.cathead .n{font-size:9pt;letter-spacing:.14em;text-transform:uppercase;opacity:.85;color:#cfe6ff;}
+.cathead h2{color:#fff;border:none;margin:.1em 0 .3em;font-size:18pt;}
+.cathead p{margin:0;font-size:10pt;opacity:.95;color:#eaf3ff;}
+.cathead .count{display:inline-block;background:var(--verde);color:#04331f;font-weight:800;padding:2px 12px;border-radius:20px;font-size:9pt;margin-top:8px;}
+.msg{background:#fff;border:1px solid var(--gris-borde);border-radius:12px;padding:13px 16px;margin:11px 0;page-break-inside:avoid;}
+.msg .top{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.msg .num{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;background:var(--azul);
+color:#fff;border-radius:7px;font-weight:800;font-size:10pt;flex:none;}
+.msg .titulo{font-weight:800;color:var(--azul);font-size:11pt;}
+.bubble{background:#D9FDD3;border:1px solid #b8eeae;border-radius:4px 12px 12px 12px;padding:9px 13px;margin:5px 0;
+font-size:10pt;color:var(--grafito);line-height:1.45;white-space:pre-line;}
+.bubble.short{background:#EAF3FC;border-color:#cfe3f7;}
+.lbl{display:block;font-size:7.5pt;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-osc);margin:8px 0 2px;}
+.lbl.s{color:var(--azul2);}
+.when{margin-top:8px;font-size:9pt;color:var(--gris);background:var(--gris-claro);border-radius:8px;padding:6px 11px;}
+.when b{color:var(--verde-osc);}
+.box{background:var(--gris-claro);border-radius:12px;padding:15px 19px;margin:13px 0;}
+.card{background:#fff;border:1px solid var(--gris-borde);border-left:5px solid var(--verde);border-radius:0 10px 10px 0;padding:12px 17px;margin:10px 0;}
+.card h3{margin-top:0;}
+.copybox{background:#fff;border:1.5px dashed var(--verde);border-radius:10px;padding:12px 16px;margin:9px 0;font-size:10pt;line-height:1.5;}
+.check{list-style:none;padding-left:0;}
+.check li{padding-left:28px;position:relative;margin:.42em 0;}
+.check li:before{content:"\2713";position:absolute;left:0;top:-1px;width:19px;height:19px;background:var(--verde);
+color:#fff;border-radius:5px;text-align:center;font-weight:800;font-size:10pt;line-height:19px;}
+.lead{font-size:12pt;color:var(--gris);line-height:1.5;}
+ol.steps{counter-reset:s;list-style:none;padding-left:0;}
+ol.steps li{position:relative;padding-left:38px;margin:.7em 0;}
+ol.steps li:before{counter-increment:s;content:counter(s);position:absolute;left:0;top:-2px;width:26px;height:26px;
+background:var(--verde);color:#fff;border-radius:50%;text-align:center;line-height:26px;font-weight:800;font-size:11pt;}
+ol.steps b{display:block;}
+table{width:100%;border-collapse:collapse;margin:11px 0;font-size:9.5pt;}
+th{background:var(--azul);color:#fff;text-align:left;padding:8px 10px;}
+td{border:1px solid var(--gris-borde);padding:8px 10px;vertical-align:top;}
+.toc-item{display:flex;justify-content:space-between;border-bottom:1px dotted var(--gris-borde);padding:6px 0;font-size:10.5pt;}
+.toc-item .c{color:var(--azul2);font-weight:700;}
+.best{background:#EAFBF1;border:1px solid var(--verde);border-radius:10px;padding:6px 14px;margin:8px 0;}
+</style></head><body>
+<section class="cover">
+      <div class="brand">Academia <span>Venta Digital</span></div>
+      <div>
+        <span class="wa">WhatsApp Business</span>
+        <div class="big100">100</div>
+        <h1>Respuestas para<br>WhatsApp</h1>
+        <p class="sub">Mensajes listos para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco.</p>
+      </div>
+      <div>
+        <div class="pill"><span>Copiar y pegar</span><span>Editables</span><span>Variante corta</span><span>Cuándo enviarlo</span></div>
+        <br><span class="tagc">COMPLEMENTO DE WHATSAPP VENTAS PRO</span>
+      </div>
+      <div class="foot">Academia Venta Digital · Aprende a vender con orden, no con suerte.</div>
+    </section>
+<section class="page">
+      <div class="runhead"><span>Pack 100 Respuestas</span><span><b>Academia Venta Digital</b></span></div>
+      <div class="kicker">Antes de empezar</div><h2>Bienvenido a tu pack de respuestas</h2><div class="divider"></div>
+      <p>Vender por WhatsApp es, muchas veces, una carrera contra el tiempo. El cliente pregunta, y cada minuto que tardas en responder —o cada vez que te quedas en blanco sin saber qué decir— es una venta que se enfría.
+
+Este pack nace para resolver justamente eso. Aquí tienes <b>100 mensajes listos para copiar, pegar y editar</b>, pensados para las situaciones reales que vives todos los días: dar la bienvenida, responder consultas, explicar precios, hacer seguimiento, retomar a quien dejó de responder, manejar objeciones y cerrar ventas con claridad.
+
+No son frases mágicas ni promesas de resultados. Son una <b>base profesional</b> para que respondas más rápido, con mejor tono y sin improvisar. Tú les pones tu producto, tu precio y tu personalidad; el pack te ahorra el trabajo de empezar desde cero cada vez.
+
+El objetivo es simple: ayudarte a <b>ordenar y mejorar tu comunicación comercial</b> para que ninguna conversación se pierda por falta de una buena respuesta.</p>
+      <h3>Las 9 categorías del pack</h3><div class="toc-item"><span><span class="c">1.</span> Mensajes de bienvenida</span><span style="color:#5C6B7A;font-weight:700">15 msj</span></div><div class="toc-item"><span><span class="c">2.</span> Respuestas a consultas iniciales</span><span style="color:#5C6B7A;font-weight:700">15 msj</span></div><div class="toc-item"><span><span class="c">3.</span> Mensajes para explicar precios</span><span style="color:#5C6B7A;font-weight:700">15 msj</span></div><div class="toc-item"><span><span class="c">4.</span> Mensajes para hacer seguimiento</span><span style="color:#5C6B7A;font-weight:700">15 msj</span></div><div class="toc-item"><span><span class="c">5.</span> Clientes que dejaron de responder</span><span style="color:#5C6B7A;font-weight:700">10 msj</span></div><div class="toc-item"><span><span class="c">6.</span> Respuestas a objeciones comunes</span><span style="color:#5C6B7A;font-weight:700">10 msj</span></div><div class="toc-item"><span><span class="c">7.</span> Mensajes de cierre de venta</span><span style="color:#5C6B7A;font-weight:700">10 msj</span></div><div class="toc-item"><span><span class="c">8.</span> Mensajes para pedir datos de compra</span><span style="color:#5C6B7A;font-weight:700">5 msj</span></div><div class="toc-item"><span><span class="c">9.</span> Mensajes para reactivar clientes antiguos</span><span style="color:#5C6B7A;font-weight:700">5 msj</span></div>
+      <div class="best"><b>100 mensajes</b> · cada uno con mensaje completo, variante corta y recomendación de cuándo enviarlo.</div>
+    </section>
+<section class="page">
+      <div class="runhead"><span>Instrucciones de uso</span><span><b>Academia Venta Digital</b></span></div>
+      <div class="kicker">Cómo usar este pack</div><h2>Instrucciones de uso</h2><div class="divider"></div>
+      <p class="lead">Saca el máximo provecho en 7 pasos simples. La idea es que respondas más rápido y mejor, sin sonar como un robot.</p>
+      <ol class="steps"><li><b>Reemplaza los [corchetes]</b>Cada mensaje tiene variables como [producto], [precio] o [nombre]. Cámbialas por los datos reales de tu negocio antes de enviar.</li><li><b>Guárdalos como respuestas rápidas</b>En WhatsApp Business, ve a Ajustes → Herramientas para la empresa → Respuestas rápidas. Crea un atajo (ej. /precio) para cada mensaje y úsalos en segundos.</li><li><b>Adapta el tono a tu estilo</b>Estos mensajes son cercanos y profesionales. Si tu marca es más formal o más divertida, ajusta una palabra aquí y allá para que suene a ti.</li><li><b>Personaliza siempre una línea</b>La plantilla te da velocidad; una línea personalizada le da calidez. Menciona el nombre o algo que dijo el cliente para que no suene genérico.</li><li><b>Usa la variante corta cuando haga falta</b>Para chats rápidos o clientes apurados, la versión corta va directo al grano sin perder amabilidad.</li><li><b>Sigue la recomendación de cuándo enviarlo</b>Cada mensaje indica el mejor momento para usarlo. Enviar el mensaje correcto en el momento correcto es la mitad del resultado.</li><li><b>No copies y pegues sin leer</b>Revisa siempre antes de enviar: que el precio, el nombre y el producto sean los correctos. Un mensaje mal pegado se nota.</li></ol>
+      <div class="box"><b>Recuerda:</b> estos mensajes son una base para ordenar y mejorar tu comunicación. No prometen ventas garantizadas: tu producto, tu trato y tu constancia son los que cierran.</div>
+    </section>
+<section class="page">
+          <div class="runhead"><span>Cat. 1 · Mensajes de bienvenida</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 1</div>
+          <h2>Mensajes de bienvenida</h2><p>Las primeras palabras marcan el tono. Salud con calidez, agradece el contacto e invita a contar qué necesita.</p><span class="count">15 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">1</span><span class="titulo">Bienvenida general</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 👋 Gracias por escribir a [Tu Negocio]. Soy [tu nombre] y con gusto te ayudo. Cuéntame, ¿qué estás buscando hoy?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 👋 Gracias por escribir. Cuéntame, ¿en qué te ayudo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Apenas un cliente nuevo escribe por primera vez.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">2</span><span class="titulo">Bienvenida desde un anuncio</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Veo que llegaste por nuestra publicación de [producto/oferta]. ¡Buena elección! ¿Te cuento los detalles?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 🙌 ¿Llegaste por el anuncio de [producto]? Te cuento los detalles 👇</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el contacto viene de una publicidad o promoción puntual.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">3</span><span class="titulo">Bienvenida desde redes sociales</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Qué bueno verte por aquí desde [Instagram/Facebook]. Gracias por escribir. ¿Qué te gustaría saber?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 😊 Gracias por escribirnos desde [red]. ¿Qué te gustaría saber?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente llega desde un perfil o historia en redes.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">4</span><span class="titulo">Bienvenida fuera de horario</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Gracias por escribir. En este momento estoy fuera de horario, pero apenas vuelva (a las [hora]) te respondo. Déjame tu consulta y la dejo lista 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! Gracias por escribir 🙌 Te respondo apenas vuelva a las [hora]. Cuéntame qué necesitas.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Como respuesta automática cuando no puedes atender al momento.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">5</span><span class="titulo">Bienvenida que califica al cliente</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 👋 Gracias por tu mensaje. Para recomendarte lo mejor, ¿es para ti o para regalo? Así te oriento mejor 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 👋 ¿Es para ti o para regalo? Así te recomiendo mejor.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando quieres entender la necesidad antes de ofrecer algo.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">6</span><span class="titulo">Bienvenida breve y cálida</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Holaa! 😊 Qué gusto que escribas. Cuéntame en qué te puedo ayudar y vemos todo al toque.</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Holaa! 😊 Cuéntame en qué te ayudo.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para negocios de tono muy cercano e informal.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">7</span><span class="titulo">Bienvenida con beneficio destacado</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Gracias por escribir a [Tu Negocio], donde [beneficio principal: ej. encuentras X con envío a todo el país]. ¿Qué estás buscando?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 🙌 En [Tu Negocio] encuentras [beneficio]. ¿Qué buscas?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando quieres dejar clara tu propuesta de valor desde el inicio.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">8</span><span class="titulo">Bienvenida a un referido</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Qué bueno que [nombre de quien refiere] te recomendara. Bienvenido/a. Cuéntame qué necesitas y te ayudo con todo gusto.</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 😊 Bienvenido/a de parte de [referente]. ¿En qué te ayudo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando alguien llega recomendado por otro cliente.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">9</span><span class="titulo">Bienvenida con catálogo</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 👋 Gracias por escribir. Te dejo nuestro catálogo aquí 👉 [link/imagen]. Cualquier cosa que te guste, me dices y te paso los detalles 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 👋 Aquí va el catálogo 👉 [link]. ¿Algo te llamó la atención?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente pide ver opciones o productos disponibles.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">10</span><span class="titulo">Bienvenida con respuesta rápida</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Gracias por contactarnos. Ya recibí tu mensaje y en un momento te respondo personalmente. Mientras, cuéntame qué necesitas 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 🙌 Recibí tu mensaje, en un momento te respondo. Cuéntame qué necesitas.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Como auto-respuesta para que el cliente sepa que lo viste.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">11</span><span class="titulo">Bienvenida agradeciendo el interés</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Gracias por interesarte en [producto/servicio]. Es de mis favoritos para recomendar. ¿Quieres que te cuente cómo funciona?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 😊 Gracias por tu interés en [producto]. ¿Te cuento cómo funciona?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente menciona un producto específico al escribir.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">12</span><span class="titulo">Bienvenida personalizada por nombre</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 👋 Qué gusto saludarte. Gracias por escribir a [Tu Negocio]. Cuéntame, ¿en qué te puedo ayudar hoy?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 👋 ¿En qué te ayudo hoy?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando ya conoces el nombre del cliente (por su perfil o contacto).</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">13</span><span class="titulo">Bienvenida con promoción vigente</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Llegaste en buen momento: esta semana tenemos [promoción]. Cuéntame qué buscas y vemos cómo aprovecharla 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 🙌 Esta semana hay [promoción]. ¿Qué estás buscando?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando tienes una oferta activa que quieres comunicar de entrada.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">14</span><span class="titulo">Bienvenida que dirige a la información</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Gracias por escribir. Para ayudarte rápido: ¿quieres ver precios, conocer el producto o coordinar una compra? Dime y vamos al grano 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 😊 ¿Quieres ver precios, conocer el producto o comprar? Dime y vamos 🙌</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando recibes muchos mensajes y quieres ordenar la conversación.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">15</span><span class="titulo">Bienvenida a un cliente que vuelve</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola de nuevo! 😊 Qué bueno tenerte por acá otra vez. Gracias por la confianza. Cuéntame, ¿en qué te ayudo esta vez?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola de nuevo! 😊 Qué bueno tenerte de vuelta. ¿En qué te ayudo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando reconoces a alguien que ya te había comprado o consultado.</div>
+            </div></section>
+<section class="page">
+          <div class="runhead"><span>Cat. 2 · Respuestas a consultas iniciales</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 2</div>
+          <h2>Respuestas a consultas iniciales</h2><p>Responde claro y completo, y termina siempre con una pregunta o un paso siguiente para mantener viva la conversación.</p><span class="count">15 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">16</span><span class="titulo">Responder &quot;¿qué venden?&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 En [Tu Negocio] nos especializamos en [productos/servicios]. Cuéntame qué necesitas y te muestro las mejores opciones para ti 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 😊 Vendemos [productos]. ¿Qué estás buscando?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente pregunta de forma general qué ofreces.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">17</span><span class="titulo">Confirmar disponibilidad / stock</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Sí, tengo disponible el [producto] que buscas. ¿Lo quieres en [color/talla/variante] o te muestro las opciones?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Sí, está disponible! 🙌 ¿En qué [color/talla] lo quieres?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando preguntan si tienes un producto en stock.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">18</span><span class="titulo">Responder &quot;¿hacen envíos?&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Sí, hacemos envíos a [zonas]. El costo es [valor o &#x27;gratis sobre $X&#x27;] y llega en [tiempo]. ¿A qué ciudad sería?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Sí, enviamos a [zonas]! 😊 ¿A qué ciudad sería?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando consultan por envíos o despacho.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">19</span><span class="titulo">Responder &quot;¿dónde están ubicados?&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Estamos en [dirección/zona] y también vendemos online con envíos. ¿Prefieres pasar a vernos o coordinamos un envío?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 🙌 Estamos en [zona] y también enviamos. ¿Qué te acomoda más?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando preguntan por tu ubicación o local físico.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">20</span><span class="titulo">Dar detalles del producto</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Claro! 😊 El [producto] incluye [característica 1], [característica 2] y [beneficio]. Es ideal si buscas [necesidad]. ¿Te paso fotos o precio?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Claro! El [producto] tiene [beneficios]. ¿Te paso fotos o precio?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando piden más información sobre un producto puntual.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">21</span><span class="titulo">Explicar cómo funciona</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Buena pregunta! 🙌 Funciona así: [paso 1], luego [paso 2] y listo. Es muy simple. ¿Quieres que te lo explique con un ejemplo?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Te explico! 🙌 [Paso 1] y luego [paso 2]. ¿Te lo muestro con un ejemplo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente no entiende bien el producto o servicio.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">22</span><span class="titulo">Pedir contexto para asesorar</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Con gusto te ayudo! 😊 Para recomendarte lo ideal, cuéntame: ¿para qué lo necesitas y tienes alguna preferencia? Así afinamos la opción perfecta.</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Con gusto! 😊 ¿Para qué lo necesitas? Así te recomiendo lo ideal.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando necesitas más información para hacer una buena recomendación.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">23</span><span class="titulo">Responder cuando falta información</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Para darte el dato exacto, ¿me cuentas [detalle que falta: ciudad / modelo / cantidad]? Así te respondo al toque 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 🙌 ¿Me dices [detalle que falta]? Así te respondo exacto.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando la consulta es incompleta y necesitas un dato para responder.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">24</span><span class="titulo">Responder por color / talla / modelo</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Sí, lo tengo en [opciones disponibles]. El [opción] es el más pedido. ¿Cuál te gustaría?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Sí! Lo tengo en [opciones]. ¿Cuál prefieres?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando preguntan por una variante específica.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">25</span><span class="titulo">Responder sobre originalidad / garantía</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Sí, es 100% [original/nuevo] e incluye [garantía/respaldo]. Quiero que compres con total confianza. ¿Te cuento más?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Sí, es [original] con [garantía]! 🙌 Compra con confianza.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente quiere asegurarse de la calidad o respaldo.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">26</span><span class="titulo">Responder horario de atención</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Atendemos de [días] de [hora] a [hora]. Aun así, déjame tu consulta cuando quieras y te respondo apenas pueda 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 😊 Atendemos [días y horario]. Déjame tu consulta cuando quieras.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando preguntan a qué hora atiendes o abres.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">27</span><span class="titulo">Responder formas de pago</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Puedes pagar con [transferencia / efectivo / tarjeta / link de pago] y también ofrecemos [cuotas si aplica]. ¿Cuál te acomoda más?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola! 🙌 Aceptamos [medios de pago]. ¿Cuál te acomoda?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando preguntan cómo pueden pagar.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">28</span><span class="titulo">Responder a quien &quot;solo está mirando&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Genial, mira con calma! 😊 Cualquier duda que tengas, aquí estoy. Y si quieres, te paso lo más pedido por si te sirve de referencia 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Mira con calma! 😊 Cualquier duda, aquí estoy.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente dice que solo está viendo, sin compromiso.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">29</span><span class="titulo">Responder una consulta técnica</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Buena pregunta! 🙌 Sobre [aspecto técnico]: [respuesta clara y simple]. Si necesitas el detalle completo te lo paso. ¿Te sirve así?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Buena pregunta! 🙌 [Respuesta clara]. ¿Te sirve o quieres el detalle?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando hacen una consulta específica o técnica del producto.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">30</span><span class="titulo">Recomendar según la necesidad</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">Por lo que me cuentas, te recomendaría [producto], porque [razón ligada a su necesidad] 😊 Es la opción que más se ajusta a ti. ¿Te muestro?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Para lo que buscas, te recomiendo [producto] porque [razón] 😊 ¿Te muestro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando ya sabes qué necesita y quieres guiarlo a la mejor opción.</div>
+            </div></section>
+<section class="page">
+          <div class="runhead"><span>Cat. 3 · Mensajes para explicar precios</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 3</div>
+          <h2>Mensajes para explicar precios</h2><p>Da el precio con seguridad y acompáñalo siempre de valor o de un paso siguiente. El precio nunca debe quedar &#x27;solo&#x27;.</p><span class="count">15 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">31</span><span class="titulo">Precio con beneficio</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 El [producto] te queda en $[precio] e incluye [beneficio]. ¿Te lo aparto o tienes alguna duda antes?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">El [producto] queda en $[precio] con [beneficio] 😊 ¿Te lo aparto?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Respuesta estándar cuando preguntan el precio de un producto.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">32</span><span class="titulo">Precio con opción de cuotas</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 El valor es $[precio], y si prefieres lo puedes dividir en [N] partes de $[monto]. ¿Cuál opción te acomoda más?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Son $[precio], o en [N] cuotas de $[monto] 🙌 ¿Cuál prefieres?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando ofreces pago en cuotas y quieres facilitar la decisión.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">33</span><span class="titulo">Precio con valor agregado</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">El [producto] está en $[precio] 😊 Y lo bueno es que incluye [extra: envío / garantía / asesoría], así que aprovechas más. ¿Te gustaría?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Son $[precio] e incluye [extra] 😊 ¿Te gustaría?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando quieres resaltar todo lo que el cliente recibe por ese precio.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">34</span><span class="titulo">Precio de varias opciones / packs</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 Te dejo las opciones:<br>• [Opción 1]: $[precio]<br>• [Opción 2]: $[precio]<br>• Pack [3]: $[precio] (el más conveniente)<br>¿Cuál te llama más la atención?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Opciones: [1] $[precio] · [2] $[precio] · Pack $[precio] 🙌 ¿Cuál prefieres?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando tienes varios productos o packs para mostrar.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">35</span><span class="titulo">Responder &quot;¿cuánto cuesta?&quot; directo</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 El [producto] te queda en $[precio]. ¿Te cuento qué incluye o lo dejamos coordinado?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Te queda en $[precio] 😊 ¿Te cuento qué incluye?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando preguntan el precio de forma directa y sin rodeos.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">36</span><span class="titulo">Precio con oferta vigente</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Buena noticia! 🙌 El [producto] normalmente está $[precio], pero esta semana lo tienes en $[precio oferta]. ¿Lo aprovechamos?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Esta semana el [producto] está en $[precio oferta] (antes $[precio]) 🙌 ¿Lo aprovechas?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando hay un descuento por tiempo limitado y honesto.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">37</span><span class="titulo">Precio con envío incluido</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Son $[precio] con el envío ya incluido a [zona], así no tienes costos extra. ¿Te lo dejo agendado?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Son $[precio] con envío incluido 😊 ¿Te lo agendo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el envío gratis es un argumento de valor.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">38</span><span class="titulo">Justificar el precio por calidad</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">Te entiendo 🙌 El valor es $[precio] porque [razón: material / durabilidad / atención personalizada]. Es una compra que te dura y vale la pena. ¿Te muestro por qué?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Son $[precio] por [razón de calidad]. Vale la pena 🙌 ¿Te muestro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente percibe el precio como alto y quieres mostrar el valor.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">39</span><span class="titulo">Precio comparando opciones</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">Para que elijas tranquilo/a 😊: la opción [básica] está en $[precio] y la [completa] en $[precio], que incluye [extra]. La mayoría prefiere la [completa]. ¿Cuál te acomoda?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">[Básica] $[precio] o [completa] $[precio] con [extra] 😊 ¿Cuál te acomoda?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando quieres ayudar al cliente a comparar y decidir.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">40</span><span class="titulo">Precio con descuento por cantidad</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 La unidad está en $[precio], pero si llevas [N] te queda en $[precio] cada una. ¿Quieres aprovechar el precio por cantidad?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">1 unidad $[precio]; desde [N] queda en $[precio] c/u 🙌 ¿Aprovechas?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando ofreces mejor precio por volumen.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">41</span><span class="titulo">Calificar antes de dar el precio</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Con gusto te paso el precio! 😊 Para darte el valor exacto, cuéntame [cantidad / modelo / zona]. Así te cotizo bien y sin sorpresas 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Con gusto! 😊 ¿Me dices [cantidad/modelo]? Y te paso el precio exacto.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el precio depende de detalles que aún no conoces.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">42</span><span class="titulo">Precio con garantía</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">El [producto] está en $[precio] e incluye [garantía], así compras con respaldo y total tranquilidad 😊 ¿Te lo preparo?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Son $[precio] con [garantía] incluida 😊 ¿Te lo preparo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando la garantía respalda el precio y da confianza.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">43</span><span class="titulo">Precio de un servicio / por sesión</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 🙌 El [servicio] tiene un valor de $[precio] por [sesión/mes/proyecto] e incluye [qué incluye]. ¿Te gustaría agendar o resolver alguna duda?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">El [servicio] está en $[precio] por [unidad] e incluye [qué incluye] 🙌 ¿Agendamos?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando vendes servicios y no productos físicos.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">44</span><span class="titulo">Precio con link de pago / financiamiento</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola! 😊 Son $[precio] y puedes pagar fácil con [link de pago / financiamiento en N cuotas]. Te lo dejo listo para cuando quieras. ¿Avanzamos?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Son $[precio], con pago fácil por [link/cuotas] 😊 ¿Avanzamos?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando ofreces medios de pago digitales o financiamiento.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">45</span><span class="titulo">Precio + invitación a decidir</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">El [producto] te queda en $[precio] 😊 Si te parece bien, lo dejamos coordinado y te lo aseguro. ¿Lo confirmamos?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Son $[precio] 😊 ¿Lo confirmamos y te lo aseguro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente ya está interesado y quieres avanzar al cierre.</div>
+            </div></section>
+<section class="page">
+          <div class="runhead"><span>Cat. 4 · Mensajes para hacer seguimiento</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 4</div>
+          <h2>Mensajes para hacer seguimiento</h2><p>Seguir no es perseguir. Cada mensaje debe aportar algo nuevo: una novedad, una facilidad o una ayuda. Nunca un seco &#x27;¿sigues interesado?&#x27;.</p><span class="count">15 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">46</span><span class="titulo">Seguimiento el mismo día</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Te dejo resumido lo que conversamos: [producto] en $[precio] con [beneficio]. Quedo atento/a para dejarlo coordinado cuando quieras 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Resumo: [producto] en $[precio]. Quedo atento/a 🙌</div>
+              <div class="when"><b>Cuándo enviarlo:</b> El mismo día de la consulta, para dejar todo claro y abierto.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">47</span><span class="titulo">Seguimiento al día siguiente</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 ¿Pudiste pensar lo del [producto]? Sigue disponible y feliz de resolver cualquier duda que te haya quedado 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¿Pudiste verlo? Sigue disponible, cualquier duda aquí estoy.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> 1 o 2 días después, cuando no hubo respuesta tras la primera charla.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">48</span><span class="titulo">Seguimiento con apartado</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Te aparté una unidad del [producto] por si todavía la querías. Te la guardo hasta [día]. ¿La dejamos lista?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 Te aparté el [producto] hasta [día]. ¿Lo dejamos listo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando quieres dar un motivo amable para que el cliente decida.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">49</span><span class="titulo">Seguimiento con novedad de stock</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Me llegó justo el [producto/variante] que estabas buscando. Te dejo foto por si todavía te interesa 👇</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Llegó el [producto] que buscabas. ¿Te muestro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando reapareció o llegó algo que el cliente pidió antes.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">50</span><span class="titulo">Seguimiento con oferta</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Me acordé de ti porque esta semana tengo [oferta] en [producto]. Quería avisarte por si quieres aprovecharlo 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 Esta semana hay [oferta] en [producto]. ¿La aprovechamos?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando tienes una promoción que puede destrabar la decisión.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">51</span><span class="titulo">Seguimiento tras enviar el precio</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 ¿Te hizo sentido el valor que te pasé? Si quieres lo vemos con calma o ajustamos algo. Estoy para ayudarte 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¿Te hizo sentido el precio? Lo vemos con calma.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando enviaste un precio y el cliente quedó en silencio.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">52</span><span class="titulo">Seguimiento amable &quot;¿pudiste ver?&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Solo paso a saludar y saber si pudiste revisar lo que te envié. Sin apuro, cuando puedas me cuentas 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¿Pudiste revisar lo que te envié? Sin apuro.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para retomar con suavidad sin presionar.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">53</span><span class="titulo">Seguimiento con info extra</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Te comparto [foto/video/dato extra] del [producto] que creo te puede ayudar a decidir. Cualquier duda, aquí estoy 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 Te dejo [info extra] del [producto] por si te ayuda a decidir.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando puedes aportar contenido útil que sume valor.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">54</span><span class="titulo">Seguimiento recordando el beneficio</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Recordaba que buscabas [necesidad]. El [producto] justo resuelve eso porque [beneficio]. ¿Lo retomamos?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 El [producto] resuelve lo que buscabas: [beneficio]. ¿Lo retomamos?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando quieres reconectar la oferta con el problema del cliente.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">55</span><span class="titulo">Seguimiento por fin de promoción</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Te aviso que la promo de [producto] termina [día]. No quería que la perdieras por no avisarte. ¿La aprovechamos?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 La promo termina [día]. ¿La aprovechamos antes?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando una oferta real está por terminar (sin inventar urgencia).</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">56</span><span class="titulo">Seguimiento preguntando la duda</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 ¿Hubo algo que te generó duda? Cuéntame con confianza y lo aclaramos. Prefiero que decidas tranquilo/a 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¿Quedó alguna duda? Cuéntame y la aclaramos.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando sospechas que una duda sin resolver frenó al cliente.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">57</span><span class="titulo">Seguimiento ofreciendo ayuda</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Quedo a tu disposición por si necesitas que te ayude a elegir o coordinar algo. Sin compromiso, cuando gustes 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 Aquí estoy si necesitas ayuda para decidir.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para mantener la puerta abierta de forma servicial.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">58</span><span class="titulo">Seguimiento con testimonio / reseña</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Te comparto lo que opinó [otro cliente] sobre el [producto] 👇 por si te sirve para decidir con más confianza 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Mira lo que opinó otro cliente del [producto] 👇</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando una reseña real puede dar el empujón de confianza.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">59</span><span class="titulo">Seguimiento por última unidad</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Me queda la última unidad del [producto] que viste. Si todavía la quieres, te la aparto hoy para que no la pierdas 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 Queda la última unidad. ¿Te la aparto hoy?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el stock es real y bajo (nunca lo inventes).</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">60</span><span class="titulo">Seguimiento de cierre de ciclo</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 No quiero llenarte de mensajes. Si más adelante necesitas el [producto], aquí estaré con gusto. ¡Que tengas una linda semana! 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Si más adelante lo necesitas, aquí estoy. ¡Linda semana!</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Como último mensaje amable tras varios intentos sin respuesta.</div>
+            </div></section>
+<section class="page">
+          <div class="runhead"><span>Cat. 5 · Clientes que dejaron de responder</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 5</div>
+          <h2>Clientes que dejaron de responder</h2><p>El silencio casi nunca es un &#x27;no&#x27;: suele ser un &#x27;me distraje&#x27;. Retoma con calidez y un motivo nuevo, sin reproches ni presión.</p><span class="count">10 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">61</span><span class="titulo">Recordatorio suave</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Pasaba a retomar nuestra conversación sobre el [producto]. Sin apuro, cuando puedas me cuentas cómo seguimos 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Retomo lo del [producto]. ¿Cómo seguimos?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Primer intento tras unos días de silencio.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">62</span><span class="titulo">Con valor: sigue disponible</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Solo para contarte que el [producto] sigue disponible por si todavía lo quieres. Te lo puedo dejar apartado 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 El [producto] sigue disponible. ¿Te lo aparto?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando quieres reabrir con un motivo concreto.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">63</span><span class="titulo">Pregunta abierta</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 ¿Cómo vas con la decisión del [producto]? Cuéntame si quieres avanzar o si prefieres que lo dejemos para más adelante 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¿Cómo vas con el [producto]? Avanzamos o lo dejamos para después.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para invitar a responder dando opciones cómodas.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">64</span><span class="titulo">Ofreciendo resolver una duda</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Quizás quedó alguna duda dando vueltas. Si me cuentas qué te frena, lo resolvemos juntos. Sin compromiso 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 ¿Quedó alguna duda? La resolvemos juntos, sin compromiso.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando crees que una duda sin aclarar detuvo al cliente.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">65</span><span class="titulo">Tono cercano y ligero</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 No quería dejarte en visto sin querer 😅 Aquí sigo por si quieres retomar lo del [producto]. ¿Cómo estás?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Aquí sigo por si quieres retomar lo del [producto] 🙌</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Con clientes de trato cercano, para romper el hielo con simpatía.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">66</span><span class="titulo">Con una novedad</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Tengo una novedad sobre el [producto]: [nuevo color / mejor precio / nuevo stock]. Me acordé de ti y quise avisarte 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 Novedad del [producto]: [novedad]. Me acordé de ti 😊</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando hay algo nuevo que justifica volver a escribir.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">67</span><span class="titulo">Reabrir con una oferta</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Quería avisarte que tengo [oferta] en el [producto] que viste. Quizás es el momento ideal para aprovecharlo 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Hay [oferta] en el [producto] que viste. ¿La aprovechas?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando una promoción puede reactivar el interés.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">68</span><span class="titulo">&quot;¿Mal momento?&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 ¿Te pillé en mal momento la otra vez? Sin problema. Cuando tengas un ratito retomamos lo del [producto] con calma 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¿Fue mal momento? Retomamos cuando puedas, sin apuro.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para quitar presión y mostrar empatía con el silencio.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">69</span><span class="titulo">Dar espacio (penúltimo intento)</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 No quiero insistir de más. Si por ahora no es el momento, lo entiendo perfecto. Solo dime y lo dejamos para cuando estés listo/a 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Si no es el momento, lo entiendo. Tú me dices cuándo.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando ya hubo varios intentos y quieres mostrar respeto.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">70</span><span class="titulo">Cierre respetuoso del ciclo</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Será este mi último mensaje para no abrumarte. Fue un gusto. Si en el futuro necesitas el [producto], aquí estaré con gusto 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 No te escribo más para no abrumar. Si me necesitas, aquí estoy 😊</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Último mensaje del ciclo, dejando una buena impresión.</div>
+            </div></section>
+<section class="page">
+          <div class="runhead"><span>Cat. 6 · Respuestas a objeciones comunes</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 6</div>
+          <h2>Respuestas a objeciones comunes</h2><p>Una objeción es una duda, no un rechazo. La fórmula: validar lo que siente, responder con calma y proponer el paso siguiente.</p><span class="count">10 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">71</span><span class="titulo">&quot;Está muy caro&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">Te entiendo 🙌 Lo bueno es que el [producto] [beneficio: te dura / te ahorra / incluye X], así que rinde más de lo que parece. Y si ayuda, lo dividimos en [N] pagos. ¿Te sirve así?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Te entiendo 🙌 Rinde más de lo que parece, y lo puedo dividir en [N] pagos. ¿Te sirve?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente siente que el precio es alto.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">72</span><span class="titulo">&quot;Lo tengo que pensar&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Claro, tómate tu tiempo! 😊 Solo para ayudarte: ¿hay algo puntual que te genere duda? Así te lo aclaro y decides con total tranquilidad 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Claro, tómate tu tiempo! 😊 ¿Hay alguna duda puntual que te aclare?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente pide tiempo para decidir.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">73</span><span class="titulo">&quot;Lo vi más barato en otro lado&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">Puede ser 🙌 Lo que incluyo yo es [garantía / atención directa / envío seguro] y respondo siempre que me necesites. Esa tranquilidad también cuenta. ¿Lo prefieres con ese respaldo?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Puede ser 🙌 Conmigo tienes [respaldo/garantía/atención]. ¿Lo prefieres así?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando comparan tu precio con el de la competencia.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">74</span><span class="titulo">&quot;Ahora no tengo plata&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Sin problema, te entiendo! 😊 ¿Quieres que te lo aparte para [fecha] o te aviso cuando tenga una promo? Así no lo pierdes cuando estés listo/a 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Te entiendo! 😊 ¿Te lo aparto para [fecha] o te aviso cuando haya promo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el tema es presupuesto o momento económico.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">75</span><span class="titulo">&quot;No estoy seguro si me servirá&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Buena duda! 🙌 Cuéntame para qué lo necesitas y te digo con honestidad si es lo ideal para ti. Prefiero que quedes contento/a antes que venderte algo que no te sirva 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Buena duda! 🙌 Cuéntame para qué lo quieres y te digo con honestidad si te sirve.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente no está seguro de que el producto le sirva.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">76</span><span class="titulo">&quot;Tengo que consultarlo&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Perfecto, me parece bien! 😊 Para que lo conversen con la info clara, te dejo un resumen: [producto], [precio], [beneficio]. Cualquier duda que surja, aquí estoy 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Me parece bien! 😊 Te dejo el resumen para que lo conversen: [producto, precio, beneficio].</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando debe consultarlo con su pareja, socio o familia.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">77</span><span class="titulo">&quot;Me da desconfianza comprar online&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Te entiendo perfecto! 🙌 Para tu tranquilidad: [forma de pago seguro / contra entrega / reseñas / garantía]. Quiero que compres seguro/a. ¿Te muestro?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Te entiendo! 🙌 Para tu tranquilidad tienes [pago seguro/garantía/reseñas]. ¿Te muestro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente teme comprar por internet.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">78</span><span class="titulo">&quot;¿Y si no me gusta?&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Muy válido! 😊 Tenemos [cambio / garantía / política de devolución], así que compras tranquilo/a. La idea es que quedes feliz con tu [producto] 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Muy válido! 😊 Tienes [cambio/garantía], compras tranquilo/a.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando teme arrepentirse de la compra.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">79</span><span class="titulo">&quot;No es buen momento&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Lo entiendo! 😊 No hay apuro. ¿Quieres que te escriba más adelante o prefieres que te avise si sale alguna promo del [producto]? Tú me dices 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Lo entiendo! 😊 ¿Te escribo más adelante o te aviso si hay promo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente dice que no es el momento adecuado.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">80</span><span class="titulo">&quot;Déjame ver y te aviso&quot;</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Perfecto! 😊 Quedo atento/a. Para no perder el contacto, ¿te parece si te escribo el [día] por si decidiste? Sin compromiso, solo para acompañarte 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Perfecto! 😊 ¿Te escribo el [día] para saber cómo vas? Sin compromiso.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente queda en avisarte (y quieres asegurar el seguimiento).</div>
+            </div></section>
+<section class="page">
+          <div class="runhead"><span>Cat. 7 · Mensajes de cierre de venta</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 7</div>
+          <h2>Mensajes de cierre de venta</h2><p>Cerrar es facilitar el &#x27;sí&#x27;. Sé claro, da el paso siguiente exacto y quita toda la fricción posible.</p><span class="count">10 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">81</span><span class="titulo">Cierre directo</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Perfecto! 🙌 Entonces te confirmo el [producto] en $[precio]. Te paso los datos para coordinar el pago, ¿te parece?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Perfecto! 🙌 Te confirmo el [producto] en $[precio]. ¿Coordinamos el pago?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente ya está decidido (etapa caliente).</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">82</span><span class="titulo">Cierre con opciones</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Genial! 😊 ¿Lo prefieres con envío a domicilio o pasas a retirarlo? Así te lo voy dejando listo 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Genial! 😊 ¿Con envío o lo retiras? Así te lo dejo listo.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para facilitar la decisión ofreciendo elegir entre A o B.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">83</span><span class="titulo">Cierre con urgencia honesta</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Buena elección! 🙌 Me queda la última unidad / la promo termina hoy. Si quieres te la aseguro ahora para que no la pierdas 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Buena elección! 🙌 Queda poco / la promo termina hoy. ¿Te la aseguro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando hay una razón real de tiempo o stock (nunca inventada).</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">84</span><span class="titulo">Cierre tras resolver la duda</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Listo, espero haber aclarado tu duda! 😊 Si te parece bien, lo dejamos confirmado y coordinamos el pago. ¿Avanzamos?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Espero haber aclarado tu duda! 😊 ¿Lo dejamos confirmado?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Justo después de responder una objeción o consulta final.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">85</span><span class="titulo">Cierre con beneficio extra</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Perfecto! 🙌 Y si lo confirmamos hoy, te incluyo [beneficio extra: envío gratis / pequeño regalo / descuento]. ¿Lo dejamos listo?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Perfecto! 🙌 Si lo confirmas hoy te incluyo [extra]. ¿Lo dejamos listo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando un pequeño incentivo puede inclinar la decisión.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">86</span><span class="titulo">Cierre asumiendo la venta</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Excelente elección! 😊 Te voy preparando el [producto]. ¿A nombre de quién lo dejo y a qué dirección lo enviamos?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Excelente! 😊 Te lo voy preparando. ¿A nombre de quién y a qué dirección?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente mostró señales claras de querer comprar.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">87</span><span class="titulo">Cierre con apartado</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Genial! 🙌 Te lo aparto enseguida para asegurarte el stock. Con [seña / confirmación] te lo dejo reservado. ¿Te parece?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Genial! 🙌 Te lo aparto para asegurar el stock. ¿Lo reservamos?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente quiere pero necesita un poco más de tiempo.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">88</span><span class="titulo">Cierre con resumen</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">Entonces quedamos así 😊: [producto], $[precio], [forma de entrega]. ¿Lo confirmamos y avanzamos con el pago?</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Quedamos: [producto] a $[precio] con [entrega] 😊 ¿Lo confirmamos?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para ordenar y cerrar cuando ya conversaron varios detalles.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">89</span><span class="titulo">Cierre con facilidad de pago</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Perfecto! 🙌 Para que sea cómodo, puedes pagar con [link / transferencia / cuotas]. Te dejo todo listo, solo dime cuál te acomoda 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Perfecto! 🙌 Págalo fácil con [link/transferencia/cuotas]. ¿Cuál te acomoda?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando facilitar el pago es lo que falta para cerrar.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">90</span><span class="titulo">Cierre amable final</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">Me encantaría ayudarte con tu [producto] 😊 Si te parece bien, lo dejamos coordinado y te aseguras el tuyo. ¿Lo confirmamos? 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">Me encantaría ayudarte 😊 ¿Lo confirmamos y te aseguro el tuyo?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cierre suave para clientes que valoran un trato cálido.</div>
+            </div></section>
+<section class="page">
+          <div class="runhead"><span>Cat. 8 · Mensajes para pedir datos de compra</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 8</div>
+          <h2>Mensajes para pedir datos de compra</h2><p>Una vez que el cliente dijo &#x27;sí&#x27;, haz el proceso simple y ordenado. Pide solo lo necesario y confirma cada paso.</p><span class="count">5 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">91</span><span class="titulo">Pedir datos de envío</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Genial! 😊 Para coordinar tu envío, ¿me ayudas con estos datos?<br>• Nombre completo:<br>• Dirección y comuna/ciudad:<br>• Teléfono de contacto:<br>Apenas los tenga, te confirmo todo 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Genial! 😊 Para el envío: nombre, dirección y teléfono. ¡Y te confirmo!</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente confirmó la compra con despacho.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">92</span><span class="titulo">Pedir datos para boleta / factura</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Perfecto! 🙌 ¿Necesitas boleta o factura? Si es factura, pásame [razón social / RUT / giro] y la dejo lista junto a tu pedido 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Perfecto! 🙌 ¿Boleta o factura? Si es factura, pásame los datos.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando necesitas datos para emitir el documento de pago.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">93</span><span class="titulo">Compartir datos de pago</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Listo! 😊 Te dejo los datos para el pago 👇<br>[Banco / Nombre / Cuenta / Tipo / Correo]<br>Apenas hagas la transferencia, mándame el comprobante y te confirmo enseguida 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Listo! 😊 Datos de pago 👇 [datos]. Mándame el comprobante y confirmo.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando el cliente acordó pagar por transferencia.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">94</span><span class="titulo">Confirmar pedido y pedir comprobante</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Perfecto, pedido confirmado! 🙌 En cuanto me envíes el comprobante de pago, preparo tu [producto] y te aviso cuando vaya en camino 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Pedido confirmado! 🙌 Envíame el comprobante y preparo tu [producto].</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para cerrar el círculo una vez acordado el pago.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">95</span><span class="titulo">Pedir datos para coordinar un servicio</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Excelente! 😊 Para agendar tu [servicio], ¿me confirmas estos datos?<br>• Nombre:<br>• Día y hora que prefieres:<br>• [Dato relevante del servicio]:<br>Y te dejo todo reservado 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Excelente! 😊 Para agendar: nombre, día/hora preferido y [dato]. ¡Y lo reservo!</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando vendes servicios y necesitas coordinar una cita.</div>
+            </div></section>
+<section class="page">
+          <div class="runhead"><span>Cat. 9 · Mensajes para reactivar clientes antiguos</span><span><b>Academia Venta Digital</b></span></div>
+          <div class="cathead"><div class="n">Categoría 9</div>
+          <h2>Mensajes para reactivar clientes antiguos</h2><p>Tus clientes pasados ya confían en ti: son tu mejor activo. Reconecta con calidez, recordando que los valoras (no solo para venderles).</p><span class="count">5 mensajes</span></div><div class="msg">
+              <div class="top"><span class="num">96</span><span class="titulo">Saludo + novedad</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 ¿Cómo has estado? Pasaba a saludarte y a contarte que tenemos [novedad / nuevo producto] que creo te puede gustar. ¿Te muestro? 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¿Cómo has estado? Tenemos [novedad] que te puede gustar. ¿Te muestro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para reconectar con un cliente que hace tiempo no te compra.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">97</span><span class="titulo">Oferta exclusiva para clientes</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 🙌 Como ya eres cliente, quería darte acceso primero a [oferta exclusiva] antes que al resto. Es mi forma de agradecerte la confianza 😊</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 🙌 Por ser cliente, tienes primero esta [oferta]. ¡Gracias por la confianza!</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando quieres premiar la fidelidad con un beneficio especial.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">98</span><span class="titulo">Producto nuevo relacionado</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Me acordé de ti porque llegó [producto nuevo] que combina perfecto con el [producto que compró]. ¿Te gustaría verlo? 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 Llegó [producto nuevo] ideal para complementar tu [compra]. ¿Te muestro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Cuando tienes algo que complementa una compra anterior.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">99</span><span class="titulo">&quot;Te extrañamos&quot; + beneficio</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Hace tiempo que no nos vemos y queríamos saludarte. Si quieres volver a probar [producto/servicio], te dejo [beneficio] de bienvenida 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¡Te extrañábamos! Te dejo [beneficio] para volver a vernos.</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Para reactivar con un gesto cálido y un pequeño incentivo.</div>
+            </div><div class="msg">
+              <div class="top"><span class="num">100</span><span class="titulo">Recordatorio de reposición / recompra</span></div>
+              <span class="lbl">Mensaje listo para copiar</span>
+              <div class="bubble">¡Hola [nombre]! 😊 Calculo que ya se te debe estar acabando tu [producto consumible]. ¿Quieres que te prepare otro para que no te quedes sin? 🙌</div>
+              <span class="lbl s">Variante más corta</span>
+              <div class="bubble short">¡Hola [nombre]! 😊 ¿Ya se te acaba tu [producto]? ¿Te preparo otro?</div>
+              <div class="when"><b>Cuándo enviarlo:</b> Ideal para productos que se consumen o agotan con el tiempo.</div>
+            </div></section>
+<section class="page">
+      <div class="runhead"><span>Checklist de seguimiento</span><span><b>Academia Venta Digital</b></span></div>
+      <div class="kicker">Para no perder ninguna venta</div><h2>Checklist de seguimiento diario</h2><div class="divider"></div>
+      <p class="lead">Repasa esta lista al final de cada día. Si la cumples, tu comunicación está ordenada.</p>
+      <ul class="check"><li>Respondí a todos los clientes nuevos del día.</li><li>Atendí primero a los clientes más interesados (los &quot;calientes&quot;).</li><li>A cada conversación le dejé un paso siguiente claro.</li><li>Hice al menos 3 seguimientos con valor (no un seco &quot;¿sigues ahí?&quot;).</li><li>Retomé al menos 1 cliente que había dejado de responder.</li><li>Reemplacé bien los [corchetes] antes de enviar cada mensaje.</li><li>Personalicé al menos una línea en los mensajes importantes.</li><li>Pedí el cierre a quien ya estaba listo para comprar.</li><li>Anoté con quién quedé pendiente para mañana.</li><li>Revisé que ningún cliente interesado quedara sin respuesta.</li></ul>
+      <div class="box"><b>Tip:</b> imprime esta página o tenla a mano en tu celular. La constancia en el seguimiento es lo que diferencia a quien vende con orden de quien vende por suerte.</div>
+    </section>
+<section class="page">
+      <div class="runhead"><span>Prompts de IA</span><span><b>Academia Venta Digital</b></span></div>
+      <div class="kicker">Adapta el pack a tu negocio</div><h2>10 prompts de IA para personalizar tus mensajes</h2><div class="divider"></div>
+      <p class="lead">Copia estos prompts en ChatGPT u otra IA para adaptar los mensajes a tu rubro. Revisa siempre el resultado antes de usarlo.</p>
+      <div class="copybox"><b>Prompt 1.</b> Actúa como experto en ventas por WhatsApp. Adapta este mensaje a mi negocio de [rubro], manteniendo un tono cercano y profesional, sin sonar agresivo: [pega el mensaje].</div><div class="copybox"><b>Prompt 2.</b> Reescribe este mensaje de WhatsApp para que suene más [cercano / formal / divertido], sin perder claridad ni el llamado a la acción: [pega el mensaje].</div><div class="copybox"><b>Prompt 3.</b> Tengo un negocio de [rubro] y vendo [producto/servicio]. Personaliza este mensaje reemplazando las variables con datos realistas de mi negocio: [pega el mensaje].</div><div class="copybox"><b>Prompt 4.</b> Acórtame este mensaje de WhatsApp para que vaya directo al grano, pero siga siendo amable y con un emoji como máximo: [pega el mensaje].</div><div class="copybox"><b>Prompt 5.</b> Un cliente me dijo: &quot;[objeción]&quot;. Dame 3 respuestas para WhatsApp que validen lo que siente, respondan con calma y propongan un paso siguiente, sin presionar.</div><div class="copybox"><b>Prompt 6.</b> Crea 5 variantes de este mensaje de seguimiento para no repetir siempre lo mismo con mis clientes, manteniendo un tono respetuoso y con valor: [pega el mensaje].</div><div class="copybox"><b>Prompt 7.</b> Adapta este pack de mensajes a mi rubro de [rubro]. Cambia los ejemplos de productos por los míos: [lista tus productos]. Mantén el tono cercano y vendedor.</div><div class="copybox"><b>Prompt 8.</b> Revisa este mensaje y dime si suena desesperado o demasiado insistente. Si es así, reescríbelo para que suene seguro, calmado y profesional: [pega el mensaje].</div><div class="copybox"><b>Prompt 9.</b> Escríbeme un mensaje de bienvenida para WhatsApp Business de mi negocio de [rubro], que destaque mi beneficio principal: [beneficio], en tono cercano y con máximo un emoji.</div><div class="copybox"><b>Prompt 10.</b> Tradúceme y adapta culturalmente este mensaje de WhatsApp para clientes de [país/región], cuidando que las expresiones suenen naturales y locales: [pega el mensaje].</div>
+    </section>
+<section class="page">
+      <div class="runhead"><span>Material de venta</span><span><b>Academia Venta Digital</b></span></div>
+      <div class="kicker">Sección de marketing</div><h2>Descripciones para Hotmart</h2><div class="divider"></div>
+      <h3>Descripción corta</h3><div class="copybox">100 mensajes listos para copiar, pegar y editar en WhatsApp Business: bienvenida, consultas, precios, seguimiento, objeciones y cierre. Responde rápido, con buen tono y sin quedarte en blanco. Incluye variantes cortas, recomendaciones de uso y prompts de IA para adaptarlos a tu negocio.</div>
+      <h3>Descripción larga</h3><div class="card"><p><b>¿Cuántas veces te has quedado sin saber qué responder a un cliente por WhatsApp?</b>
+
+Si vendes por WhatsApp, conoces esa sensación: un cliente pregunta el precio, dice "lo pienso" o simplemente deja de responder, y tú no sabes qué escribir para no sonar insistente ni perder la venta. Cada duda al teclear es tiempo perdido y, muchas veces, una oportunidad que se enfría.
+
+<b>Pack 100 Respuestas para WhatsApp</b> es tu biblioteca de mensajes listos para usar. 100 respuestas profesionales, cercanas y editables que cubren las situaciones reales de tu día a día comercial, para que nunca más te quedes en blanco.</p>
+      <p><b>¿Qué incluye?</b></p><ul><li>15 mensajes de bienvenida para cada tipo de contacto.</li><li>15 respuestas para consultas iniciales (precio, stock, envíos y más).</li><li>15 formas de explicar precios con seguridad y valor.</li><li>15 mensajes de seguimiento que aportan valor sin presionar.</li><li>10 mensajes para retomar a clientes que dejaron de responder.</li><li>10 respuestas a las objeciones más comunes (&quot;está caro&quot;, &quot;lo pienso&quot;...).</li><li>10 mensajes de cierre claros y directos.</li><li>5 mensajes para pedir datos de compra de forma ordenada.</li><li>5 mensajes para reactivar clientes antiguos.</li><li>Cada mensaje con una variante corta y la recomendación de cuándo enviarlo.</li><li>Instrucciones de uso, checklist de seguimiento y 10 prompts de IA para adaptarlo todo a tu negocio.</li></ul>
+      <p><b>¿Para quién es?</b> Para emprendedores, vendedores, negocios locales, revendedores, prestadores de servicios y cualquiera que venda por WhatsApp y quiera responder mejor sin improvisar.</p>
+      <p style="color:#5C6B7A;font-size:9pt"><i>Aviso: material educativo. No promete ventas garantizadas ni resultados. Los resultados dependen de cada persona, su producto y su constancia.</i></p></div>
+    </section>
+<section class="page">
+      <div class="runhead"><span>Material de venta</span><span><b>Academia Venta Digital</b></span></div>
+      <div class="kicker">Order Bump</div><h2>Texto para el checkout (Order Bump)</h2><div class="divider"></div>
+      <div class="copybox"><b>✅ Sí, agrega el Pack 100 Respuestas para WhatsApp a mi compra</b>
+
+Ya tienes el sistema con <i>WhatsApp Ventas Pro</i>. Ahora llévate las palabras exactas para aplicarlo. Suma <b>100 mensajes listos para copiar y pegar</b> —bienvenida, precios, seguimiento, objeciones y cierre— para que nunca te quedes en blanco frente a un cliente. Editables, con variantes cortas y recomendaciones de cuándo usarlos. <b>Solo por hoy, agrégalo a tu pedido a un precio especial.</b></div>
+      <div class="kicker" style="margin-top:24px">Diseño</div><h2>3 ideas de diseño en Canva</h2><div class="divider"></div>
+      <div class="card"><h3>Idea 1 — "Burbujas de chat"</h3><p>Plantilla tipo conversación: fondo claro con burbujas de chat verdes y blancas mostrando ejemplos de mensajes. Encabezado azul con el título. Transmite al instante que es un pack de mensajes para WhatsApp. <b>(La más representativa del producto.)</b></p></div><div class="card"><h3>Idea 2 — "Tarjetas numeradas"</h3><p>Cada mensaje en una tarjeta limpia con número, título, mensaje y etiqueta de categoría con color. Estilo catálogo ordenado, fácil de hojear. Ideal para la versión editable que el usuario imprime o consulta en el celular.</p></div><div class="card"><h3>Idea 3 — "Índice por categorías"</h3><p>Portada con un índice visual de las 9 categorías, cada una con su ícono y color. Páginas interiores con fondo neutro y acentos verdes. Estilo guía profesional, moderno y muy navegable.</p></div>
+    </section>
+<section class="page">
+      <div class="runhead"><span>Material de venta</span><span><b>Academia Venta Digital</b></span></div>
+      <div class="kicker">Diseño</div><h2>Portada sugerida</h2><div class="divider"></div>
+      <div class="card"><b>Concepto:</b> burbuja de chat verde estilo WhatsApp como protagonista, sobre fondo azul degradado (confianza + digital).
+
+<b>Composición sugerida:</b>
+• Arriba: "ACADEMIA VENTA DIGITAL" en mayúsculas espaciadas.
+• Centro: título grande <b>"Pack 100 Respuestas para WhatsApp"</b> en blanco, dentro o junto a una burbuja de chat verde.
+• Debajo: subtítulo "Mensajes listos para responder, hacer seguimiento y cerrar ventas sin quedarte en blanco".
+• Detalle: un número "100" grande y destacado, y 3 píldoras con categorías (Bienvenida · Precios · Cierre).
+• Pie: etiqueta "Complemento de WhatsApp Ventas Pro".</div>
+      <div class="kicker" style="margin-top:24px">Diseño</div><h2>Contraportada</h2><div class="divider"></div>
+      <div class="card"><b>Deja de quedarte en blanco frente a un cliente.</b>
+
+Dentro de este pack tienes 100 mensajes profesionales y editables para cada momento de tu venta por WhatsApp: dar la bienvenida, responder consultas, explicar precios, hacer seguimiento, manejar objeciones, cerrar y reactivar clientes.
+
+Cada mensaje viene listo para copiar y pegar, con una variante más corta y la recomendación de cuándo enviarlo. Solo reemplazas los datos de tu negocio y lo guardas como respuesta rápida en WhatsApp Business.
+
+No prometemos ventas garantizadas ni fórmulas mágicas. Te damos una base sólida para <b>responder mejor, más rápido y con un tono que genera confianza</b>. El resto lo pones tú.
+
+<i>Academia Venta Digital · Aprende a vender con orden, no con suerte.</i></div>
+    </section>
+</body></html>
