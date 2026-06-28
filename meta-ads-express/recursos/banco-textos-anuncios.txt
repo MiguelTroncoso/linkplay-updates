@@ -1,0 +1,49 @@
+==========================================================
+BANCO DE TEXTOS PARA ANUNCIOS — Meta Ads Express
+Academia Venta Digital
+==========================================================
+Reemplaza el texto entre [corchetes] con los datos de tu negocio.
+Fórmula: GANCHO + OFERTA CLARA + INVITACIÓN A ESCRIBIR.
+Evita promesas exageradas o garantizadas (también evita rechazos).
+
+----------------------------------------------------------
+PARA PRODUCTOS
+----------------------------------------------------------
+- ¿Buscas [producto] de calidad sin complicarte? 😊 Tenemos [variedad/beneficio] con envío a [zona]. Escríbenos por WhatsApp y te ayudamos a elegir 👇
+- [Producto] que [beneficio principal] ✨ Atención personalizada y envío rápido. Toca "Enviar mensaje" y te asesoramos 👇
+- ¿Te gusta [producto]? Tenemos [variedad] para ti 🙌 Escríbenos por WhatsApp y te mostramos todo 👇
+
+----------------------------------------------------------
+PARA SERVICIOS
+----------------------------------------------------------
+- ¿Necesitas [servicio] y no sabes por dónde partir? Te asesoramos sin compromiso 🙌 Escríbenos por WhatsApp y conversamos hoy 👇
+- Reserva tu [servicio] esta semana 📅 Cupos limitados. Escríbenos por WhatsApp para coordinar día y hora 👇
+- [Servicio] con atención cercana y profesional. Cuéntanos qué necesitas por WhatsApp 👇
+
+----------------------------------------------------------
+PARA OFERTAS / TEMPORADA
+----------------------------------------------------------
+- 🎉 Esta semana: [oferta/descuento] en [producto]. Stock limitado. Escríbenos por WhatsApp antes que se acabe 👇
+- ¿[Fecha/evento] se acerca? 🎁 Tenemos [producto] ideal para regalar. Escríbenos y te mostramos opciones 👇
+
+----------------------------------------------------------
+PARA NEGOCIOS LOCALES
+----------------------------------------------------------
+- ¿Estás en [ciudad]? 📍 [Producto/servicio] con atención cercana y personalizada. Escríbenos por WhatsApp y coordina hoy 👇
+
+----------------------------------------------------------
+MENSAJE DE BIENVENIDA DEL CHAT (el que ve el cliente al abrir WhatsApp)
+----------------------------------------------------------
+- Hola, vi tu anuncio y quiero más información sobre [producto] 😊
+
+----------------------------------------------------------
+PROMPT DE IA PARA MÁS VARIANTES
+----------------------------------------------------------
+"Dame 5 variantes de este anuncio para mi negocio de [rubro], tono
+cercano y sin promesas exageradas, con un emoji y una invitación clara
+a enviar mensaje por WhatsApp: [pega tu anuncio]"
+
+==========================================================
+Recuerda: las pantallas y políticas de Meta pueden cambiar.
+Cumple siempre las normas de publicidad de la plataforma.
+==========================================================

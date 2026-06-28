@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Ads Express para WhatsApp — Academia Venta Digital</title>
+<style>
+  :root{
+    --azul:#0B3D6B; --azul2:#1573C6; --verde:#25D366; --verde-osc:#0E7A4A;
+    --grafito:#26303B; --gris:#5C6B7A; --gris-claro:#EAF0F5; --gris-borde:#D7E0E8;
+    --blanco:#FFFFFF; --amarillo:#FFC53D; --meta:#0866FF; /* azul Meta/anuncios */
+  }
+  *{ box-sizing:border-box; }
+  @page{ size:Letter; margin:0; }
+  html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body{ font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif; color:var(--grafito); margin:0; font-size:11.5pt; line-height:1.6; }
+
+  .page{ page-break-after:always; padding:24mm 20mm 20mm; position:relative; min-height:100vh; }
+  .page:last-child{ page-break-after:auto; }
+
+  h1,h2,h3,h4{ color:var(--azul); line-height:1.2; margin:0 0 .5em; }
+  h1{ font-size:26pt; }
+  h2{ font-size:19pt; border-bottom:3px solid var(--verde); padding-bottom:.25em; margin-top:0; }
+  h3{ font-size:14pt; color:var(--azul2); margin-top:1.3em; }
+  h4{ font-size:12pt; color:var(--grafito); margin-top:1.1em; }
+  p{ margin:.55em 0; } ul,ol{ margin:.5em 0 .9em; padding-left:1.25em; } li{ margin:.3em 0; }
+  strong{ color:var(--azul); } a{ color:var(--azul2); text-decoration:none; }
+
+  .kicker{ text-transform:uppercase; letter-spacing:.18em; font-size:9pt; color:var(--verde-osc); font-weight:700; margin-bottom:.4em; }
+
+  .cover{ background:linear-gradient(150deg,#06234a 0%, var(--meta) 60%, #1f8fff 130%); color:#fff;
+    display:flex; flex-direction:column; justify-content:space-between; padding:28mm 22mm; min-height:100vh; page-break-after:always; }
+  .cover .brand{ font-size:12pt; letter-spacing:.22em; text-transform:uppercase; font-weight:700; opacity:.92; }
+  .cover .brand span{ color:var(--amarillo); }
+  .cover h1{ color:#fff; font-size:42pt; line-height:1.04; margin:.15em 0 0; }
+  .cover .badge-ads{ display:inline-block; background:#fff; color:var(--meta); font-weight:800; padding:6px 16px; border-radius:30px; font-size:12pt; }
+  .cover .arrow{ display:inline-block; background:var(--verde); color:#04331f; font-weight:800; padding:6px 16px; border-radius:30px; font-size:12pt; }
+  .cover .sub{ font-size:15pt; line-height:1.45; max-width:84%; opacity:.96; font-weight:300; }
+  .cover .pill{ display:inline-flex; gap:8px; flex-wrap:wrap; }
+  .cover .pill span{ background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.4); padding:5px 13px; border-radius:20px; font-size:9.5pt; }
+  .cover .foot{ font-size:10pt; opacity:.85; border-top:1px solid rgba(255,255,255,.3); padding-top:14px; }
+  .cover .tagc{ font-size:9pt; background:var(--amarillo); color:#3a2a00; font-weight:800; padding:4px 12px; border-radius:6px; display:inline-block; }
+
+  .box{ background:var(--gris-claro); border-radius:12px; padding:16px 20px; margin:14px 0; }
+  .box-bordered{ border:1px solid var(--gris-borde); }
+  .tip{ border-left:5px solid var(--verde); background:#EAFBF1; border-radius:0 10px 10px 0; padding:12px 18px; margin:14px 0; }
+  .tip .t{ font-weight:800; color:var(--verde-osc); text-transform:uppercase; font-size:8.5pt; letter-spacing:.1em; display:block; margin-bottom:3px;}
+  .warn{ border-left:5px solid var(--amarillo); background:#FFF7E2; border-radius:0 10px 10px 0; padding:12px 18px; margin:14px 0; }
+  .warn .t{ font-weight:800; color:#9a6b00; text-transform:uppercase; font-size:8.5pt; letter-spacing:.1em; display:block; margin-bottom:3px;}
+  .ia{ border-left:5px solid var(--meta); background:#EAF2FF; border-radius:0 10px 10px 0; padding:12px 18px; margin:14px 0; }
+  .ia .t{ font-weight:800; color:var(--meta); text-transform:uppercase; font-size:8.5pt; letter-spacing:.1em; display:block; margin-bottom:3px;}
+
+  .copy{ background:#fff; border:1.5px dashed var(--verde); border-radius:10px; padding:12px 16px; margin:10px 0;
+    font-family:"Consolas","Courier New",monospace; font-size:10pt; color:var(--grafito); line-height:1.5; white-space:pre-line; }
+  .copy .lbl{ font-family:"Segoe UI",sans-serif; display:block; font-size:8pt; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--verde-osc); margin-bottom:6px; }
+
+  table{ width:100%; border-collapse:collapse; margin:14px 0; font-size:10pt; }
+  th{ background:var(--azul); color:#fff; text-align:left; padding:9px 11px; font-size:9.5pt; }
+  td{ border:1px solid var(--gris-borde); padding:8px 11px; vertical-align:top; }
+  tr:nth-child(even) td{ background:var(--gris-claro); }
+
+  .check{ list-style:none; padding-left:0; }
+  .check li{ padding-left:30px; position:relative; margin:.5em 0; }
+  .check li:before{ content:"\2713"; position:absolute; left:0; top:-1px; width:20px; height:20px; background:var(--verde);
+    color:#fff; border-radius:5px; text-align:center; font-weight:800; font-size:11pt; line-height:20px; }
+
+  .ex{ background:#fff; border:1px solid var(--gris-borde); border-top:4px solid var(--meta); border-radius:10px; padding:14px 18px; margin:14px 0; }
+  .ex .t{ color:var(--meta); font-weight:800; text-transform:uppercase; font-size:9pt; letter-spacing:.08em; }
+
+  ol.steps{ counter-reset:s; list-style:none; padding-left:0; }
+  ol.steps>li{ position:relative; padding-left:42px; margin:.85em 0; }
+  ol.steps>li:before{ counter-increment:s; content:counter(s); position:absolute; left:0; top:-2px; width:30px; height:30px;
+    background:var(--meta); color:#fff; border-radius:50%; text-align:center; line-height:30px; font-weight:800; font-size:13pt; }
+  ol.steps>li b{ color:var(--azul); }
+
+  /* Mockup de anuncio */
+  .ad{ max-width:320px; border:1px solid var(--gris-borde); border-radius:12px; overflow:hidden; margin:14px auto; box-shadow:0 2px 8px rgba(0,0,0,.08); background:#fff; }
+  .ad .ahead{ display:flex; align-items:center; gap:8px; padding:9px 12px; font-size:9pt; }
+  .ad .ahead .dot{ width:30px; height:30px; border-radius:50%; background:var(--verde-osc); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; }
+  .ad .ahead .biz{ font-weight:800; color:var(--grafito); }
+  .ad .ahead .promo{ font-size:7.5pt; color:var(--gris); }
+  .ad .acopy{ padding:0 12px 10px; font-size:9.5pt; }
+  .ad .aimg{ background:linear-gradient(135deg,#dbe7f5,#c4d8ee); height:120px; display:flex; align-items:center; justify-content:center; color:var(--azul2); font-size:9pt; font-weight:700; text-align:center; }
+  .ad .abar{ display:flex; justify-content:space-between; align-items:center; padding:9px 12px; background:#f4f7fa; }
+  .ad .abar .headline{ font-size:9pt; font-weight:800; color:var(--grafito); line-height:1.2; }
+  .ad .abar .cta{ background:var(--verde); color:#04331f; font-weight:800; font-size:8.5pt; padding:6px 11px; border-radius:7px; white-space:nowrap; }
+
+  .metric{ display:inline-block; background:#fff; border:1px solid var(--gris-borde); border-left:4px solid var(--verde); border-radius:8px; padding:8px 14px; margin:4px; font-size:9.5pt; }
+  .metric b{ color:var(--azul); }
+
+  .toc-item{ display:flex; justify-content:space-between; border-bottom:1px dotted var(--gris-borde); padding:7px 0; font-size:11pt; }
+  .toc-item .toc-cap{ color:var(--azul2); font-weight:700; }
+  .toc-item .n{ color:var(--gris); font-weight:700; }
+
+  .runhead{ position:absolute; top:11mm; left:20mm; right:20mm; display:flex; justify-content:space-between;
+    font-size:8pt; color:var(--gris); text-transform:uppercase; letter-spacing:.12em; border-bottom:1px solid var(--gris-borde); padding-bottom:5px; }
+  .runhead b{ color:var(--verde-osc); }
+
+  .day{ background:var(--gris-claro); border-radius:12px; padding:14px 18px; margin:12px 0; border-left:5px solid var(--meta); }
+  .day h4{ margin-top:0; color:var(--azul); }
+  .num{ display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; background:var(--verde);
+    color:#fff; border-radius:50%; font-weight:800; font-size:13pt; margin-right:10px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .center{ text-align:center; } .mt0{ margin-top:0; }
+  .lead{ font-size:13pt; color:var(--gris); line-height:1.55; }
+  .divider{ height:3px; width:60px; background:var(--verde); border-radius:3px; margin:10px 0 16px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PORTADA ============ -->
+<section class="cover">
+  <div><div class="brand">Academia <span>Venta Digital</span></div></div>
+  <div>
+    <span class="badge-ads">Meta Ads</span> <span class="arrow">→ WhatsApp</span>
+    <h1>Meta Ads Express<br>para WhatsApp</h1>
+    <p class="sub">La guía rápida para crear anuncios simples en Facebook e Instagram y llevar personas interesadas directo a tu WhatsApp.</p>
+  </div>
+  <div>
+    <div class="pill">
+      <span>Tu primer anuncio paso a paso</span>
+      <span>Cuánto invertir</span>
+      <span>Qué escribir</span>
+      <span>Plan de lanzamiento</span>
+    </div>
+    <br><span class="tagc">GUÍA PRÁCTICA · SIN LENGUAJE TÉCNICO</span>
+  </div>
+  <div class="foot">Academia Venta Digital · Aprende a vender con orden, no con suerte.</div>
+</section>
+
+<!-- ============ PRESENTACIÓN ============ -->
+<section class="page">
+  <div class="runhead"><span>Bienvenida</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Por dónde vas</div>
+  <h2>Ya ordenaste. Ahora toca atraer.</h2>
+  <div class="divider"></div>
+  <p class="lead">Con <strong>WhatsApp Ventas Pro</strong> aprendiste a no perder ninguna venta de los clientes que ya te escriben. Este es el paso siguiente: <strong>conseguir que te escriban muchos más.</strong></p>
+
+  <p>Hasta ahora dependías de que la gente te encontrara: una recomendación, una publicación, alguien que pasó por tu local. Eso está bien, pero es lento y no lo controlas tú. La publicidad cambia eso: te permite <strong>poner tu oferta frente a personas interesadas</strong> y enviarlas directo a tu WhatsApp, donde ya sabes ordenar, responder y cerrar.</p>
+
+  <p>“Meta” es la empresa dueña de <strong>Facebook</strong> e <strong>Instagram</strong>. Sus anuncios son la forma más accesible que existe hoy para que un negocio pequeño llegue a clientes nuevos sin gastar una fortuna. Y lo mejor: hay un tipo de anuncio hecho justo para esto, el <strong>anuncio “click-to-WhatsApp”</strong>, que abre una conversación contigo con un solo toque.</p>
+
+  <div class="box box-bordered">
+    <p class="mt0"><strong>Este material está pensado para que:</strong></p>
+    <ul class="check">
+      <li>Crees tu primer anuncio aunque nunca hayas hecho publicidad.</li>
+      <li>Entiendas, sin palabras raras, cómo funciona todo.</li>
+      <li>Sepas cuánto invertir para empezar, sin gastar de más.</li>
+      <li>Escribas anuncios que de verdad inviten a escribirte.</li>
+    </ul>
+  </div>
+
+  <div class="warn">
+    <span class="t">Importante y honesto</span>
+    La publicidad <strong>no garantiza ventas ni resultados</strong>. Es una herramienta: bien usada, te trae conversaciones; lo que pase después depende de tu oferta, tu producto, tu mercado y de cómo atiendas. Además, <strong>invertir en anuncios tiene un costo</strong> que tú defines y controlas.
+  </div>
+
+  <p>Vamos paso a paso, con calma. Al final tendrás tu primer anuncio funcionando y un plan claro para mejorarlo. Empecemos.</p>
+</section>
+
+<!-- ============ ÍNDICE ============ -->
+<section class="page">
+  <div class="runhead"><span>Meta Ads Express</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Lo que vas a aprender</div>
+  <h2>Índice</h2>
+  <div class="divider"></div>
+  <!-- TOC_AUTO -->
+  <div class="toc-item"><span>Presentación</span><span class="n">02</span></div>
+  <div class="toc-item"><span>Introducción: por qué los anuncios a WhatsApp funcionan</span><span class="n">04</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 1 · Cómo funciona la publicidad que lleva a WhatsApp</span><span class="n">06</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 2 · Lo que necesitas antes de empezar</span><span class="n">08</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 3 · Define tu oferta y a quién le hablas</span><span class="n">10</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 4 · Crea tu primer anuncio paso a paso</span><span class="n">12</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 5 · Qué escribir y qué imagen usar</span><span class="n">14</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 6 · Cuánto invertir para empezar</span><span class="n">16</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 7 · A quién mostrarle tu anuncio</span><span class="n">18</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 8 · Prepara tu WhatsApp para los anuncios</span><span class="n">20</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 9 · Cómo saber si tu anuncio funciona</span><span class="n">22</span></div>
+  <div class="toc-item"><span class="toc-cap">Capítulo 10 · Optimizar y crecer con calma</span><span class="n">24</span></div>
+  <div class="toc-item"><span>Bonus: 8 errores comunes al hacer anuncios</span><span class="n">26</span></div>
+  <div class="toc-item"><span>Plan de acción: lanza tu primer anuncio en 5 días</span><span class="n">27</span></div>
+  <div class="toc-item"><span>Checklist de lanzamiento</span><span class="n">29</span></div>
+  <div class="toc-item"><span>Banco de textos para tus anuncios</span><span class="n">30</span></div>
+  <div class="toc-item"><span>Recursos descargables</span><span class="n">32</span></div>
+  <div class="toc-item"><span>Tu sistema completo</span><span class="n">33</span></div>
+  <div class="toc-item"><span>Avisos legales</span><span class="n">34</span></div>
+</section>
+
+<!-- ============ INTRODUCCIÓN ============ -->
+<section class="page">
+  <div class="runhead"><span>Introducción</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Introducción</div>
+  <h2>Por qué los anuncios a WhatsApp funcionan tan bien</h2>
+  <div class="divider"></div>
+  <p class="lead">La mayoría de los anuncios mandan a la gente a una página web donde se pierde. Un anuncio a WhatsApp hace algo distinto: abre una conversación contigo. Y tú ya sabes vender conversando.</p>
+
+  <p>Piénsalo así: cuando alguien hace clic en un anuncio normal, llega a un sitio, mira un rato y se va. Frío. En cambio, cuando hace clic en un anuncio <strong>click-to-WhatsApp</strong>, se abre tu chat con un mensaje listo para enviarte. Pasa de “curioso” a “persona que te escribió” en un segundo. Y una conversación es mucho más fácil de convertir en venta que una visita anónima.</p>
+
+  <h3>Las 3 razones por las que este método es ideal para ti</h3>
+  <table>
+    <tr><th>Razón</th><th>Qué significa para tu negocio</th></tr>
+    <tr><td><strong>Conversación directa</strong></td><td>El cliente te escribe; tú respondes con el sistema que ya dominas.</td></tr>
+    <tr><td><strong>Bajo costo de entrada</strong></td><td>Puedes empezar con poco dinero al día y subir solo si funciona.</td></tr>
+    <tr><td><strong>Tú tienes el control</strong></td><td>Decides cuánto gastar, a quién mostrarle y cuándo pausar.</td></tr>
+  </table>
+
+  <div class="ia">
+    <span class="t">La idea central de este ebook</span>
+    No necesitas convertirte en experto en marketing. Necesitas un <strong>anuncio simple, claro y honesto</strong> que invite a la persona correcta a escribirte. Eso es lo que vas a construir aquí.
+  </div>
+
+  <h3>Lo que vas a lograr</h3>
+  <ul class="check">
+    <li>Tener listas tus cuentas (Facebook, WhatsApp Business y Meta).</li>
+    <li>Crear tu primer anuncio click-to-WhatsApp paso a paso.</li>
+    <li>Escribir el texto y elegir la imagen del anuncio.</li>
+    <li>Definir un presupuesto inicial sensato.</li>
+    <li>Saber leer si funciona y qué ajustar.</li>
+    <li>Tener un plan de lanzamiento claro.</li>
+  </ul>
+
+  <div class="warn">
+    <span class="t">Un recordatorio antes de seguir</span>
+    Las pantallas y nombres de botones de Meta <strong>cambian cada cierto tiempo</strong>. Si algo se ve un poco distinto al crear tu anuncio, no te preocupes: los conceptos de esta guía siguen siendo los mismos. Busca el botón que cumpla la misma función.
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 1 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 1</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 1</div>
+  <h2>Cómo funciona la publicidad que lleva a WhatsApp</h2>
+  <div class="divider"></div>
+  <p class="lead">Antes de crear nada, entiende el camino que recorre un cliente. Cuando lo ves completo, todo lo demás se vuelve simple.</p>
+
+  <h3>El recorrido en 4 pasos</h3>
+  <ol class="steps">
+    <li><b>Tu anuncio aparece</b> en el feed de Facebook o Instagram de personas que podrían estar interesadas en lo que vendes.</li>
+    <li><b>La persona ve tu imagen y tu mensaje.</b> Si le interesa, toca el botón “Enviar mensaje”.</li>
+    <li><b>Se abre tu WhatsApp</b> con un mensaje ya escrito, listo para enviarte (tú eliges ese mensaje).</li>
+    <li><b>Empieza la conversación.</b> Desde aquí aplicas tu sistema de WhatsApp Ventas Pro: ordenas, respondes y cierras.</li>
+  </ol>
+
+  <p>Tú solo te encargas de los <strong>dos primeros pasos</strong> (crear un buen anuncio). El resto ya lo sabes hacer. Por eso este método encaja perfecto con lo que aprendiste.</p>
+
+  <div class="ex">
+    <span class="t">Así se ve un anuncio click-to-WhatsApp</span>
+    <div class="ad">
+      <div class="ahead"><div class="dot">TN</div><div><div class="biz">Tu Negocio</div><div class="promo">Publicidad</div></div></div>
+      <div class="acopy">¿Buscas [tu producto]? 😊 Escríbenos y te ayudamos a elegir el ideal para ti. ¡Envío a todo el país!</div>
+      <div class="aimg">[ Aquí va tu foto del producto ]</div>
+      <div class="abar"><div class="headline">Escríbenos por<br>WhatsApp</div><div class="cta">Enviar mensaje</div></div>
+    </div>
+  </div>
+
+  <h3>3 conceptos simples que conviene conocer</h3>
+  <table>
+    <tr><th>Palabra</th><th>Qué significa (en simple)</th></tr>
+    <tr><td><strong>Campaña</strong></td><td>El “contenedor” de tu anuncio, donde defines el objetivo (recibir mensajes).</td></tr>
+    <tr><td><strong>Segmentación</strong></td><td>A quién le quieres mostrar el anuncio (zona, edad, intereses).</td></tr>
+    <tr><td><strong>Presupuesto</strong></td><td>Cuánto dinero pones al día. Tú lo decides y lo puedes cambiar o pausar.</td></tr>
+  </table>
+
+  <div class="tip">
+    <span class="t">No te abrumes con los términos</span>
+    No necesitas memorizar nada. A lo largo del ebook usaremos estas palabras de forma natural y verás que son más fáciles de lo que parecen.
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 2 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 2</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 2</div>
+  <h2>Lo que necesitas antes de empezar</h2>
+  <div class="divider"></div>
+  <p class="lead">Reúne estas piezas una sola vez. Con esto listo, crear anuncios será cuestión de minutos cada vez.</p>
+
+  <h3>Tu checklist de preparación</h3>
+  <table>
+    <tr><th>Necesitas</th><th>Para qué sirve</th><th>¿Lo tienes?</th></tr>
+    <tr><td><strong>Página de Facebook</strong> de tu negocio</td><td>Es la “identidad” desde la que se publica el anuncio.</td><td>☐</td></tr>
+    <tr><td><strong>WhatsApp Business</strong></td><td>El número al que llegarán las conversaciones.</td><td>☐</td></tr>
+    <tr><td><strong>Cuenta en Meta</strong> (Business Suite / Administrador de anuncios)</td><td>El lugar donde creas y gestionas los anuncios.</td><td>☐</td></tr>
+    <tr><td><strong>Una forma de pago</strong> (tarjeta)</td><td>Para que Meta cobre tu inversión publicitaria.</td><td>☐</td></tr>
+    <tr><td><strong>1 o 2 fotos buenas</strong> de tu producto</td><td>La imagen del anuncio. Claras y bien iluminadas.</td><td>☐</td></tr>
+  </table>
+
+  <h3>Conecta tu WhatsApp con tu página de Facebook</h3>
+  <p>Este es el paso clave que permite el botón “Enviar mensaje”. Se hace una sola vez:</p>
+  <ol class="steps">
+    <li><b>Entra a tu página de Facebook</b> desde la computadora o la app Meta Business Suite.</li>
+    <li><b>Busca la sección de WhatsApp</b> (suele estar en Configuración o en las herramientas de la página).</li>
+    <li><b>Ingresa tu número de WhatsApp Business</b> y confirma el código que te llega.</li>
+    <li><b>Listo:</b> ahora tus anuncios pueden enviar gente directo a ese WhatsApp.</li>
+  </ol>
+
+  <div class="warn">
+    <span class="t">Usa WhatsApp Business, no el normal</span>
+    WhatsApp Business es gratis y te da herramientas clave para esto: <strong>mensaje de bienvenida automático, respuestas rápidas, catálogo y etiquetas</strong>. Si aún usas el normal, instala el Business antes de seguir (puedes mantener tu mismo número).
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Revisa el checklist de arriba y marca lo que ya tienes. Lo que falte, consíguelo hoy: crear la página de Facebook y cambiar a WhatsApp Business toma menos de 30 minutos y es gratis. Con esto resuelto, el resto del ebook fluye solo.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 3 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 3</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 3</div>
+  <h2>Define tu oferta y a quién le hablas</h2>
+  <div class="divider"></div>
+  <p class="lead">El anuncio más bonito fracasa si no tiene una oferta clara para la persona correcta. Antes de tocar un botón, define estas dos cosas.</p>
+
+  <h3>1. Tu oferta: ¿qué le ofreces y por qué te escribiría?</h3>
+  <p>La gente no escribe “porque sí”. Escribe porque hay algo que le interesa. Tu oferta debe responder: <strong>¿qué gana la persona si te escribe ahora?</strong></p>
+  <table>
+    <tr><th>Oferta débil</th><th>Oferta clara (invita a escribir)</th></tr>
+    <tr><td>“Vendemos ropa”</td><td>“Vestidos de fiesta desde $19.990, con envío. Escríbenos y te asesoramos.”</td></tr>
+    <tr><td>“Servicios de peluquería”</td><td>“Agenda tu corte + peinado esta semana con 20% off. Escríbenos.”</td></tr>
+    <tr><td>“Tortas”</td><td>“Tortas personalizadas para tu evento. Cuéntanos tu idea por WhatsApp.”</td></tr>
+  </table>
+
+  <h3>2. Tu cliente ideal: ¿a quién le hablas?</h3>
+  <p>No le vendes a “todo el mundo”. Mientras más claro tengas a quién te diriges, mejor funcionará el anuncio. Responde rápido:</p>
+  <ul>
+    <li><strong>¿Dónde está?</strong> Ciudad, comuna o zona a la que llegas con tu producto o envío.</li>
+    <li><strong>¿Qué edad tiene, más o menos?</strong> Un rango aproximado basta.</li>
+    <li><strong>¿Qué le interesa o qué problema tiene</strong> que tú resuelves?</li>
+  </ul>
+
+  <div class="box">
+    <p class="mt0"><strong>Ejemplo de cliente ideal definido:</strong></p>
+    <p class="mt0">“Mujeres y hombres de 25 a 45 años, de [mi ciudad], que buscan [regalos originales] y valoran [la rapidez y el envío a domicilio].”</p>
+  </div>
+
+  <div class="tip">
+    <span class="t">Una oferta, un público, un anuncio</span>
+    No mezcles todo en un solo anuncio. Si vendes varias cosas, empieza con <strong>tu producto estrella</strong> y una oferta clara. Después puedes crear más anuncios para otros productos.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Escribe en una línea tu oferta clara (qué ofreces + por qué escribir) y en otra línea tu cliente ideal (dónde, edad, interés). Guárdalas: las usarás directamente al crear el anuncio en el Capítulo 4.</p>
+  </div>
+</section>
+<!-- ============ CAPÍTULO 4 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 4</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 4 · El corazón del ebook</div>
+  <h2>Crea tu primer anuncio paso a paso</h2>
+  <div class="divider"></div>
+  <p class="lead">Llegó el momento. Vamos a crear un anuncio que envíe gente a tu WhatsApp. Sigue los pasos con calma; los nombres exactos de los botones pueden variar, pero la lógica es siempre esta.</p>
+
+  <p>La forma más simple de empezar es desde tu <strong>página de Facebook</strong> o desde <strong>Instagram</strong> con el botón “Promocionar” / “Promocionar publicación”. Es la versión “express” del sistema de anuncios, ideal para empezar.</p>
+
+  <ol class="steps">
+    <li><b>Entra a tu página y toca “Promocionar”.</b> Verás varias opciones de objetivo.</li>
+    <li><b>Elige el objetivo “Recibir más mensajes”</b> (o “Obtener más clientes potenciales por WhatsApp”). Este es el que abre el chat.</li>
+    <li><b>Selecciona WhatsApp</b> como destino de los mensajes (no Messenger). Confirma que aparezca tu número.</li>
+    <li><b>Sube tu imagen</b> y escribe el texto del anuncio (lo veremos en el Capítulo 5).</li>
+    <li><b>Define tu público:</b> ubicación, edad e intereses (Capítulo 7).</li>
+    <li><b>Pon tu presupuesto y duración:</b> cuánto por día y cuántos días (Capítulo 6).</li>
+    <li><b>Revisa la vista previa</b> en Facebook e Instagram. ¿Se ve bien? ¿El mensaje es claro?</li>
+    <li><b>Publica.</b> Meta revisará tu anuncio (suele tardar unos minutos a horas) y luego empezará a mostrarse.</li>
+  </ol>
+
+  <div class="tip">
+    <span class="t">El mensaje de bienvenida del anuncio</span>
+    Al elegir WhatsApp, podrás editar el <strong>mensaje que el cliente verá ya escrito</strong> al abrir el chat. Pon algo que te ayude a saber de dónde viene, por ejemplo: <em>“Hola, vi tu anuncio y quiero más información sobre [producto]”.</em>
+  </div>
+
+  <div class="warn">
+    <span class="t">Si tu anuncio es rechazado, tranquilo</span>
+    A veces Meta rechaza un anuncio por su revisión automática. No es grave ni personal. Suele deberse a textos que prometen demasiado o imágenes con mucho texto. Ajusta y vuelve a enviar. En el Capítulo 5 te ayudo a evitarlo.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Haz el recorrido completo hasta el paso 7 <strong>sin publicar todavía</strong>. Solo familiarízate con las pantallas. Cuando termines los próximos capítulos (texto, presupuesto y público), volverás a completar y publicar con todo bien pensado.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 5 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 5</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 5</div>
+  <h2>Qué escribir y qué imagen usar</h2>
+  <div class="divider"></div>
+  <p class="lead">El texto y la imagen son lo único que ve tu cliente. No tienen que ser perfectos ni profesionales: tienen que ser claros, honestos y dar ganas de escribir.</p>
+
+  <h3>La fórmula del texto del anuncio</h3>
+  <div class="box">
+    <p class="mt0"><strong>GANCHO + OFERTA CLARA + INVITACIÓN A ESCRIBIR</strong></p>
+    <p>Una línea que llame la atención, una que diga qué ofreces, y una que invite a tocar “Enviar mensaje”.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="copy"><span class="lbl">Ejemplo 1 · Producto</span>¿Buscas [producto] sin complicarte? 😊
+Tenemos [beneficio] con envío a [zona].
+Escríbenos por WhatsApp y te ayudamos a elegir 👇</div>
+    <div class="copy"><span class="lbl">Ejemplo 2 · Servicio</span>¿Necesitas [servicio] y no sabes por dónde partir?
+Te asesoramos sin compromiso 🙌
+Toca “Enviar mensaje” y conversamos 👇</div>
+  </div>
+  <div class="grid2">
+    <div class="copy"><span class="lbl">Ejemplo 3 · Oferta</span>Esta semana: [oferta / descuento] en [producto] 🎉
+Cupos/stock limitados.
+Escríbenos por WhatsApp antes que se acabe 👇</div>
+    <div class="copy"><span class="lbl">Ejemplo 4 · Local</span>¿Estás en [ciudad]? 📍
+[Producto/servicio] con atención personalizada.
+Escríbenos y coordina hoy mismo 👇</div>
+  </div>
+
+  <h3>La imagen o el video</h3>
+  <ul>
+    <li><strong>Usa fotos reales</strong> de tu producto, tu local o tu trabajo. Generan más confianza que las imágenes “de banco”.</li>
+    <li><strong>Buena luz y enfoque.</strong> Una foto clara con el celular es suficiente.</li>
+    <li><strong>Poco texto sobre la imagen.</strong> Meta muestra menos los anuncios saturados de texto. Deja que la foto hable.</li>
+    <li><strong>Formato cuadrado o vertical</strong> funciona mejor en el celular.</li>
+  </ul>
+
+  <div class="warn">
+    <span class="t">Para evitar rechazos y vender con seriedad</span>
+    No prometas resultados garantizados (“hazte rico”, “resultados asegurados”), no uses “tú” acusatorio sobre condiciones personales, ni imágenes engañosas. Habla claro y honesto. Eso, además de cumplir las reglas, <strong>atrae mejores clientes</strong>.
+  </div>
+
+  <div class="ia">
+    <span class="t">Usa la IA para tu texto</span>
+    Pídele a ChatGPT: <em>“Escríbeme 3 textos cortos para un anuncio de Facebook que invite a escribir por WhatsApp. Vendo [producto] en [ciudad]. Tono cercano, sin promesas exageradas, con un emoji y una invitación clara a enviar mensaje.”</em> Luego elige el que más suene a ti y ajústalo.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Escribe 2 versiones del texto de tu anuncio con la fórmula Gancho + Oferta + Invitación, y elige tus 2 mejores fotos. Tener 2 versiones te servirá para probar cuál funciona mejor (lo verás en el Capítulo 9).</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 6 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 6</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 6</div>
+  <h2>Cuánto invertir para empezar</h2>
+  <div class="divider"></div>
+  <p class="lead">La pregunta del millón. La respuesta honesta: empieza con poco, observa y sube solo si funciona. Nunca apuestes dinero que no puedes perder mientras aprendes.</p>
+
+  <h3>La regla de oro del presupuesto</h3>
+  <div class="ia">
+    <span class="t">Empieza pequeño, decide con datos</span>
+    Define un monto diario bajo y cómodo para ti, déjalo correr unos días, y recién entonces decide si subir, ajustar o pausar. <strong>La publicidad se aprende mirando, no adivinando.</strong>
+  </div>
+
+  <h3>Cómo pensar tu presupuesto inicial</h3>
+  <table>
+    <tr><th>Etapa</th><th>Qué hacer</th></tr>
+    <tr><td><strong>Prueba (primeros días)</strong></td><td>Un monto diario pequeño que no te duela. El objetivo es aprender, no vender mucho aún.</td></tr>
+    <tr><td><strong>Observación</strong></td><td>Mira cuántas conversaciones llegan y a qué costo. Dale unos días antes de juzgar.</td></tr>
+    <tr><td><strong>Ajuste</strong></td><td>Si llegan conversaciones de calidad, sube de a poco. Si no, cambia imagen, texto o público.</td></tr>
+  </table>
+
+  <h3>El número que de verdad importa: el costo por conversación</h3>
+  <p>No te fijes solo en cuántas personas vieron el anuncio. Fíjate en <strong>cuánto te cuesta cada conversación nueva de WhatsApp</strong>. Es simple:</p>
+  <div class="box center">
+    <p class="mt0" style="font-size:13pt;"><strong>Lo que gastaste ÷ Conversaciones recibidas = Costo por conversación</strong></p>
+    <p class="mt0" style="color:var(--gris);">Ejemplo: si gastaste $10.000 y recibiste 20 conversaciones → $500 por conversación.</p>
+  </div>
+  <p>Luego compáralo con tu negocio: si de cada X conversaciones cierras una venta que te deja Y de ganancia, sabrás si el anuncio te conviene. <strong>Tú tienes esos números; el anuncio solo trae las conversaciones.</strong></p>
+
+  <div class="warn">
+    <span class="t">Sé paciente y responsable</span>
+    Los primeros días casi siempre son los más caros: la plataforma está “aprendiendo” a quién mostrar tu anuncio. No te asustes ni pauses al primer día. Y recuerda: los costos varían según tu país, tu rubro y la competencia. <strong>No hay un número mágico igual para todos.</strong>
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Define tu presupuesto diario de prueba (uno que puedas sostener varios días sin estrés) y cuántos días lo dejarás correr antes de evaluar. Anótalo. Ese es tu “experimento” inicial.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 7 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 7</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 7</div>
+  <h2>A quién mostrarle tu anuncio (segmentación simple)</h2>
+  <div class="divider"></div>
+  <p class="lead">No necesitas una segmentación complicada. Para empezar, con definir bien 3 cosas basta: dónde, quién y qué le interesa.</p>
+
+  <h3>Los 3 ajustes esenciales</h3>
+  <table>
+    <tr><th>Ajuste</th><th>Recomendación para empezar</th></tr>
+    <tr><td><strong>📍 Ubicación</strong></td><td>La zona a la que llegas con tu producto o envío. Si vendes local, limita a tu ciudad o a un radio cercano.</td></tr>
+    <tr><td><strong>👥 Edad y género</strong></td><td>El rango de tu cliente ideal (Capítulo 3). No lo hagas demasiado estrecho.</td></tr>
+    <tr><td><strong>❤️ Intereses</strong></td><td>1 a 3 intereses relacionados con tu producto. Si dudas, deja que Meta optimice con un público más amplio.</td></tr>
+  </table>
+
+  <div class="tip">
+    <span class="t">Amplio vs. estrecho</span>
+    Un error común es achicar demasiado el público “para no gastar de más”. Hoy, a Meta le suele ir bien con públicos algo amplios porque encuentra solo a quién mostrarle. <strong>Empieza más amplio y observa.</strong>
+  </div>
+
+  <h3>Ejemplo de segmentación lista</h3>
+  <div class="box">
+    <ul style="margin:0;">
+      <li><strong>Ubicación:</strong> [Mi ciudad] + 15 km a la redonda.</li>
+      <li><strong>Edad:</strong> 25 a 45 · <strong>Género:</strong> todos (o el que corresponda).</li>
+      <li><strong>Intereses:</strong> [interés 1], [interés 2] relacionados con tu producto.</li>
+    </ul>
+  </div>
+
+  <div class="warn">
+    <span class="t">Cuida la privacidad y las reglas</span>
+    Meta no permite segmentar de forma que haga sentir señalada a una persona por temas sensibles (salud, religión, etc.). Mantén tu segmentación en lo simple: zona, edad e intereses de consumo. Es lo que mejor funciona y evita problemas.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Escribe tu segmentación en las 3 líneas del ejemplo (ubicación, edad/género, intereses). Ya tienes texto, imagen, presupuesto y público: en el próximo capítulo conectamos todo con tu WhatsApp y lanzamos.</p>
+  </div>
+</section>
+<!-- ============ CAPÍTULO 8 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 8</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 8</div>
+  <h2>Prepara tu WhatsApp para recibir los anuncios</h2>
+  <div class="divider"></div>
+  <p class="lead">De nada sirve traer conversaciones si llegan a un WhatsApp desordenado. Estos ajustes hacen que cada persona que llega del anuncio reciba una buena primera impresión, automáticamente.</p>
+
+  <h3>1. Mensaje de bienvenida automático</h3>
+  <p>WhatsApp Business puede enviar un saludo automático a quien te escribe por primera vez. Actívalo para responder al instante, aunque estés ocupado.</p>
+  <div class="copy"><span class="lbl">Mensaje de bienvenida (edítalo)</span>¡Hola! 👋 Gracias por escribir a [Tu Negocio]. En un momento te atendemos personalmente. Mientras, cuéntanos: ¿qué producto o servicio te interesa? 😊</div>
+  <p style="font-size:9.5pt; color:var(--gris);">Lo activas en: WhatsApp Business → Ajustes → Herramientas para la empresa → Mensaje de bienvenida.</p>
+
+  <h3>2. Respuestas rápidas y etiquetas</h3>
+  <ul>
+    <li><strong>Respuestas rápidas:</strong> ten listas tus respuestas de precio, envío y disponibilidad (¡las del Pack 100 Respuestas calzan perfecto aquí!).</li>
+    <li><strong>Etiqueta “Vino de anuncio”:</strong> crea una etiqueta para marcar a quienes llegan por publicidad. Así mides después cuántos compraron.</li>
+  </ul>
+
+  <h3>3. Conecta el anuncio con tu sistema</h3>
+  <p>Aquí se cierra el círculo de los dos productos: el anuncio trae la conversación, y tu sistema de <strong>WhatsApp Ventas Pro</strong> la convierte en venta.</p>
+  <table>
+    <tr><th>Llega el cliente del anuncio</th><th>Qué haces (tu sistema)</th></tr>
+    <tr><td>Te escribe el mensaje del anuncio</td><td>Responde rápido y cálido (saludo + respuesta + paso siguiente).</td></tr>
+    <tr><td>Pregunta precio o detalles</td><td>Usa tus plantillas; clasifícalo por etapa en tu CRM.</td></tr>
+    <tr><td>Duda o “lo pienso”</td><td>Maneja la objeción y haz seguimiento con valor.</td></tr>
+    <tr><td>Listo para comprar</td><td>Cierra con un mensaje claro y pide los datos.</td></tr>
+  </table>
+
+  <div class="tip">
+    <span class="t">La regla de oro de la publicidad a WhatsApp</span>
+    <strong>Responde rápido.</strong> Quien llega de un anuncio está interesado <em>ahora</em>. Mientras más rápido contestes, más conversaciones se vuelven ventas. Si demoras horas, gran parte se enfría.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Activa tu mensaje de bienvenida automático y crea la etiqueta “Vino de anuncio”. Con esto, tu WhatsApp queda listo para recibir y aprovechar cada conversación que traiga la publicidad.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 9 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 9</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 9</div>
+  <h2>Cómo saber si tu anuncio funciona</h2>
+  <div class="divider"></div>
+  <p class="lead">No necesitas entender 50 métricas. Con mirar 3 números y hacerte 1 pregunta, sabrás si vas bien o si toca ajustar.</p>
+
+  <h3>Los 3 números que sí importan al empezar</h3>
+  <div class="center">
+    <span class="metric"><b>Conversaciones</b><br>iniciadas por WhatsApp</span>
+    <span class="metric"><b>Costo</b><br>por conversación</span>
+    <span class="metric"><b>Ventas</b><br>cerradas de esas charlas</span>
+  </div>
+  <p>El resto de los datos (alcance, impresiones, clics) está bien para curiosear, pero al principio <strong>enfócate en estos tres</strong>. Son los que se conectan con tu dinero real.</p>
+
+  <h3>La pregunta clave</h3>
+  <div class="ia">
+    <span class="t">¿Me deja ganancia?</span>
+    Si una conversación te cuesta $500 y de cada 10 conversaciones cierras 2 ventas que te dejan $8.000 cada una, claramente conviene. Haz tu propio cálculo con tus números. <strong>El anuncio es rentable cuando lo que ganas supera lo que inviertes.</strong>
+  </div>
+
+  <h3>Prueba simple: 2 anuncios, no 1</h3>
+  <p>Recuerda las 2 versiones del Capítulo 5. Publica ambas con el mismo presupuesto pequeño y deja que compitan unos días. Quédate con la que traiga conversaciones más baratas o de mejor calidad. Esto se llama “probar”, y es lo que hacen los que saben.</p>
+
+  <table>
+    <tr><th>Si ves esto…</th><th>Probablemente significa…</th></tr>
+    <tr><td>Mucha gente ve el anuncio pero nadie escribe</td><td>El texto o la oferta no convencen. Cámbialos.</td></tr>
+    <tr><td>Llegan conversaciones pero no son tu cliente</td><td>Revisa tu segmentación (zona, edad, intereses).</td></tr>
+    <tr><td>Llegan buenas conversaciones pero no cierras</td><td>El anuncio funciona; revisa tu atención y seguimiento.</td></tr>
+  </table>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Cada día de tu prueba, anota en una hoja: cuánto gastaste, cuántas conversaciones llegaron y cuántas ventas salieron. Al cabo de unos días tendrás claro, con datos, qué decisión tomar. Sin adivinar.</p>
+  </div>
+</section>
+
+<!-- ============ CAPÍTULO 10 ============ -->
+<section class="page">
+  <div class="runhead"><span>Capítulo 10</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Capítulo 10</div>
+  <h2>Optimizar y crecer con calma</h2>
+  <div class="divider"></div>
+  <p class="lead">Cuando encuentres un anuncio que te trae conversaciones rentables, no lo apagues: cuídalo y hazlo crecer poco a poco. Así se construye un flujo constante de clientes.</p>
+
+  <h3>Qué hacer según tus resultados</h3>
+  <div class="grid2">
+    <div class="box"><h4 class="mt0" style="color:var(--verde-osc)">✅ Si funciona</h4>
+      <ul style="margin:0;">
+        <li>Sube el presupuesto <strong>de a poco</strong> (no lo dupliques de golpe).</li>
+        <li>Mantén el anuncio ganador corriendo.</li>
+        <li>Crea variantes para no “cansar” a la audiencia.</li>
+      </ul>
+    </div>
+    <div class="box"><h4 class="mt0" style="color:#9a6b00">⚠️ Si no funciona</h4>
+      <ul style="margin:0;">
+        <li>Cambia <strong>una cosa a la vez</strong> (imagen, luego texto, luego público).</li>
+        <li>Dale unos días a cada cambio antes de juzgar.</li>
+        <li>Revisa si el problema es el anuncio o tu atención.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Señales de que tu anuncio “se cansó”</h3>
+  <p>Con el tiempo, un mismo anuncio puede empezar a rendir menos porque tu público ya lo vio mucho. Cuando notes que suben los costos o bajan las conversaciones sin otra explicación, <strong>refresca la imagen o el texto</strong>. Es normal y parte del juego.</p>
+
+  <div class="warn">
+    <span class="t">Crece sostenible, no de golpe</span>
+    La tentación de “invertir mucho porque funciona” puede salir cara: al subir rápido, los costos suelen empeorar mientras la plataforma se reajusta. Crece en escalones pequeños y observa en cada uno. <strong>La constancia gana, no la prisa.</strong>
+  </div>
+
+  <div class="tip">
+    <span class="t">Tu meta realista</span>
+    No busques “el anuncio viral perfecto”. Busca <strong>un anuncio simple que te traiga conversaciones a un costo que te deja ganancia</strong>, y repítelo. Eso, sostenido en el tiempo, es lo que hace crecer un negocio.
+  </div>
+
+  <div class="ex">
+    <span class="t">Ejercicio práctico</span>
+    <p>Define tu “regla de crecimiento”: por ejemplo, “si mi costo por conversación se mantiene bien durante 3 días, subo el presupuesto un poco”. Tener la regla escrita te evita decisiones impulsivas.</p>
+  </div>
+</section>
+<!-- ============ BONUS ERRORES ============ -->
+<section class="page">
+  <div class="runhead"><span>Bonus · Errores</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Bonus</div>
+  <h2>8 errores comunes al hacer anuncios (y cómo evitarlos)</h2>
+  <div class="divider"></div>
+  <p class="lead">Aprende de los tropiezos más típicos para no perder tiempo ni dinero al empezar.</p>
+  <table>
+    <tr><th>#</th><th>El error</th><th>La solución</th></tr>
+    <tr><td>1</td><td>Mandar el anuncio a una web en vez de a WhatsApp</td><td>Usa el objetivo “Recibir mensajes” por WhatsApp.</td></tr>
+    <tr><td>2</td><td>Oferta confusa o genérica</td><td>Una oferta clara: qué ofreces + por qué escribir.</td></tr>
+    <tr><td>3</td><td>Pausar el anuncio al primer día</td><td>Dale unos días; la plataforma está aprendiendo.</td></tr>
+    <tr><td>4</td><td>Público demasiado estrecho</td><td>Empieza más amplio y deja que Meta optimice.</td></tr>
+    <tr><td>5</td><td>Responder lento las conversaciones</td><td>Mensaje de bienvenida + responde lo antes posible.</td></tr>
+    <tr><td>6</td><td>Prometer resultados garantizados</td><td>Habla honesto; evita rechazos y atrae mejor cliente.</td></tr>
+    <tr><td>7</td><td>Imagen oscura o con mucho texto</td><td>Foto real, clara y con poco texto encima.</td></tr>
+    <tr><td>8</td><td>Subir el presupuesto de golpe</td><td>Crece en escalones pequeños y observa.</td></tr>
+  </table>
+  <div class="tip">
+    <span class="t">El error más caro</span>
+    Traer conversaciones y no atenderlas bien. La publicidad llena tu WhatsApp; tu sistema de atención decide cuántas se vuelven ventas. Por eso este ebook es el complemento de <strong>WhatsApp Ventas Pro</strong>, no su reemplazo.
+  </div>
+</section>
+
+<!-- ============ PLAN DE 5 DÍAS ============ -->
+<section class="page">
+  <div class="runhead"><span>Plan de lanzamiento</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Plan de acción</div>
+  <h2>Lanza tu primer anuncio en 5 días</h2>
+  <div class="divider"></div>
+  <p class="lead">Una tarea por día. Al final de la semana tendrás tu anuncio funcionando y midiendo de verdad.</p>
+
+  <div class="day"><h4><span class="num">1</span>Día 1 · Prepara la base</h4>
+    <p>Deja listo el checklist del Capítulo 2: página de Facebook, WhatsApp Business, cuenta de Meta y forma de pago. Conecta tu WhatsApp con tu página.</p></div>
+  <div class="day"><h4><span class="num">2</span>Día 2 · Define oferta, público y fotos</h4>
+    <p>Escribe tu oferta clara y tu cliente ideal (Cap. 3). Elige tus 2 mejores fotos. Define tu segmentación (Cap. 7).</p></div>
+  <div class="day"><h4><span class="num">3</span>Día 3 · Crea el anuncio (sin publicar)</h4>
+    <p>Escribe 2 versiones del texto (Cap. 5), arma el anuncio paso a paso (Cap. 4) y edita el mensaje de bienvenida del chat. Define tu presupuesto de prueba (Cap. 6).</p></div>
+  <div class="day"><h4><span class="num">4</span>Día 4 · Prepara tu WhatsApp y publica</h4>
+    <p>Activa el mensaje de bienvenida automático y la etiqueta “Vino de anuncio” (Cap. 8). Revisa la vista previa y <strong>publica</strong> tus 2 versiones.</p></div>
+  <div class="day"><h4><span class="num">5</span>Día 5 · Observa y atiende</h4>
+    <p>Responde rápido cada conversación con tu sistema. Empieza a anotar tus 3 números (Cap. 9). No juzgues aún: deja correr unos días más y luego ajusta.</p></div>
+
+  <div class="tip">
+    <span class="t">Después del día 5</span>
+    Sigue observando una semana, ajusta una cosa a la vez (Cap. 10) y quédate con lo que funcione. Acabas de poner en marcha un canal para atraer clientes nuevos cada día.
+  </div>
+</section>
+
+<!-- ============ CHECKLIST DE LANZAMIENTO ============ -->
+<section class="page">
+  <div class="runhead"><span>Checklist</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Antes de tocar “Publicar”</div>
+  <h2>Checklist de lanzamiento</h2>
+  <div class="divider"></div>
+  <p class="lead">Repasa esta lista antes de publicar. Si cumples todo, tu anuncio sale bien armado.</p>
+
+  <h3>✅ Preparación</h3>
+  <ul class="check">
+    <li>Mi WhatsApp Business está conectado a mi página de Facebook.</li>
+    <li>Tengo activado el mensaje de bienvenida automático.</li>
+    <li>Tengo mis respuestas rápidas y la etiqueta “Vino de anuncio”.</li>
+  </ul>
+  <h3>✅ El anuncio</h3>
+  <ul class="check">
+    <li>El objetivo es “Recibir mensajes” por WhatsApp (no web ni Messenger).</li>
+    <li>Mi oferta es clara: qué ofrezco y por qué escribirme.</li>
+    <li>El texto sigue la fórmula Gancho + Oferta + Invitación.</li>
+    <li>La imagen es real, clara y con poco texto encima.</li>
+    <li>No prometo resultados garantizados ni nada engañoso.</li>
+    <li>El mensaje de bienvenida del chat me ayuda a saber que vino del anuncio.</li>
+  </ul>
+  <h3>✅ Público y presupuesto</h3>
+  <ul class="check">
+    <li>Definí ubicación, edad/género e intereses.</li>
+    <li>Puse un presupuesto diario que puedo sostener varios días.</li>
+    <li>Decidí cuántos días lo dejaré correr antes de evaluar.</li>
+  </ul>
+</section>
+
+<!-- ============ BANCO DE ANUNCIOS ============ -->
+<section class="page">
+  <div class="runhead"><span>Bonus · Plantillas</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Bonus · Copia y adapta</div>
+  <h2>Banco de textos para tus anuncios</h2>
+  <div class="divider"></div>
+  <p class="lead">Plantillas listas para tu anuncio. Reemplaza los [corchetes] con los datos de tu negocio y elige la que mejor te represente.</p>
+
+  <h3>Para productos</h3>
+  <div class="copy">¿Buscas [producto] de calidad sin complicarte? 😊 Tenemos [variedad/beneficio] con envío a [zona]. Escríbenos por WhatsApp y te ayudamos a elegir 👇</div>
+  <div class="copy">[Producto] que [beneficio principal] ✨ Atención personalizada y envío rápido. Toca “Enviar mensaje” y te asesoramos 👇</div>
+
+  <h3>Para servicios</h3>
+  <div class="copy">¿Necesitas [servicio] y no sabes por dónde partir? Te asesoramos sin compromiso 🙌 Escríbenos por WhatsApp y conversamos hoy 👇</div>
+  <div class="copy">Reserva tu [servicio] esta semana 📅 Cupos limitados. Escríbenos por WhatsApp para coordinar día y hora 👇</div>
+
+  <h3>Para ofertas / temporada</h3>
+  <div class="copy">🎉 Esta semana: [oferta/descuento] en [producto]. Stock limitado. Escríbenos por WhatsApp antes que se acabe 👇</div>
+  <div class="copy">¿[Fecha/evento] se acerca? 🎁 Tenemos [producto] ideal para regalar. Escríbenos y te mostramos opciones 👇</div>
+
+  <h3>Para negocios locales</h3>
+  <div class="copy">¿Estás en [ciudad]? 📍 [Producto/servicio] con atención cercana y personalizada. Escríbenos por WhatsApp y coordina hoy 👇</div>
+
+  <div class="ia">
+    <span class="t">Multiplica tus opciones con IA</span>
+    Pega cualquiera de estas plantillas en ChatGPT y pide: <em>“Dame 5 variantes de este anuncio para mi negocio de [rubro], tono cercano y sin promesas exageradas.”</em> Tendrás material para probar durante semanas.
+  </div>
+</section>
+
+<!-- ============ RECURSOS DESCARGABLES ============ -->
+<section class="page">
+  <div class="runhead"><span>Recursos descargables</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Incluido con tu compra</div>
+  <h2>Recursos descargables</h2>
+  <div class="divider"></div>
+  <p class="lead">Tu compra incluye estos recursos listos para usar. Disponibles en el área de miembros de Hotmart, junto a este ebook.</p>
+
+  <div class="box box-bordered" style="display:flex; gap:16px; align-items:center;">
+    <div style="flex:none; width:60px; height:60px; background:var(--meta); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:28pt;">📝</div>
+    <div><h3 style="margin:0;">1. Banco de textos para anuncios</h3>
+      <p class="mt0" style="margin:2px 0;">Las plantillas de este ebook en un archivo de texto, listas para copiar y adaptar.</p>
+      <p class="mt0" style="font-size:9pt; color:var(--gris);">👉 <strong>Disponible en el área de miembros de Hotmart, junto con tu compra.</strong></p></div>
+  </div>
+  <div class="box box-bordered" style="display:flex; gap:16px; align-items:center;">
+    <div style="flex:none; width:60px; height:60px; background:var(--verde); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:28pt;">✅</div>
+    <div><h3 style="margin:0;">2. Checklist de lanzamiento imprimible</h3>
+      <p class="mt0" style="margin:2px 0;">La lista de verificación para revisar antes de publicar cada anuncio.</p>
+      <p class="mt0" style="font-size:9pt; color:var(--gris);">👉 <strong>Disponible en el área de miembros de Hotmart, junto con tu compra.</strong></p></div>
+  </div>
+  <div class="box box-bordered" style="display:flex; gap:16px; align-items:center;">
+    <div style="flex:none; width:60px; height:60px; background:var(--verde-osc); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:28pt;">📊</div>
+    <div><h3 style="margin:0;">3. Planilla de seguimiento de resultados</h3>
+      <p class="mt0" style="margin:2px 0;">Hoja simple (CSV) para anotar gasto, conversaciones y ventas día a día.</p>
+      <p class="mt0" style="font-size:9pt; color:var(--gris);">👉 <strong>Disponible en el área de miembros de Hotmart, junto con tu compra.</strong></p></div>
+  </div>
+
+  <div class="tip">
+    <span class="t">Cómo acceder</span>
+    Todos estos recursos están en el <strong>área de miembros de Hotmart</strong>, junto a este ebook. Descárgalos y tenlos a mano para aplicar lo aprendido.
+  </div>
+</section>
+
+<!-- ============ CIERRE ============ -->
+<section class="page" style="background:linear-gradient(160deg,#06234a 0%, var(--meta) 95%); color:#fff;">
+  <div class="kicker" style="color:var(--amarillo);">Tu sistema completo</div>
+  <h2 style="color:#fff; border-color:var(--verde);">Ya tienes la máquina completa</h2>
+  <div class="divider"></div>
+  <p class="lead" style="color:#dbe8f5;">Ordenar. Atender. Atraer. Cuando las tres piezas trabajan juntas, dejas de vender por suerte y empiezas a vender con sistema.</p>
+
+  <div class="box" style="background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.25);">
+    <table style="margin:0;">
+      <tr><th style="background:rgba(255,255,255,.15)">Pieza</th><th style="background:rgba(255,255,255,.15)">Qué hace</th></tr>
+      <tr><td style="border-color:rgba(255,255,255,.2)"><strong style="color:#fff">WhatsApp Ventas Pro</strong></td><td style="border-color:rgba(255,255,255,.2)">Ordena clientes, responde y cierra con método.</td></tr>
+      <tr><td style="border-color:rgba(255,255,255,.2)"><strong style="color:#fff">Pack 100 Respuestas</strong></td><td style="border-color:rgba(255,255,255,.2)">Te da las palabras listas para cada momento.</td></tr>
+      <tr><td style="border-color:rgba(255,255,255,.2)"><strong style="color:#fff">Meta Ads Express</strong></td><td style="border-color:rgba(255,255,255,.2)">Llena tu WhatsApp de conversaciones nuevas.</td></tr>
+    </table>
+  </div>
+
+  <p style="color:#dbe8f5;">No necesitas hacerlo perfecto desde el primer día. Necesitas empezar, observar y mejorar. Publica tu primer anuncio, atiende cada conversación con tu sistema y ajusta con calma. Paso a paso, estás construyendo algo que funciona.</p>
+
+  <div class="tip" style="background:rgba(37,211,102,.18); border-color:var(--verde);">
+    <span class="t" style="color:#7CF0A8;">Tu próximo movimiento</span>
+    <span style="color:#fff;">Vuelve al <strong>Plan de 5 días</strong> y empieza hoy por el Día 1. La mejor publicidad es la que se lanza, no la que se queda en la cabeza.</span>
+  </div>
+
+  <p class="center" style="margin-top:24px; color:#9fc4e8; font-size:10pt;">Academia Venta Digital · Aprende a vender con orden, no con suerte.</p>
+</section>
+
+<!-- ============ AVISOS LEGALES ============ -->
+<section class="page">
+  <div class="runhead"><span>Avisos legales</span><span><b>Academia Venta Digital</b></span></div>
+  <div class="kicker">Información importante</div>
+  <h2>Avisos legales</h2>
+  <div class="divider"></div>
+
+  <div class="box box-bordered"><h3 class="mt0">Sobre las marcas</h3>
+    <p class="mt0">Este producto es independiente y no está afiliado, patrocinado ni aprobado por Meta Platforms, Inc., WhatsApp, Facebook ni Instagram. <strong>Meta</strong>, <strong>WhatsApp</strong>, <strong>Facebook</strong> e <strong>Instagram</strong> son marcas de sus respectivos propietarios. Las menciones son solo con fines informativos y educativos.</p></div>
+
+  <div class="box box-bordered"><h3 class="mt0">Sobre los resultados y la inversión</h3>
+    <p class="mt0">Este material es educativo. <strong>No promete ventas ni resultados garantizados.</strong> La publicidad implica una <strong>inversión de dinero que tú defines y controlas</strong>, y cuyos costos y resultados varían según tu país, rubro, oferta, competencia y mercado. Los resultados dependen de cada persona y de su constancia.</p></div>
+
+  <div class="box box-bordered"><h3 class="mt0">Sobre las plataformas y herramientas</h3>
+    <p class="mt0">Las pantallas, nombres de botones, funciones, políticas y precios de Meta (Facebook/Instagram) y de las herramientas de IA mencionadas pueden cambiar en cualquier momento sin previo aviso. Es responsabilidad de cada usuario cumplir las normas de publicidad de cada plataforma. Academia Venta Digital no es responsable de servicios de terceros.</p></div>
+
+  <p class="center" style="margin-top:20px; color:var(--gris); font-size:9.5pt;">© Academia Venta Digital · Todos los derechos reservados. Prohibida su reventa o distribución sin autorización.</p>
+</section>
+
+</body>
+</html>
