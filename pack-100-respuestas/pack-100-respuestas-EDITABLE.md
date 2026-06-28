@@ -1082,3 +1082,15 @@ Cada mensaje viene listo para copiar y pegar, con una variante más corta y la r
 No prometemos ventas garantizadas ni fórmulas mágicas. Te damos una base sólida para **responder mejor, más rápido y con un tono que genera confianza**. El resto lo pones tú.
 
 _Academia Venta Digital · Aprende a vender con orden, no con suerte._
+
+---
+
+## Avisos legales
+
+**Sobre las marcas.** Este producto es independiente y no está afiliado, patrocinado ni aprobado por WhatsApp, Meta Platforms, Inc. ni empresas relacionadas. **WhatsApp**, **Facebook** e **Instagram** son marcas de sus respectivos propietarios. Las menciones a estas plataformas son solo con fines informativos y educativos.
+
+**Sobre los resultados.** Este material es de carácter educativo y comercial. **No promete ventas garantizadas ni resultados.** Los mensajes son una base para ordenar y mejorar tu comunicación; los resultados dependen de cada persona, de su producto, de su mercado y de su constancia.
+
+**Sobre las herramientas de IA.** Las funciones de inteligencia artificial mencionadas dependen de la herramienta que utilices (como ChatGPT u otras) y de sus condiciones de uso, disponibilidad y precios, que pueden cambiar. Academia Venta Digital no es responsable de dichas herramientas de terceros.
+
+_© Academia Venta Digital · Todos los derechos reservados. Prohibida su reventa o distribución sin autorización._

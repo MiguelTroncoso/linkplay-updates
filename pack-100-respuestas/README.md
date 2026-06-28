@@ -8,7 +8,7 @@ Producto complementario (**Order Bump**) de *WhatsApp Ventas Pro*.
 
 | Archivo | Descripción |
 |---|---|
-| `pack-100-respuestas.pdf` | Producto final maquetado (50 páginas) — listo para entregar |
+| `pack-100-respuestas.pdf` | Producto final maquetado (51 páginas) — listo para entregar |
 | `pack-100-respuestas-EDITABLE.md` | **Plantilla editable** — copia, pega y reemplaza los [corchetes] |
 | `pack-100-respuestas.csv` | Los 100 mensajes en columnas — ideal para importar/ordenar o pegar como respuestas rápidas |
 | `pack-100-respuestas.html` | Fuente del PDF (editable con estilos) |
@@ -35,9 +35,10 @@ Cada mensaje incluye: **título del caso de uso**, **mensaje listo para copiar**
 - Introducción breve e instrucciones de uso (7 pasos)
 - Checklist de seguimiento diario
 - 10 prompts de IA para adaptar los mensajes a cualquier negocio
-- Descripción corta y larga para Hotmart
+- Descripción corta y larga para Hotmart (con disclaimer de marcas para pegar en la ficha)
 - Texto de venta para Order Bump (checkout)
 - 3 ideas de diseño en Canva + portada y contraportada sugeridas
+- Página de **Avisos legales** (marcas WhatsApp/Meta + resultados + herramientas de IA), coherente con el ebook principal
 
 ## 🎨 Identidad visual
 

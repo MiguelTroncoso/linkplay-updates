@@ -556,6 +556,17 @@ No prometemos ventas garantizadas ni fórmulas mágicas. Te damos una base sóli
 
 <i>Academia Venta Digital · Aprende a vender con orden, no con suerte.</i>"""
 
+# Avisos legales (mismos que el ebook principal, para coherencia de marca)
+AVISOS = [
+ ("Sobre las marcas",
+  "Este producto es independiente y no está afiliado, patrocinado ni aprobado por WhatsApp, Meta Platforms, Inc. ni empresas relacionadas. <b>WhatsApp</b>, <b>Facebook</b> e <b>Instagram</b> son marcas de sus respectivos propietarios. Las menciones a estas plataformas son solo con fines informativos y educativos."),
+ ("Sobre los resultados",
+  "Este material es de carácter educativo y comercial. <b>No promete ventas garantizadas ni resultados.</b> Los mensajes son una base para ordenar y mejorar tu comunicación; los resultados dependen de cada persona, de su producto, de su mercado y de su constancia."),
+ ("Sobre las herramientas de IA",
+  "Las funciones de inteligencia artificial mencionadas dependen de la herramienta que utilices (como ChatGPT u otras) y de sus condiciones de uso, disponibilidad y precios, que pueden cambiar. Academia Venta Digital no es responsable de dichas herramientas de terceros."),
+]
+AVISO_MARCAS_HOTMART = "Aviso de marcas (para incluir también en la página de Hotmart): Este producto es independiente y no está afiliado, patrocinado ni aprobado por WhatsApp, Meta Platforms, Inc. ni empresas relacionadas. WhatsApp, Facebook e Instagram son marcas de sus respectivos propietarios."
+
 # ---------------------------------------------------------------------------
 # VERIFICACIÓN DE CONTEO
 # ---------------------------------------------------------------------------
@@ -729,6 +740,7 @@ def gen_html():
       <p><b>¿Qué incluye?</b></p><ul>{incluye}</ul>
       <p><b>¿Para quién es?</b> Para emprendedores, vendedores, negocios locales, revendedores, prestadores de servicios y cualquiera que venda por WhatsApp y quiera responder mejor sin improvisar.</p>
       <p style="color:#5C6B7A;font-size:9pt"><i>Aviso: material educativo. No promete ventas garantizadas ni resultados. Los resultados dependen de cada persona, su producto y su constancia.</i></p></div>
+      <div class="box" style="font-size:9pt;color:#5C6B7A;margin-top:12px"><b>{esc(AVISO_MARCAS_HOTMART.split(':')[0])}:</b> {esc(AVISO_MARCAS_HOTMART.split(':',1)[1].strip())}</div>
     </section>""")
 
     # Order bump + Canva + portada + contraportada
@@ -747,6 +759,17 @@ def gen_html():
       <div class="card">{PORTADA}</div>
       <div class="kicker" style="margin-top:24px">Diseño</div><h2>Contraportada</h2><div class="divider"></div>
       <div class="card">{CONTRAPORTADA}</div>
+    </section>""")
+
+    # Avisos legales (página final)
+    avisos = "".join(
+        f'<div class="box" style="border:1px solid var(--gris-borde)"><h3 class="mt0" style="margin-top:0">{esc(t)}</h3>'
+        f'<p class="mt0" style="margin:0">{d}</p></div>' for t, d in AVISOS)
+    out.append(f"""<section class="page">
+      <div class="runhead"><span>Avisos legales</span><span><b>Academia Venta Digital</b></span></div>
+      <div class="kicker">Información importante</div><h2>Avisos legales</h2><div class="divider"></div>
+      {avisos}
+      <p class="center" style="margin-top:22px;color:var(--gris);font-size:9pt">© Academia Venta Digital · Todos los derechos reservados. Prohibida su reventa o distribución sin autorización.</p>
     </section>""")
 
     out.append("</body></html>")
@@ -796,6 +819,11 @@ def gen_md():
           PORTADA.replace("<b>", "**").replace("</b>", "**").replace("•", "-"), "",
           "### Contraportada", "",
           CONTRAPORTADA.replace("<b>", "**").replace("</b>", "**").replace("<i>", "_").replace("</i>", "_"), ""]
+    L += ["---", "", "## Avisos legales", ""]
+    for t, d in AVISOS:
+        L += [f"**{t}.** " + d.replace("<b>", "**").replace("</b>", "**"), ""]
+    L += ["_© Academia Venta Digital · Todos los derechos reservados. "
+          "Prohibida su reventa o distribución sin autorización._", ""]
     return "\n".join(L)
 
 # ============================ CSV (respuestas rápidas) ============================
