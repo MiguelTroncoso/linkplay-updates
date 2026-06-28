@@ -1,0 +1,51 @@
+==========================================================
+FRASES COPIABLES (muestra inicial) — WhatsApp Ventas Pro
+Academia Venta Digital
+==========================================================
+Reemplaza el texto entre [corchetes] con los datos de tu negocio.
+Esta es una base inicial. El banco completo de 100 mensajes está
+en "Pack 100 Respuestas para WhatsApp".
+
+----------------------------------------------------------
+PARA ABRIR LA CONVERSACIÓN
+----------------------------------------------------------
+- ¡Hola! 👋 Gracias por escribir. Cuéntame qué buscas y te ayudo enseguida.
+- ¡Qué bueno que escribes! 🙌 ¿Es para ti o para regalo? Así te recomiendo mejor.
+- ¡Hola! Bienvenido/a a [Tu Negocio] 😊 ¿En qué te puedo ayudar hoy?
+
+----------------------------------------------------------
+PARA RESPONDER PRECIO
+----------------------------------------------------------
+- ¡Buena elección! El [producto] te queda en $[precio], incluye [beneficio]. ¿Te lo aparto?
+- Te queda en $[precio] 🙌 Y si tomas [oferta], te incluyo [extra]. ¿Lo vemos?
+
+----------------------------------------------------------
+PARA HACER SEGUIMIENTO
+----------------------------------------------------------
+- ¡Hola [nombre]! 😊 Aún tengo disponible el [producto] que viste. ¿Te lo dejo apartado?
+- Me acordé de ti 🙌 Esta semana tengo [oferta]. ¿La aprovechamos?
+- ¡Hola! No quiero llenarte de mensajes 😊 Si lo necesitas más adelante, aquí estoy.
+
+----------------------------------------------------------
+PARA RESPONDER OBJECIONES
+----------------------------------------------------------
+- Te entiendo 🙌 Lo bueno es que [beneficio], y puedo dividir el pago en 2. ¿Te sirve?
+- ¡Claro, tómate tu tiempo! ¿Hay alguna duda puntual que te aclare para decidir tranquilo/a?
+
+----------------------------------------------------------
+PARA CERRAR LA VENTA
+----------------------------------------------------------
+- ¡Perfecto! Entonces te confirmo el [producto]. Te paso los datos para coordinar, ¿te parece?
+- ¿Lo prefieres con envío o pasas a retirarlo? Así te lo dejo listo 😊
+- Me queda la última unidad. Si quieres, te la aparto hoy para que no la pierdas 🙌
+
+----------------------------------------------------------
+PARA DESPUÉS DE LA VENTA
+----------------------------------------------------------
+- ¡Gracias por tu compra! 🙌 Te llega en [tiempo]. Cualquier cosa, aquí estoy.
+- ¡Espero que lo disfrutes! 😊 Si te gustó, ¿me ayudas con una reseña? Significa mucho 🙏
+
+==========================================================
+Consejo: guarda cada frase como "respuesta rápida" en
+WhatsApp Business (Ajustes → Herramientas para la empresa).
+==========================================================

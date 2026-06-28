@@ -1,0 +1,48 @@
+==========================================================
+PROMPTS DE IA — WhatsApp Ventas Pro
+Academia Venta Digital
+==========================================================
+Copia estos prompts en ChatGPT (u otra IA) para mejorar y
+adaptar tus mensajes. Revisa SIEMPRE el resultado antes de
+enviarlo: tú conoces tu precio, tu producto y a tu cliente.
+
+----------------------------------------------------------
+1. MEJORAR UN MENSAJE
+"Mejora este mensaje para que suene más cálido y claro, sin
+perder mi estilo: [pega tu mensaje]"
+
+2. RESPONDER UNA OBJECIÓN
+"Actúa como vendedor cercano y profesional. Vendo [productos]
+por WhatsApp. Un cliente me dijo: '[objeción]'. Escríbeme 3
+respuestas cortas, amables y sin sonar desesperado, que resalten
+el valor y propongan un siguiente paso. Tono cercano, en español,
+con máximo 1 emoji."
+
+3. HACER SEGUIMIENTO
+"Dame 3 formas de hacer seguimiento a un cliente que dijo 'lo
+pienso' hace 3 días, sin sonar insistente."
+
+4. CREAR UN SALUDO DE BIENVENIDA
+"Escribe un saludo de bienvenida para clientes nuevos de mi
+negocio de [rubro], tono cercano y con máximo un emoji."
+
+5. RESUMIR EL BENEFICIO
+"Resume este producto en 1 frase de venta que destaque el
+beneficio principal: [descripción]"
+
+6. AJUSTAR EL TONO
+"Reescribe este mensaje para que suene más [formal / cercano /
+divertido], sin perder el llamado a la acción: [pega tu mensaje]"
+
+7. ACORTAR UN MENSAJE
+"Acorta este mensaje para que vaya directo al grano, pero siga
+siendo amable: [pega tu mensaje]"
+
+8. REVISAR SI SUENA INSISTENTE
+"Revisa este mensaje y dime si suena desesperado o demasiado
+insistente. Si es así, reescríbelo para que suene seguro y
+profesional: [pega tu mensaje]"
+
+==========================================================
+Regla de oro: la IA es un borrador, no la última palabra.
+==========================================================
