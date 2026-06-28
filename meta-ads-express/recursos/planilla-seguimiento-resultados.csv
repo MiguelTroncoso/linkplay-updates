@@ -1,16 +1,18 @@
-Fecha,Gasto del día,Conversaciones recibidas,Costo por conversación,Ventas cerradas,Ganancia estimada,Notas / qué cambié
-Día 1 (ejemplo),5000,8,625,1,8000,Versión A foto producto
-Día 2 (ejemplo),5000,11,455,2,16000,Versión B funcionó mejor
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
-Recordatorio:,Costo por conversación = Gasto del día / Conversaciones recibidas,,,,,
+Fecha,Campaña / Anuncio,Gasto,Conversaciones recibidas,Costo por conversación,Ventas cerradas,Ingresos generados,Ganancia estimada,Observaciones
+Día 1 (ejemplo),Anuncio A - foto producto,5000,8,625,1,12000,8000,Versión A foto producto
+Día 2 (ejemplo),Anuncio B - oferta,5000,11,455,2,24000,16000,Versión B funcionó mejor
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+Recordatorio:,Costo por conversación = Gasto / Conversaciones recibidas,,,,,,,
+,Ganancia estimada = Ingresos generados - Gasto,,,,,,,

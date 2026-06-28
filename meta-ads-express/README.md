@@ -11,10 +11,12 @@ Producto **upsell** (USD 27) de la familia *WhatsApp Ventas Pro*.
 | Archivo | Descripción | Páginas |
 |---|---|---|
 | `LEEME-PRIMERO.txt` | Guía de bienvenida: qué incluye y orden de uso | — |
-| `ebook-Meta-Ads-Express.pdf` | Ebook completo (10 capítulos + bonus + plan + recursos + aviso legal) | 34 |
+| `ebook-Meta-Ads-Express.pdf` | Ebook completo (10 capítulos + bonus + plan + recursos + aviso legal) | 35 |
 | `recursos/banco-textos-anuncios.txt` | Plantillas de texto para anuncios | — |
 | `recursos/checklist-lanzamiento.pdf` | Checklist de lanzamiento imprimible (1 página) | 1 |
-| `recursos/planilla-seguimiento-resultados.csv` | Planilla para anotar gasto, conversaciones y ventas | — |
+| `recursos/planilla-seguimiento-resultados.csv` | Planilla de resultados (fecha, campaña, gasto, conversaciones, costo, ventas, ingresos, ganancia) | — |
+| `recursos/10-ideas-creativos-canva.txt` | 10 conceptos de imagen para anuncios en Canva | — |
+| `recursos/5-guiones-reels-anuncios.txt` | 5 guiones para grabar videos cortos / reels | — |
 
 ### 🔒 Uso interno (NO entregar al comprador)
 

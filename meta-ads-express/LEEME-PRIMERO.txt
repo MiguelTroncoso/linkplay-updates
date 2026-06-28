@@ -18,6 +18,8 @@ QUÉ INCLUYE TU COMPRA
   [ ] 2. Banco de textos para anuncios (archivo de texto)
   [ ] 3. Checklist de lanzamiento imprimible (PDF)
   [ ] 4. Planilla de seguimiento de resultados (CSV)
+  [ ] 5. 10 ideas de creativos para Canva (archivo de texto)
+  [ ] 6. 5 guiones para reels / anuncios cortos (archivo de texto)
 
 
 ------------------------------------------------------------
